@@ -1,0 +1,1593 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Большой урок-тренажёр по компьютеру</title>
+  <style>
+    :root{
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --ink:#1f2a44;
+      --muted:#62708f;
+      --accent:#4f7cff;
+      --accent-2:#7c4dff;
+      --ok:#e9fff1;
+      --ok-b:#22a85a;
+      --bad:#fff0f0;
+      --bad-b:#d44b4b;
+      --line:#dfe5ff;
+      --shadow:0 10px 30px rgba(44,77,180,.10);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(124,77,255,.12), transparent 26%),
+        radial-gradient(circle at top left, rgba(79,124,255,.12), transparent 22%),
+        var(--bg);
+      color:var(--ink);
+    }
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px 14px 80px;
+    }
+    .hero{
+      background:linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+      border:1px solid var(--line);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:24px;
+      margin-bottom:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -40px -40px auto;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(79,124,255,.18), rgba(79,124,255,0));
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(28px, 4.8vw, 46px);
+      line-height:1.06;
+    }
+    .lead{
+      font-size:clamp(15px, 2.8vw, 19px);
+      color:var(--muted);
+      margin:0 0 14px;
+      max-width:760px;
+      line-height:1.5;
+    }
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .badge{
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .sticky-bar{
+      position:sticky;
+      top:8px;
+      z-index:20;
+      margin:0 0 18px;
+    }
+    .status{
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      border-radius:22px;
+      padding:14px;
+      display:grid;
+      grid-template-columns: 1.2fr .9fr .9fr;
+      gap:12px;
+      align-items:center;
+    }
+    .progress-shell{
+      width:100%;
+      height:14px;
+      border-radius:999px;
+      background:#e8edff;
+      overflow:hidden;
+      border:1px solid #d7dfff;
+    }
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border-radius:999px;
+      transition:width .35s ease;
+    }
+    .status-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px 14px;
+      min-height:64px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .status-label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:var(--muted);
+      margin-bottom:4px;
+      font-weight:700;
+    }
+    .status-value{
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .toc{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin:18px 0 22px;
+    }
+    .toc a{
+      text-decoration:none;
+      color:var(--ink);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:14px;
+      font-weight:800;
+      box-shadow:var(--shadow);
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .section{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      margin-bottom:18px;
+    }
+    .section h2{
+      margin:0 0 8px;
+      font-size:clamp(24px, 4vw, 34px);
+    }
+    .section .sub{
+      color:var(--muted);
+      margin:0 0 18px;
+      line-height:1.5;
+      font-size:16px;
+    }
+
+    .tips{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .tip{
+      background:#f7f9ff;
+      border:1px dashed #cfd9ff;
+      border-radius:18px;
+      padding:14px;
+    }
+    .tip strong{
+      display:block;
+      margin-bottom:6px;
+    }
+
+    .question{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px;
+      margin-bottom:14px;
+      background:#fff;
+    }
+    .question h3{
+      margin:0 0 12px;
+      font-size:18px;
+      line-height:1.35;
+    }
+    .q-meta{
+      display:inline-block;
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+      background:#f3f6ff;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      margin-bottom:10px;
+    }
+
+    .options{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    .btn-option, .mini-key, .check-btn, .nav-top, .reset-btn, .show-answers{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      background:#f7f9ff;
+      border:1px solid var(--line);
+      color:var(--ink);
+      border-radius:18px;
+      padding:14px 12px;
+      font-weight:800;
+      font-size:15px;
+      transition:.2s ease;
+      box-shadow:none;
+    }
+    .btn-option:hover, .mini-key:hover, .check-btn:hover, .nav-top:hover, .reset-btn:hover, .show-answers:hover{
+      transform:translateY(-1px);
+      background:#eef3ff;
+    }
+    .btn-option.selected{outline:3px solid rgba(79,124,255,.18); background:#edf3ff}
+    .btn-option.correct, .mini-key.correct{background:var(--ok); border-color:#a8e5c0}
+    .btn-option.wrong, .mini-key.wrong{background:var(--bad); border-color:#f0b2b2}
+
+    .row-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .check-btn{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;
+      border:none;
+      padding:14px 18px;
+    }
+    .show-answers{
+      background:#fff7ef;
+      border-color:#ffd9a5;
+    }
+
+    .feedback{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      font-weight:700;
+      display:none;
+    }
+    .feedback.ok{display:block;background:var(--ok);border:1px solid #a8e5c0;color:#0d6a34}
+    .feedback.bad{display:block;background:var(--bad);border:1px solid #efb3b3;color:#9f2f2f}
+
+    .pair-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:12px;
+    }
+    .pair-item{
+      background:#f9fbff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+    }
+    .pair-item label{
+      display:block;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+    select{
+      width:100%;
+      padding:14px 12px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:15px;
+    }
+
+    .key-bank{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:12px 0;
+    }
+    .mini-key{
+      min-width:74px;
+      background:#fff;
+    }
+    .mini-key.active{
+      background:#edf3ff;
+      outline:3px solid rgba(79,124,255,.18);
+    }
+    .answer-box{
+      min-height:60px;
+      padding:14px;
+      border-radius:18px;
+      background:#f7f9ff;
+      border:1px dashed #bccaff;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .ans-pill{
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+    }
+
+    .statement{
+      background:#f9fbff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .tf-buttons{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .final-card{
+      text-align:center;
+      padding:26px;
+      border-radius:28px;
+      background:linear-gradient(135deg,#ffffff,#f4f7ff);
+      border:1px solid var(--line);
+    }
+    .final-score{
+      font-size:clamp(34px, 8vw, 60px);
+      margin:8px 0;
+      font-weight:900;
+    }
+    .certificate{
+      margin-top:16px;
+      background:#fff;
+      border:2px dashed #b9c8ff;
+      border-radius:24px;
+      padding:18px;
+      font-size:18px;
+      line-height:1.5;
+    }
+
+    .foot-actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .nav-top{
+      background:#fff;
+      border-color:var(--line);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .reset-btn{
+      background:#fff0f5;
+      border-color:#ffc2d6;
+    }
+
+    @media (max-width: 860px){
+      .status{grid-template-columns:1fr}
+      .toc{grid-template-columns:repeat(2,1fr)}
+      .tips{grid-template-columns:1fr}
+      .options{grid-template-columns:1fr}
+      .pair-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 560px){
+      .wrap{padding:12px 10px 60px}
+      .hero, .section{padding:16px}
+      .toc{grid-template-columns:1fr}
+      .badge{width:100%; text-align:center}
+      .btn-option, .mini-key, .check-btn, .nav-top, .reset-btn, .show-answers{
+        min-height:52px;
+        font-size:16px;
+      }
+      .status-box{min-height:auto}
+      .question h3{font-size:17px}
+      .section .sub{font-size:15px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="top">
+    <section class="hero">
+      <h1>Большой урок-тренажёр по компьютеру</h1>
+      <p class="lead">
+        Здесь собраны все прошлые темы в одном уроке: обычные сочетания клавиш, клавиши F1–F12,
+        браузер, специальные клавиши и скрытые фишки. Урок сделан так, чтобы было удобно проходить
+        и на компьютере, и на телефоне.
+      </p>
+      <div class="badges">
+        <div class="badge">5 больших разделов</div>
+        <div class="badge">70+ заданий</div>
+        <div class="badge">Крупные кнопки для телефона</div>
+        <div class="badge">Автопроверка и сертификат</div>
+      </div>
+    </section>
+
+    <div class="sticky-bar">
+      <div class="status">
+        <div class="status-box">
+          <div class="status-label">Общий прогресс</div>
+          <div class="progress-shell"><div class="progress-bar" id="globalBar"></div></div>
+        </div>
+        <div class="status-box">
+          <div class="status-label">Баллы</div>
+          <div class="status-value"><span id="scoreNow">0</span> / <span id="scoreMax">0</span></div>
+        </div>
+        <div class="status-box">
+          <div class="status-label">Решено заданий</div>
+          <div class="status-value"><span id="doneNow">0</span> / <span id="doneMax">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="toc">
+      <a href="#section-hotkeys">1. Горячие клавиши</a>
+      <a href="#section-fkeys">2. Клавиши F1–F12</a>
+      <a href="#section-browser">3. Браузер</a>
+      <a href="#section-special">4. Специальные клавиши</a>
+      <a href="#section-secret">5. Секретные фишки</a>
+      <a href="#section-final">6. Итог и сертификат</a>
+    </nav>
+
+    <section class="section" id="section-hotkeys">
+      <h2>1. Горячие клавиши</h2>
+      <p class="sub">Вспоминаем самые нужные сочетания: копировать, вставить, сохранить, найти, выделить всё и переключать окна.</p>
+      <div class="tips">
+        <div class="tip"><strong>Как запомнить:</strong> Представь, что клавиатура — это пульт управления. Одни кнопки помогают работать с текстом, другие — управлять окнами.</div>
+        <div class="tip"><strong>Пример:</strong> Сделал рисунок и боишься потерять? Нажми <b>Ctrl + S</b>, чтобы сохранить работу.</div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 1</div>
+        <h3>Какая комбинация копирует выделенный текст или файл?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + C</button>
+          <button class="btn-option">Ctrl + V</button>
+          <button class="btn-option">Ctrl + X</button>
+          <button class="btn-option">Ctrl + F</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 2</div>
+        <h3>Как вставить то, что уже скопировано?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + S</button>
+          <button class="btn-option">Ctrl + V</button>
+          <button class="btn-option">Ctrl + A</button>
+          <button class="btn-option">Alt + Tab</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 3</div>
+        <h3>Как быстро отменить последнее действие?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + Y</button>
+          <button class="btn-option">Ctrl + H</button>
+          <button class="btn-option">Ctrl + Z</button>
+          <button class="btn-option">Ctrl + P</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="3">
+        <div class="q-meta">Вопрос 4</div>
+        <h3>Как переключиться на другое открытое окно?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + T</button>
+          <button class="btn-option">Win + E</button>
+          <button class="btn-option">Ctrl + Shift + T</button>
+          <button class="btn-option">Alt + Tab</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 5</div>
+        <h3>Как выделить весь текст на странице или в документе?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + A</button>
+          <button class="btn-option">Ctrl + C</button>
+          <button class="btn-option">Home</button>
+          <button class="btn-option">Ctrl + End</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 6</div>
+        <h3>Ты ищешь слово в длинном тексте. Что нажать?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + P</button>
+          <button class="btn-option">Ctrl + X</button>
+          <button class="btn-option">Ctrl + F</button>
+          <button class="btn-option">Ctrl + I</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 7</div>
+        <h3>Как сохранить документ?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + T</button>
+          <button class="btn-option">Ctrl + S</button>
+          <button class="btn-option">Win + D</button>
+          <button class="btn-option">Alt + F4</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 8</div>
+        <h3>Какая комбинация возвращает то, что ты только что отменил?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + Z</button>
+          <button class="btn-option">Ctrl + A</button>
+          <button class="btn-option">Ctrl + Y</button>
+          <button class="btn-option">Ctrl + W</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 9</div>
+        <h3>Как закрыть текущее окно программы?</h3>
+        <div class="options">
+          <button class="btn-option">Win + L</button>
+          <button class="btn-option">Alt + F4</button>
+          <button class="btn-option">Ctrl + H</button>
+          <button class="btn-option">F2</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 10</div>
+        <h3>Ты случайно закрыл вкладку в браузере. Как вернуть её обратно?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + Shift + T</button>
+          <button class="btn-option">Ctrl + Tab</button>
+          <button class="btn-option">Ctrl + P</button>
+          <button class="btn-option">Shift + Delete</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question pair-question">
+        <div class="q-meta">Задание на сопоставление</div>
+        <h3>Соедини действие и правильную комбинацию.</h3>
+        <div class="pair-grid">
+          <div class="pair-item">
+            <label>Открыть новую вкладку</label>
+            <select data-correct="Ctrl + T">
+              <option value="">Выбери ответ</option>
+              <option>Ctrl + T</option>
+              <option>Ctrl + Shift + T</option>
+              <option>Win + E</option>
+              <option>Ctrl + P</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>Печать</label>
+            <select data-correct="Ctrl + P">
+              <option value="">Выбери ответ</option>
+              <option>Ctrl + A</option>
+              <option>Ctrl + P</option>
+              <option>Alt + Tab</option>
+              <option>Ctrl + C</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>Открыть проводник</label>
+            <select data-correct="Win + E">
+              <option value="">Выбери ответ</option>
+              <option>Win + E</option>
+              <option>Ctrl + F</option>
+              <option>Alt + F4</option>
+              <option>Ctrl + S</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>Заблокировать компьютер</label>
+            <select data-correct="Win + L">
+              <option value="">Выбери ответ</option>
+              <option>Ctrl + L</option>
+              <option>Win + L</option>
+              <option>Win + D</option>
+              <option>Ctrl + Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn pair-check">Проверить сопоставление</button>
+          <button class="show-answers pair-show">Показать правильные ответы</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-fkeys">
+      <h2>2. Клавиши F1–F12</h2>
+      <p class="sub">Теперь вспоминаем верхний ряд клавиш. Они часто помогают быстрее работать в браузере, проводнике и программах.</p>
+      <div class="tips">
+        <div class="tip"><strong>Полезно знать:</strong> На ноутбуках иногда вместе с F-клавишами работают яркость, звук и другие функции через кнопку <b>Fn</b>.</div>
+        <div class="tip"><strong>Пример:</strong> В проводнике клавиша <b>F2</b> быстро переименовывает файл. Это сильно удобнее, чем искать пункт мышкой.</div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 1</div>
+        <h3>Какая клавиша чаще всего открывает справку или помощь?</h3>
+        <div class="options">
+          <button class="btn-option">F11</button>
+          <button class="btn-option">F5</button>
+          <button class="btn-option">F1</button>
+          <button class="btn-option">F2</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 2</div>
+        <h3>Как быстро переименовать выделенный файл?</h3>
+        <div class="options">
+          <button class="btn-option">F4</button>
+          <button class="btn-option">F2</button>
+          <button class="btn-option">F8</button>
+          <button class="btn-option">F10</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 3</div>
+        <h3>Как обновить страницу в браузере?</h3>
+        <div class="options">
+          <button class="btn-option">F5</button>
+          <button class="btn-option">F6</button>
+          <button class="btn-option">F9</button>
+          <button class="btn-option">F12</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="3">
+        <div class="q-meta">Вопрос 4</div>
+        <h3>Какая клавиша переносит курсор в адресную строку браузера?</h3>
+        <div class="options">
+          <button class="btn-option">F11</button>
+          <button class="btn-option">F1</button>
+          <button class="btn-option">F2</button>
+          <button class="btn-option">F6</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 5</div>
+        <h3>Как включить полноэкранный режим в браузере?</h3>
+        <div class="options">
+          <button class="btn-option">F12</button>
+          <button class="btn-option">F11</button>
+          <button class="btn-option">F3</button>
+          <button class="btn-option">F7</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 6</div>
+        <h3>Какая клавиша обычно открывает инструменты разработчика в браузере?</h3>
+        <div class="options">
+          <button class="btn-option">F4</button>
+          <button class="btn-option">F8</button>
+          <button class="btn-option">F12</button>
+          <button class="btn-option">F10</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 7</div>
+        <h3>Какой клавишей часто открывают поиск на странице или поиск внутри некоторых программ?</h3>
+        <div class="options">
+          <button class="btn-option">F3</button>
+          <button class="btn-option">F7</button>
+          <button class="btn-option">F9</button>
+          <button class="btn-option">F10</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="3">
+        <div class="q-meta">Вопрос 8</div>
+        <h3>Какой F-клавишей иногда открывают меню программы через клавиатуру?</h3>
+        <div class="options">
+          <button class="btn-option">F1</button>
+          <button class="btn-option">F8</button>
+          <button class="btn-option">F4</button>
+          <button class="btn-option">F10</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question pair-question">
+        <div class="q-meta">Практика</div>
+        <h3>Соедини клавишу и действие.</h3>
+        <div class="pair-grid">
+          <div class="pair-item">
+            <label>F1</label>
+            <select data-correct="Справка / помощь">
+              <option value="">Выбери ответ</option>
+              <option>Справка / помощь</option>
+              <option>Обновить страницу</option>
+              <option>Переименовать файл</option>
+              <option>Полный экран</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>F2</label>
+            <select data-correct="Переименовать файл">
+              <option value="">Выбери ответ</option>
+              <option>Открыть адресную строку</option>
+              <option>Полный экран</option>
+              <option>Переименовать файл</option>
+              <option>Справка / помощь</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>F5</label>
+            <select data-correct="Обновить страницу">
+              <option value="">Выбери ответ</option>
+              <option>Обновить страницу</option>
+              <option>Справка / помощь</option>
+              <option>Поиск на странице</option>
+              <option>Удалить файл</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>F11</label>
+            <select data-correct="Полный экран">
+              <option value="">Выбери ответ</option>
+              <option>Инструменты разработчика</option>
+              <option>Полный экран</option>
+              <option>Печать</option>
+              <option>Поиск на странице</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn pair-check">Проверить сопоставление</button>
+          <button class="show-answers pair-show">Показать правильные ответы</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question builder" data-answer="F11">
+        <div class="q-meta">Собери клавишу</div>
+        <h3>Какую клавишу нажать, чтобы браузер перешёл в полноэкранный режим?</h3>
+        <div class="answer-box"></div>
+        <div class="key-bank">
+          <button class="mini-key">F1</button>
+          <button class="mini-key">F5</button>
+          <button class="mini-key">F11</button>
+          <button class="mini-key">F12</button>
+          <button class="mini-key">F2</button>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn builder-check">Проверить</button>
+          <button class="show-answers builder-reset">Сбросить</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-browser">
+      <h2>3. Браузер: вкладки, поиск, адресная строка, загрузки</h2>
+      <p class="sub">Здесь мы закрепляем, как устроен браузер и как быстро находить нужную информацию.</p>
+      <div class="tips">
+        <div class="tip"><strong>Адресная строка</strong> — это место, куда можно писать адрес сайта или поисковый запрос.</div>
+        <div class="tip"><strong>Загрузки</strong> — это файлы, которые ты скачал из интернета: картинки, документы, программы.</div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 1</div>
+        <h3>Где в браузере обычно пишут адрес сайта?</h3>
+        <div class="options">
+          <button class="btn-option">Во вкладке</button>
+          <button class="btn-option">В адресной строке</button>
+          <button class="btn-option">В панели загрузок</button>
+          <button class="btn-option">В истории</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 2</div>
+        <h3>Что такое вкладка в браузере?</h3>
+        <div class="options">
+          <button class="btn-option">Кнопка для печати</button>
+          <button class="btn-option">Только название сайта</button>
+          <button class="btn-option">Отдельная открытая страница</button>
+          <button class="btn-option">Папка с картинками</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 3</div>
+        <h3>Ты скачал картинку. Где её чаще всего искать сначала?</h3>
+        <div class="options">
+          <button class="btn-option">В папке «Загрузки»</button>
+          <button class="btn-option">В корзине</button>
+          <button class="btn-option">В блокноте</button>
+          <button class="btn-option">На панели задач</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="3">
+        <div class="q-meta">Вопрос 4</div>
+        <h3>Что безопаснее вводить в поиск, если нужно узнать про планеты?</h3>
+        <div class="options">
+          <button class="btn-option">Скачать всё бесплатно</button>
+          <button class="btn-option">Супер взлом</button>
+          <button class="btn-option">Нажми срочно приз</button>
+          <button class="btn-option">Планеты Солнечной системы для детей</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 5</div>
+        <h3>Как открыть новую вкладку через клавиатуру?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + W</button>
+          <button class="btn-option">Ctrl + T</button>
+          <button class="btn-option">Ctrl + Shift + T</button>
+          <button class="btn-option">Alt + F4</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 6</div>
+        <h3>Ты случайно закрыл вкладку с важным сайтом. Что сделать?</h3>
+        <div class="options">
+          <button class="btn-option">Удалить браузер</button>
+          <button class="btn-option">Нажать Esc</button>
+          <button class="btn-option">Нажать Ctrl + Shift + T</button>
+          <button class="btn-option">Нажать F2</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 7</div>
+        <h3>Если сайт не показывает свежую информацию, что можно попробовать?</h3>
+        <div class="options">
+          <button class="btn-option">Обновить страницу</button>
+          <button class="btn-option">Переименовать вкладку</button>
+          <button class="btn-option">Открыть Paint</button>
+          <button class="btn-option">Нажать Caps Lock</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question tf-question">
+        <div class="q-meta">Верно или нет</div>
+        <h3>В адресную строку можно писать не только адрес сайта, но и обычный поисковый запрос.</h3>
+        <div class="tf-buttons">
+          <button class="btn-option tf-btn" data-answer="true">Верно</button>
+          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question tf-question">
+        <div class="q-meta">Верно или нет</div>
+        <h3>Все скачанные файлы навсегда остаются только в браузере и не сохраняются на компьютере.</h3>
+        <div class="tf-buttons">
+          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
+          <button class="btn-option tf-btn" data-answer="true">Верно</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question builder" data-answer="Ctrl + Shift + T">
+        <div class="q-meta">Собери комбинацию</div>
+        <h3>Собери сочетание, которое возвращает случайно закрытую вкладку.</h3>
+        <div class="answer-box"></div>
+        <div class="key-bank">
+          <button class="mini-key">Ctrl</button>
+          <button class="mini-key">Shift</button>
+          <button class="mini-key">T</button>
+          <button class="mini-key">W</button>
+          <button class="mini-key">F4</button>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn builder-check">Проверить</button>
+          <button class="show-answers builder-reset">Сбросить</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-special">
+      <h2>4. Специальные клавиши</h2>
+      <p class="sub">Это клавиши управления: Enter, Esc, Tab, Shift, Backspace, Delete, Home, End, Page Up и Page Down.</p>
+      <div class="tips">
+        <div class="tip"><strong>Enter</strong> подтверждает действие или переносит на новую строку.</div>
+        <div class="tip"><strong>Esc</strong> часто помогает выйти, закрыть меню или отменить режим.</div>
+      </div>
+
+      <div class="question quiz" data-answer="3">
+        <div class="q-meta">Вопрос 1</div>
+        <h3>Какая клавиша часто подтверждает действие?</h3>
+        <div class="options">
+          <button class="btn-option">Esc</button>
+          <button class="btn-option">Tab</button>
+          <button class="btn-option">Shift</button>
+          <button class="btn-option">Enter</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 2</div>
+        <h3>Чем часто пользуются, чтобы закрыть окно меню или выйти из полноэкранного режима?</h3>
+        <div class="options">
+          <button class="btn-option">Esc</button>
+          <button class="btn-option">Home</button>
+          <button class="btn-option">Delete</button>
+          <button class="btn-option">Page Down</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 3</div>
+        <h3>Какая клавиша стирает символ слева от курсора?</h3>
+        <div class="options">
+          <button class="btn-option">Delete</button>
+          <button class="btn-option">Shift</button>
+          <button class="btn-option">Backspace</button>
+          <button class="btn-option">End</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 4</div>
+        <h3>Какая клавиша удаляет символ справа от курсора или удаляет выделенный объект?</h3>
+        <div class="options">
+          <button class="btn-option">Backspace</button>
+          <button class="btn-option">Delete</button>
+          <button class="btn-option">Home</button>
+          <button class="btn-option">Alt</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 5</div>
+        <h3>Какая клавиша помогает перейти к следующему полю в форме или к следующему элементу?</h3>
+        <div class="options">
+          <button class="btn-option">Tab</button>
+          <button class="btn-option">Esc</button>
+          <button class="btn-option">Page Up</button>
+          <button class="btn-option">Ctrl</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 6</div>
+        <h3>Какая клавиша переносит курсор в начало строки?</h3>
+        <div class="options">
+          <button class="btn-option">End</button>
+          <button class="btn-option">Page Down</button>
+          <button class="btn-option">Home</button>
+          <button class="btn-option">Enter</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 7</div>
+        <h3>Какая клавиша переносит курсор в конец строки?</h3>
+        <div class="options">
+          <button class="btn-option">Home</button>
+          <button class="btn-option">End</button>
+          <button class="btn-option">Shift</button>
+          <button class="btn-option">Esc</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question tf-question">
+        <div class="q-meta">Верно или нет</div>
+        <h3>Page Down обычно помогает пролистать страницу вниз.</h3>
+        <div class="tf-buttons">
+          <button class="btn-option tf-btn" data-answer="true">Верно</button>
+          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question tf-question">
+        <div class="q-meta">Верно или нет</div>
+        <h3>Shift сам по себе всегда печатает целые слова.</h3>
+        <div class="tf-buttons">
+          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
+          <button class="btn-option tf-btn" data-answer="true">Верно</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question builder" data-answer="Shift">
+        <div class="q-meta">Выбери клавишу</div>
+        <h3>Какую клавишу удерживают, когда хотят написать одну большую букву?</h3>
+        <div class="answer-box"></div>
+        <div class="key-bank">
+          <button class="mini-key">Esc</button>
+          <button class="mini-key">Shift</button>
+          <button class="mini-key">Tab</button>
+          <button class="mini-key">Home</button>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn builder-check">Проверить</button>
+          <button class="show-answers builder-reset">Сбросить</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-secret">
+      <h2>5. Секретные и неожиданные фишки</h2>
+      <p class="sub">Здесь собраны клавиши и комбинации, о которых часто не знают. Они могут показаться маленькими, но сильно ускоряют работу.</p>
+      <div class="tips">
+        <div class="tip"><strong>Win + V</strong> открывает историю буфера обмена. Можно выбрать не только последний, а один из недавно скопированных фрагментов.</div>
+        <div class="tip"><strong>Win + .</strong> быстро открывает панель эмодзи и символов. Это удобно не только для смайликов, но и для значков.</div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 1</div>
+        <h3>Какая комбинация открывает историю буфера обмена в Windows?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + V</button>
+          <button class="btn-option">Win + V</button>
+          <button class="btn-option">Win + C</button>
+          <button class="btn-option">Ctrl + H</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Вопрос 2</div>
+        <h3>Как удалить сразу целое слово слева от курсора?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + Backspace</button>
+          <button class="btn-option">Shift + Delete</button>
+          <button class="btn-option">Alt + Tab</button>
+          <button class="btn-option">Ctrl + End</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 3</div>
+        <h3>Как сделать снимок только активного окна, а не всего экрана?</h3>
+        <div class="options">
+          <button class="btn-option">PrtSc</button>
+          <button class="btn-option">Win + Shift + S</button>
+          <button class="btn-option">Alt + PrtSc</button>
+          <button class="btn-option">F12</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="3">
+        <div class="q-meta">Вопрос 4</div>
+        <h3>Какая комбинация открывает панель эмодзи и специальных символов?</h3>
+        <div class="options">
+          <button class="btn-option">Win + ;</button>
+          <button class="btn-option">Ctrl + .</button>
+          <button class="btn-option">Alt + E</button>
+          <button class="btn-option">Win + .</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Вопрос 5</div>
+        <h3>Как открыть контекстное меню, если мышкой нажимать неудобно?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + M</button>
+          <button class="btn-option">Shift + F10</button>
+          <button class="btn-option">Alt + Z</button>
+          <button class="btn-option">F3</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Вопрос 6</div>
+        <h3>Какая комбинация часто быстро открывает окно с выделением области для снимка экрана?</h3>
+        <div class="options">
+          <button class="btn-option">Win + V</button>
+          <button class="btn-option">Ctrl + Shift + S</button>
+          <button class="btn-option">Win + Shift + S</button>
+          <button class="btn-option">Ctrl + Alt + S</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question tf-question">
+        <div class="q-meta">Верно или нет</div>
+        <h3>История буфера обмена полезна, когда ты копировал несколько разных фраз и хочешь выбрать одну из них позже.</h3>
+        <div class="tf-buttons">
+          <button class="btn-option tf-btn" data-answer="true">Верно</button>
+          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question tf-question">
+        <div class="q-meta">Верно или нет</div>
+        <h3>Ctrl + Backspace удаляет только одну букву слева от курсора.</h3>
+        <div class="tf-buttons">
+          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
+          <button class="btn-option tf-btn" data-answer="true">Верно</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question builder" data-answer="Win + V">
+        <div class="q-meta">Собери комбинацию</div>
+        <h3>Собери комбинацию, которая открывает историю буфера обмена.</h3>
+        <div class="answer-box"></div>
+        <div class="key-bank">
+          <button class="mini-key">Win</button>
+          <button class="mini-key">V</button>
+          <button class="mini-key">C</button>
+          <button class="mini-key">Shift</button>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn builder-check">Проверить</button>
+          <button class="show-answers builder-reset">Сбросить</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question builder" data-answer="Shift + F10">
+        <div class="q-meta">Собери комбинацию</div>
+        <h3>Собери сочетание для открытия контекстного меню без мышки.</h3>
+        <div class="answer-box"></div>
+        <div class="key-bank">
+          <button class="mini-key">Shift</button>
+          <button class="mini-key">F10</button>
+          <button class="mini-key">F12</button>
+          <button class="mini-key">Ctrl</button>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn builder-check">Проверить</button>
+          <button class="show-answers builder-reset">Сбросить</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-final">
+      <h2>6. Финальное смешанное испытание</h2>
+      <p class="sub">Последний блок. Здесь задания смешаны из всех тем сразу.</p>
+
+      <div class="question quiz" data-answer="0">
+        <div class="q-meta">Финал 1</div>
+        <h3>Ты хочешь найти слово в тексте. Что нажать?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + F</button>
+          <button class="btn-option">Ctrl + P</button>
+          <button class="btn-option">F11</button>
+          <button class="btn-option">Win + V</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="3">
+        <div class="q-meta">Финал 2</div>
+        <h3>Ты хочешь быстро перейти в полноэкранный режим браузера.</h3>
+        <div class="options">
+          <button class="btn-option">F5</button>
+          <button class="btn-option">F2</button>
+          <button class="btn-option">Esc</button>
+          <button class="btn-option">F11</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Финал 3</div>
+        <h3>Какой клавишей чаще всего удаляют символ слева от курсора?</h3>
+        <div class="options">
+          <button class="btn-option">Delete</button>
+          <button class="btn-option">Backspace</button>
+          <button class="btn-option">Enter</button>
+          <button class="btn-option">Tab</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="2">
+        <div class="q-meta">Финал 4</div>
+        <h3>Что нажать, чтобы открыть историю буфера обмена?</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + V</button>
+          <button class="btn-option">Win + E</button>
+          <button class="btn-option">Win + V</button>
+          <button class="btn-option">Ctrl + C</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question quiz" data-answer="1">
+        <div class="q-meta">Финал 5</div>
+        <h3>Ты хочешь вернуться к только что закрытой вкладке.</h3>
+        <div class="options">
+          <button class="btn-option">Ctrl + W</button>
+          <button class="btn-option">Ctrl + Shift + T</button>
+          <button class="btn-option">Alt + Tab</button>
+          <button class="btn-option">Home</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question tf-question">
+        <div class="q-meta">Финал 6</div>
+        <h3>Esc часто помогает выйти из режима, закрыть меню или отменить действие.</h3>
+        <div class="tf-buttons">
+          <button class="btn-option tf-btn" data-answer="true">Верно</button>
+          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question pair-question">
+        <div class="q-meta">Финал 7</div>
+        <h3>Последнее сопоставление.</h3>
+        <div class="pair-grid">
+          <div class="pair-item">
+            <label>Ctrl + S</label>
+            <select data-correct="Сохранить">
+              <option value="">Выбери ответ</option>
+              <option>Сохранить</option>
+              <option>Помощь</option>
+              <option>Вернуть вкладку</option>
+              <option>История буфера</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>F1</label>
+            <select data-correct="Помощь">
+              <option value="">Выбери ответ</option>
+              <option>Сохранить</option>
+              <option>Окно меню</option>
+              <option>Помощь</option>
+              <option>Начало строки</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>Home</label>
+            <select data-correct="Начало строки">
+              <option value="">Выбери ответ</option>
+              <option>Начало строки</option>
+              <option>Конец строки</option>
+              <option>Новая вкладка</option>
+              <option>Контекстное меню</option>
+            </select>
+          </div>
+          <div class="pair-item">
+            <label>Shift + F10</label>
+            <select data-correct="Контекстное меню">
+              <option value="">Выбери ответ</option>
+              <option>Контекстное меню</option>
+              <option>Поиск</option>
+              <option>Выделить всё</option>
+              <option>Обновить</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="check-btn pair-check">Проверить сопоставление</button>
+          <button class="show-answers pair-show">Показать правильные ответы</button>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="final-card">
+        <div class="status-label">Итог урока</div>
+        <div class="final-score" id="finalPercent">0%</div>
+        <p id="finalText">Решай задания, и здесь появится итог.</p>
+
+        <div class="certificate" id="certificate">
+          <strong>Сертификат ученика</strong><br>
+          Ты прошёл большой урок по работе с компьютером и закрепил темы:
+          сочетания клавиш, F1–F12, браузер, специальные клавиши и скрытые фишки.
+          <br><br>
+          Твой результат: <b id="certScore">0 / 0</b>
+        </div>
+
+        <div class="foot-actions">
+          <a href="#top" class="nav-top">Наверх</a>
+          <button class="reset-btn" id="resetAll">Сбросить все ответы</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const state = {
+      total: 0,
+      done: 0,
+      score: 0
+    };
+
+    const allQuestions = [];
+    document.querySelectorAll('.quiz, .tf-question, .pair-question, .builder').forEach(q => allQuestions.push(q));
+    state.total = allQuestions.length;
+    document.getElementById('scoreMax').textContent = state.total;
+    document.getElementById('doneMax').textContent = state.total;
+
+    function updateStatus(){
+      document.getElementById('scoreNow').textContent = state.score;
+      document.getElementById('doneNow').textContent = state.done;
+      const percent = state.total ? Math.round((state.done / state.total) * 100) : 0;
+      document.getElementById('globalBar').style.width = percent + '%';
+
+      const scorePercent = state.total ? Math.round((state.score / state.total) * 100) : 0;
+      document.getElementById('finalPercent').textContent = scorePercent + '%';
+
+      let text = 'Решай задания, и здесь появится итог.';
+      if(state.done === 0){
+        text = 'Пока нет решённых заданий.';
+      } else if(scorePercent < 40){
+        text = 'Хорошее начало. Ещё немного практики, и будет намного легче.';
+      } else if(scorePercent < 70){
+        text = 'Уже уверенно. Видно, что основные темы начинают запоминаться.';
+      } else if(scorePercent < 90){
+        text = 'Очень хороший результат. Ты отлично ориентируешься в клавишах и браузере.';
+      } else {
+        text = 'Отлично. Это уже уровень очень уверенного пользователя.';
+      }
+      document.getElementById('finalText').textContent = text;
+      document.getElementById('certScore').textContent = state.score + ' / ' + state.total;
+    }
+
+    function markDone(question, isCorrect){
+      if(question.dataset.checked === '1') return;
+      question.dataset.checked = '1';
+      state.done += 1;
+      if(isCorrect) state.score += 1;
+      updateStatus();
+    }
+
+    function setFeedback(question, okText, badText, isCorrect){
+      const fb = question.querySelector('.feedback');
+      if(!fb) return;
+      fb.className = 'feedback ' + (isCorrect ? 'ok' : 'bad');
+      fb.textContent = isCorrect ? okText : badText;
+    }
+
+    document.querySelectorAll('.quiz').forEach(question => {
+      const buttons = question.querySelectorAll('.btn-option');
+      buttons.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+          if(question.dataset.checked === '1') return;
+          buttons.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+
+          const correctIndex = Number(question.dataset.answer);
+          const isCorrect = index === correctIndex;
+          buttons[correctIndex].classList.add('correct');
+          if(!isCorrect) btn.classList.add('wrong');
+          markDone(question, isCorrect);
+
+          setFeedback(
+            question,
+            'Верно.',
+            'Не совсем. Правильный ответ уже подсвечен.',
+            isCorrect
+          );
+        });
+      });
+    });
+
+    document.querySelectorAll('.tf-question').forEach(question => {
+      const buttons = question.querySelectorAll('.tf-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if(question.dataset.checked === '1') return;
+          const value = btn.dataset.answer;
+          const correctValue = buttons[0].dataset.answer === 'true' && question.querySelector('h3').textContent.includes('не сохраняются на компьютере')
+            ? 'false'
+            : btn.parentElement.querySelector('[data-answer="true"]') && question.querySelector('h3').textContent.includes('не сохраняются на компьютере')
+              ? 'false'
+              : null;
+        });
+      });
+    });
+
+    // explicit truth values stored in question dataset for clarity
+    document.querySelectorAll('.tf-question').forEach((question) => {
+      const text = question.querySelector('h3').textContent.trim();
+      let correct = 'true';
+      if(text.includes('не сохраняются на компьютере')) correct = 'false';
+      if(text.includes('Shift сам по себе всегда печатает целые слова')) correct = 'false';
+      if(text.includes('Ctrl + Backspace удаляет только одну букву')) correct = 'false';
+      question.dataset.truth = correct;
+
+      const buttons = question.querySelectorAll('.tf-btn');
+      buttons.forEach(btn => {
+        btn.onclick = () => {
+          if(question.dataset.checked === '1') return;
+          const value = btn.dataset.answer;
+          const isCorrect = value === question.dataset.truth;
+          buttons.forEach(b => {
+            if(b.dataset.answer === question.dataset.truth) b.classList.add('correct');
+          });
+          if(!isCorrect) btn.classList.add('wrong');
+          markDone(question, isCorrect);
+          setFeedback(
+            question,
+            'Верно.',
+            'Неверно. Правильный вариант уже подсвечен.',
+            isCorrect
+          );
+        };
+      });
+    });
+
+    document.querySelectorAll('.pair-question').forEach(question => {
+      const checkBtn = question.querySelector('.pair-check');
+      const showBtn = question.querySelector('.pair-show');
+      const selects = question.querySelectorAll('select');
+
+      checkBtn.addEventListener('click', () => {
+        if(question.dataset.checked === '1') return;
+        let allCorrect = true;
+        selects.forEach(sel => {
+          const ok = sel.value === sel.dataset.correct;
+          sel.style.borderColor = ok ? '#7ad29f' : '#ef9f9f';
+          sel.style.background = ok ? '#eefcf4' : '#fff2f2';
+          if(!ok) allCorrect = false;
+        });
+        markDone(question, allCorrect);
+        setFeedback(
+          question,
+          'Все пары собраны верно.',
+          'Есть ошибки. Неправильные поля подсвечены.',
+          allCorrect
+        );
+      });
+
+      showBtn.addEventListener('click', () => {
+        selects.forEach(sel => {
+          sel.value = sel.dataset.correct;
+          sel.style.borderColor = '#7ad29f';
+          sel.style.background = '#eefcf4';
+        });
+      });
+    });
+
+    document.querySelectorAll('.builder').forEach(question => {
+      const answerBox = question.querySelector('.answer-box');
+      const keys = question.querySelectorAll('.mini-key');
+      const checkBtn = question.querySelector('.builder-check');
+      const resetBtn = question.querySelector('.builder-reset');
+      let picked = [];
+
+      function renderPicked(){
+        answerBox.innerHTML = '';
+        if(!picked.length){
+          answerBox.textContent = 'Здесь появится выбранная клавиша или комбинация';
+          return;
+        }
+        picked.forEach(k => {
+          const span = document.createElement('span');
+          span.className = 'ans-pill';
+          span.textContent = k;
+          answerBox.appendChild(span);
+        });
+      }
+      renderPicked();
+
+      keys.forEach(key => {
+        key.addEventListener('click', () => {
+          if(question.dataset.checked === '1') return;
+          const value = key.textContent.trim();
+          const idx = picked.indexOf(value);
+          if(idx >= 0){
+            picked.splice(idx, 1);
+            key.classList.remove('active');
+          } else {
+            picked.push(value);
+            key.classList.add('active');
+          }
+          renderPicked();
+        });
+      });
+
+      checkBtn.addEventListener('click', () => {
+        if(question.dataset.checked === '1') return;
+        const built = picked.join(' + ');
+        const target = question.dataset.answer.trim();
+        const isCorrect = built === target;
+        keys.forEach(k => {
+          if(target.split(' + ').includes(k.textContent.trim())){
+            if(isCorrect) k.classList.add('correct');
+          }
+        });
+        if(!isCorrect){
+          picked.forEach(kv => {
+            keys.forEach(k => {
+              if(k.textContent.trim() === kv && !target.split(' + ').includes(kv)){
+                k.classList.add('wrong');
+              }
+            });
+          });
+        }
+        markDone(question, isCorrect);
+        setFeedback(
+          question,
+          'Верно.',
+          'Не совсем. Можно сбросить и собрать ещё раз уже в новой копии урока или подсмотреть ответ.',
+          isCorrect
+        );
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if(question.dataset.checked === '1') return;
+        picked = [];
+        keys.forEach(k => k.classList.remove('active', 'wrong', 'correct'));
+        renderPicked();
+      });
+    });
+
+    document.getElementById('resetAll').addEventListener('click', () => {
+      if(!confirm('Сбросить весь прогресс в этом уроке?')) return;
+      window.location.reload();
+    });
+
+    updateStatus();
+  </script>
+</body>
+</html>
