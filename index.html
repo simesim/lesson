@@ -1,1593 +1,1257 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Большой урок-тренажёр по компьютеру</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бобёр строит домик</title>
   <style>
-    :root{
-      --bg:#f6f8ff;
-      --card:#ffffff;
-      --ink:#1f2a44;
-      --muted:#62708f;
-      --accent:#4f7cff;
-      --accent-2:#7c4dff;
-      --ok:#e9fff1;
-      --ok-b:#22a85a;
-      --bad:#fff0f0;
-      --bad-b:#d44b4b;
-      --line:#dfe5ff;
-      --shadow:0 10px 30px rgba(44,77,180,.10);
-      --radius:24px;
+    * {
+      box-sizing: border-box;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: Inter, Arial, sans-serif;
+    :root {
+      --sky1: #8fd8ff;
+      --sky2: #e6f8ff;
+      --grass1: #9adf6f;
+      --grass2: #63c14c;
+      --panel: rgba(255, 255, 255, 0.94);
+      --text: #243746;
+      --accent: #ff9f43;
+      --green: #48bf6a;
+      --blue: #6f86ff;
+      --red: #ef6666;
+      --shadow: 0 14px 30px rgba(27, 57, 85, 0.15);
+      --wood: #bd7b47;
+      --wood-dark: #8f5a33;
+      --roof: #dd5a52;
+      --roof-dark: #b7403b;
+      --window: #bfe9ff;
+      --glass: #eaf8ff;
+      --stone: #b8b8bf;
+      --fence: #d6a06a;
+      --flower1: #ff6699;
+      --flower2: #ffd84d;
+      --flower3: #8d7dff;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: var(--text);
       background:
-        radial-gradient(circle at top right, rgba(124,77,255,.12), transparent 26%),
-        radial-gradient(circle at top left, rgba(79,124,255,.12), transparent 22%),
-        var(--bg);
-      color:var(--ink);
-    }
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:18px 14px 80px;
-    }
-    .hero{
-      background:linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
-      border:1px solid var(--line);
-      border-radius:32px;
-      box-shadow:var(--shadow);
-      padding:24px;
-      margin-bottom:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -40px auto;
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(79,124,255,.18), rgba(79,124,255,0));
-    }
-    h1{
-      margin:0 0 10px;
-      font-size:clamp(28px, 4.8vw, 46px);
-      line-height:1.06;
-    }
-    .lead{
-      font-size:clamp(15px, 2.8vw, 19px);
-      color:var(--muted);
-      margin:0 0 14px;
-      max-width:760px;
-      line-height:1.5;
-    }
-    .badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
-    }
-    .badge{
-      padding:10px 14px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
-      font-weight:700;
-      font-size:14px;
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,0.55) 0 70px, transparent 71px),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.4) 0 90px, transparent 91px),
+        linear-gradient(to bottom, var(--sky1) 0%, var(--sky2) 58%, #c7f3a1 58%, #93da6c 100%);
+      overflow-x: hidden;
     }
 
-    .sticky-bar{
-      position:sticky;
-      top:8px;
-      z-index:20;
-      margin:0 0 18px;
-    }
-    .status{
-      background:rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border:1px solid var(--line);
-      box-shadow:var(--shadow);
-      border-radius:22px;
-      padding:14px;
-      display:grid;
-      grid-template-columns: 1.2fr .9fr .9fr;
-      gap:12px;
-      align-items:center;
-    }
-    .progress-shell{
-      width:100%;
-      height:14px;
-      border-radius:999px;
-      background:#e8edff;
-      overflow:hidden;
-      border:1px solid #d7dfff;
-    }
-    .progress-bar{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      border-radius:999px;
-      transition:width .35s ease;
-    }
-    .status-box{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:12px 14px;
-      min-height:64px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-    .status-label{
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      color:var(--muted);
-      margin-bottom:4px;
-      font-weight:700;
-    }
-    .status-value{
-      font-size:20px;
-      font-weight:800;
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 16px 40px;
     }
 
-    .toc{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin:18px 0 22px;
-    }
-    .toc a{
-      text-decoration:none;
-      color:var(--ink);
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:14px;
-      font-weight:800;
-      box-shadow:var(--shadow);
-      min-height:74px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
+    .title {
+      text-align: center;
+      margin-bottom: 18px;
     }
 
-    .section{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:28px;
-      box-shadow:var(--shadow);
-      padding:22px;
-      margin-bottom:18px;
-    }
-    .section h2{
-      margin:0 0 8px;
-      font-size:clamp(24px, 4vw, 34px);
-    }
-    .section .sub{
-      color:var(--muted);
-      margin:0 0 18px;
-      line-height:1.5;
-      font-size:16px;
+    .title h1 {
+      margin: 0 0 10px;
+      font-size: 40px;
+      line-height: 1.1;
+      color: #173a54;
     }
 
-    .tips{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-bottom:18px;
-    }
-    .tip{
-      background:#f7f9ff;
-      border:1px dashed #cfd9ff;
-      border-radius:18px;
-      padding:14px;
-    }
-    .tip strong{
-      display:block;
-      margin-bottom:6px;
+    .title p {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #25526e;
     }
 
-    .question{
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:16px;
-      margin-bottom:14px;
-      background:#fff;
-    }
-    .question h3{
-      margin:0 0 12px;
-      font-size:18px;
-      line-height:1.35;
-    }
-    .q-meta{
-      display:inline-block;
-      font-size:12px;
-      font-weight:800;
-      color:var(--muted);
-      background:#f3f6ff;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:6px 10px;
-      margin-bottom:10px;
+    .game {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      align-items: start;
     }
 
-    .options{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-    .btn-option, .mini-key, .check-btn, .nav-top, .reset-btn, .show-answers{
-      appearance:none;
-      border:none;
-      cursor:pointer;
-      background:#f7f9ff;
-      border:1px solid var(--line);
-      color:var(--ink);
-      border-radius:18px;
-      padding:14px 12px;
-      font-weight:800;
-      font-size:15px;
-      transition:.2s ease;
-      box-shadow:none;
-    }
-    .btn-option:hover, .mini-key:hover, .check-btn:hover, .nav-top:hover, .reset-btn:hover, .show-answers:hover{
-      transform:translateY(-1px);
-      background:#eef3ff;
-    }
-    .btn-option.selected{outline:3px solid rgba(79,124,255,.18); background:#edf3ff}
-    .btn-option.correct, .mini-key.correct{background:var(--ok); border-color:#a8e5c0}
-    .btn-option.wrong, .mini-key.wrong{background:var(--bad); border-color:#f0b2b2}
-
-    .row-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:12px;
-    }
-    .check-btn{
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:#fff;
-      border:none;
-      padding:14px 18px;
-    }
-    .show-answers{
-      background:#fff7ef;
-      border-color:#ffd9a5;
+    .panel {
+      background: var(--panel);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 2px solid rgba(255,255,255,0.65);
+      backdrop-filter: blur(6px);
     }
 
-    .feedback{
-      margin-top:12px;
-      padding:12px 14px;
-      border-radius:16px;
-      font-weight:700;
-      display:none;
-    }
-    .feedback.ok{display:block;background:var(--ok);border:1px solid #a8e5c0;color:#0d6a34}
-    .feedback.bad{display:block;background:var(--bad);border:1px solid #efb3b3;color:#9f2f2f}
-
-    .pair-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:12px;
-    }
-    .pair-item{
-      background:#f9fbff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-    }
-    .pair-item label{
-      display:block;
-      font-weight:800;
-      margin-bottom:10px;
-    }
-    select{
-      width:100%;
-      padding:14px 12px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:#fff;
-      font-size:15px;
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
-    .key-bank{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:12px 0;
-    }
-    .mini-key{
-      min-width:74px;
-      background:#fff;
-    }
-    .mini-key.active{
-      background:#edf3ff;
-      outline:3px solid rgba(79,124,255,.18);
-    }
-    .answer-box{
-      min-height:60px;
-      padding:14px;
-      border-radius:18px;
-      background:#f7f9ff;
-      border:1px dashed #bccaff;
-      font-weight:800;
-      display:flex;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .ans-pill{
-      padding:8px 12px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
+    .pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 17px;
+      font-weight: 700;
+      background: linear-gradient(180deg, #fff, #edf7ff);
+      border: 2px solid #dbe9ff;
     }
 
-    .statement{
-      background:#f9fbff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-      margin-bottom:12px;
-    }
-    .tf-buttons{
-      display:flex;
-      gap:10px;
-      margin-top:10px;
+    .progress {
+      width: 100%;
+      height: 20px;
+      background: #edf3f7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
     }
 
-    .final-card{
-      text-align:center;
-      padding:26px;
-      border-radius:28px;
-      background:linear-gradient(135deg,#ffffff,#f4f7ff);
-      border:1px solid var(--line);
-    }
-    .final-score{
-      font-size:clamp(34px, 8vw, 60px);
-      margin:8px 0;
-      font-weight:900;
-    }
-    .certificate{
-      margin-top:16px;
-      background:#fff;
-      border:2px dashed #b9c8ff;
-      border-radius:24px;
-      padding:18px;
-      font-size:18px;
-      line-height:1.5;
+    .progress__bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffbf59, #ff8d4e, #ff6aa1);
+      transition: width 0.35s ease;
     }
 
-    .foot-actions{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:16px;
-    }
-    .nav-top{
-      background:#fff;
-      border-color:var(--line);
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .reset-btn{
-      background:#fff0f5;
-      border-color:#ffc2d6;
+    .question-box {
+      min-height: 210px;
+      border-radius: 24px;
+      padding: 22px;
+      background: linear-gradient(180deg, #fffaf0, #fff2dc);
+      border: 2px dashed #ffcc77;
+      margin-bottom: 16px;
     }
 
-    @media (max-width: 860px){
-      .status{grid-template-columns:1fr}
-      .toc{grid-template-columns:repeat(2,1fr)}
-      .tips{grid-template-columns:1fr}
-      .options{grid-template-columns:1fr}
-      .pair-grid{grid-template-columns:1fr}
+    .question-number {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ae6800;
+      margin-bottom: 12px;
     }
 
-    @media (max-width: 560px){
-      .wrap{padding:12px 10px 60px}
-      .hero, .section{padding:16px}
-      .toc{grid-template-columns:1fr}
-      .badge{width:100%; text-align:center}
-      .btn-option, .mini-key, .check-btn, .nav-top, .reset-btn, .show-answers{
-        min-height:52px;
-        font-size:16px;
+    .question-text {
+      font-size: 29px;
+      line-height: 1.42;
+      font-weight: 700;
+    }
+
+    .help-text {
+      margin-top: 14px;
+      font-size: 16px;
+      color: #5d6d79;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    input[type="text"] {
+      flex: 1 1 260px;
+      min-width: 220px;
+      padding: 16px 18px;
+      border: 2px solid #d1e0eb;
+      border-radius: 18px;
+      font-size: 24px;
+      outline: none;
+      background: #fff;
+    }
+
+    input[type="text"]:focus {
+      border-color: #75bbff;
+      box-shadow: 0 0 0 4px rgba(117, 187, 255, 0.18);
+    }
+
+    button {
+      border: none;
+      border-radius: 18px;
+      padding: 16px 20px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+    }
+
+    .btn-check {
+      background: linear-gradient(180deg, #58cf78, #34b45a);
+      color: white;
+    }
+
+    .btn-hint {
+      background: linear-gradient(180deg, #ffd15c, #ffae38);
+      color: #533400;
+    }
+
+    .btn-restart {
+      background: linear-gradient(180deg, #7c95ff, #5a78e8);
+      color: white;
+      margin-top: 12px;
+    }
+
+    .message {
+      min-height: 62px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      background: #f3f7fa;
+    }
+
+    .message.success {
+      background: #e9faee;
+      color: #187338;
+    }
+
+    .message.error {
+      background: #fff0f0;
+      color: #bf3d3d;
+    }
+
+    .message.info {
+      background: #eef6ff;
+      color: #2a6699;
+    }
+
+    .scene {
+      position: sticky;
+      top: 16px;
+      overflow: hidden;
+    }
+
+    .world {
+      position: relative;
+      min-height: 620px;
+      border-radius: 26px;
+      padding: 20px 18px 18px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.85), transparent 190px),
+        linear-gradient(to bottom, #8ed5ff 0%, #dcf7ff 57%, #afe58a 57%, #75cb59 100%);
+      overflow: hidden;
+      box-shadow: inset 0 -12px 22px rgba(0,0,0,0.08);
+    }
+
+    .sun {
+      position: absolute;
+      right: 24px;
+      top: 18px;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8c7 0 18%, #ffd65f 45%, #ffb43a 100%);
+      box-shadow: 0 0 34px rgba(255, 204, 83, 0.8);
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    .speech {
+      position: relative;
+      z-index: 4;
+      margin: 0 auto 16px;
+      max-width: 86%;
+      background: white;
+      border-radius: 18px;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .speech::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -12px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .build-area {
+      position: relative;
+      width: 100%;
+      height: 330px;
+      margin-top: 12px;
+      z-index: 2;
+    }
+
+    .house {
+      position: absolute;
+      left: 50%;
+      bottom: 38px;
+      transform: translateX(-50%);
+      width: 290px;
+      height: 230px;
+    }
+
+    .part {
+      position: absolute;
+      opacity: 0;
+      transform: scale(0.7) translateY(10px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .part.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .foundation-left,
+    .foundation-right {
+      bottom: 0;
+      width: 140px;
+      height: 20px;
+      background: linear-gradient(180deg, #c5c5cc, #9e9ea8);
+      border: 3px solid #6d6d76;
+      border-radius: 6px;
+    }
+
+    .foundation-left {
+      left: 0;
+    }
+
+    .foundation-right {
+      right: 0;
+    }
+
+    .floor {
+      left: 38px;
+      bottom: 18px;
+      width: 214px;
+      height: 14px;
+      background: linear-gradient(180deg, #cf8d57, #ab6c3f);
+      border: 3px solid #764622;
+      border-radius: 4px;
+    }
+
+    .wall-left,
+    .wall-right,
+    .wall-back,
+    .wall-front {
+      background: linear-gradient(180deg, #d79a62, #b87645);
+      border: 3px solid #875229;
+    }
+
+    .wall-left {
+      left: 36px;
+      bottom: 30px;
+      width: 20px;
+      height: 112px;
+      border-radius: 4px;
+    }
+
+    .wall-right {
+      right: 36px;
+      bottom: 30px;
+      width: 20px;
+      height: 112px;
+      border-radius: 4px;
+    }
+
+    .wall-back {
+      left: 54px;
+      bottom: 122px;
+      width: 182px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .wall-front {
+      left: 54px;
+      bottom: 30px;
+      width: 182px;
+      height: 96px;
+      border-radius: 8px;
+    }
+
+    .roof-left,
+    .roof-right {
+      width: 120px;
+      height: 18px;
+      background: linear-gradient(180deg, var(--roof), var(--roof-dark));
+      border: 3px solid #8a3430;
+      top: 64px;
+      transform-origin: center;
+      border-radius: 10px;
+    }
+
+    .roof-left {
+      left: 30px;
+      transform: rotate(-28deg) scale(0.7) translateY(10px);
+    }
+
+    .roof-left.show {
+      transform: rotate(-28deg) scale(1) translateY(0);
+    }
+
+    .roof-right {
+      right: 30px;
+      transform: rotate(28deg) scale(0.7) translateY(10px);
+    }
+
+    .roof-right.show {
+      transform: rotate(28deg) scale(1) translateY(0);
+    }
+
+    .door {
+      left: 118px;
+      bottom: 30px;
+      width: 48px;
+      height: 70px;
+      background: linear-gradient(180deg, #96582f, #7a421f);
+      border: 3px solid #5a2d12;
+      border-radius: 12px 12px 4px 4px;
+    }
+
+    .door::after {
+      content: "";
+      position: absolute;
+      right: 7px;
+      top: 34px;
+      width: 8px;
+      height: 8px;
+      background: #ffd15a;
+      border-radius: 50%;
+    }
+
+    .window-left,
+    .window-right {
+      bottom: 70px;
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(180deg, var(--window), var(--glass));
+      border: 3px solid #4b7ea1;
+      border-radius: 10px;
+    }
+
+    .window-left {
+      left: 68px;
+    }
+
+    .window-right {
+      right: 68px;
+    }
+
+    .window-left::before,
+    .window-right::before,
+    .window-left::after,
+    .window-right::after {
+      content: "";
+      position: absolute;
+      background: #4b7ea1;
+    }
+
+    .window-left::before,
+    .window-right::before {
+      left: 50%;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+
+    .window-left::after,
+    .window-right::after {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      transform: translateY(-50%);
+    }
+
+    .chimney {
+      right: 58px;
+      top: 26px;
+      width: 28px;
+      height: 58px;
+      background: linear-gradient(180deg, #d18c56, #b36b3a);
+      border: 3px solid #7d4822;
+      border-radius: 6px 6px 4px 4px;
+    }
+
+    .fence {
+      left: -10px;
+      bottom: 0;
+      width: 310px;
+      height: 46px;
+    }
+
+    .fence::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          to right,
+          transparent 0 8px,
+          #d8a36d 8px 22px,
+          transparent 22px 30px
+        );
+      border-bottom: 4px solid #9a6334;
+    }
+
+    .flowers {
+      left: 30px;
+      bottom: -4px;
+      width: 230px;
+      height: 42px;
+    }
+
+    .flower {
+      position: absolute;
+      bottom: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      box-shadow:
+        10px 0 0 currentColor,
+        -10px 0 0 currentColor,
+        0 -10px 0 currentColor,
+        0 10px 0 currentColor;
+    }
+
+    .flower::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      background: #ffd857;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .flower.f1 { left: 20px; color: var(--flower1); }
+    .flower.f2 { left: 62px; color: var(--flower2); }
+    .flower.f3 { left: 104px; color: var(--flower3); }
+    .flower.f4 { left: 146px; color: #ff7f50; }
+    .flower.f5 { left: 188px; color: #7ccf62; }
+
+    .bird {
+      position: absolute;
+      top: 80px;
+      left: 50px;
+      font-size: 24px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .bird.show {
+      opacity: 1;
+      transform: translateY(0);
+      animation: birdFly 2.8s ease-in-out infinite;
+    }
+
+    .beaver-zone {
+      position: absolute;
+      left: 14px;
+      bottom: 34px;
+      z-index: 4;
+      display: flex;
+      align-items: end;
+      gap: 6px;
+    }
+
+    .beaver {
+      font-size: 84px;
+      transform-origin: center bottom;
+      animation: bob 2.2s ease-in-out infinite;
+      user-select: none;
+    }
+
+    .beaver.happy {
+      animation: cheer 0.7s ease;
+    }
+
+    .beaver-text {
+      background: rgba(255,255,255,0.92);
+      border-radius: 14px;
+      padding: 8px 12px;
+      font-size: 16px;
+      font-weight: 700;
+      max-width: 130px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .material-fly,
+    .confetti,
+    .star {
+      position: absolute;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .material-fly {
+      font-size: 34px;
+      left: 16%;
+      bottom: 110px;
+      animation: materialFly 0.95s ease forwards;
+    }
+
+    .confetti {
+      width: 12px;
+      height: 18px;
+      border-radius: 3px;
+      left: 50%;
+      top: 38%;
+      animation: confettiBurst 1.2s ease-out forwards;
+    }
+
+    .star {
+      font-size: 24px;
+      animation: starFloat 1s ease forwards;
+      opacity: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .small-card {
+      background: linear-gradient(180deg, #fff7e8, #fff1d8);
+      border: 2px solid #ffd89d;
+      border-radius: 18px;
+      padding: 12px 14px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.07);
+    }
+
+    .materials {
+      position: relative;
+      z-index: 4;
+      min-height: 150px;
+      border-radius: 22px;
+      padding: 16px;
+      background: linear-gradient(180deg, #fffaf0, #ffefcf);
+      border: 2px dashed #ffbe5e;
+    }
+
+    .materials h3 {
+      margin: 0 0 12px;
+      text-align: center;
+      font-size: 24px;
+      color: #9b5c00;
+    }
+
+    .material-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      min-height: 84px;
+      font-size: 30px;
+    }
+
+    .mat {
+      display: inline-block;
+      animation: popIn 0.35s ease;
+    }
+
+    .finish {
+      display: none;
+      margin-top: 14px;
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #edfff0, #dbffea);
+      border: 2px solid #b8efc4;
+      text-align: center;
+    }
+
+    .finish h2 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      color: #17723d;
+    }
+
+    .finish p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .ground {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 74px;
+      background:
+        radial-gradient(circle at 8% 62%, #93dc67 0 24px, transparent 25px),
+        radial-gradient(circle at 28% 62%, #7ed05a 0 22px, transparent 23px),
+        radial-gradient(circle at 48% 62%, #91dc66 0 26px, transparent 27px),
+        radial-gradient(circle at 70% 62%, #7ed259 0 24px, transparent 25px),
+        radial-gradient(circle at 90% 62%, #90dc66 0 22px, transparent 23px),
+        linear-gradient(to top, #4faa40, #70cb57);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(2px) rotate(-2deg); }
+    }
+
+    @keyframes cheer {
+      0%   { transform: translateY(0) scale(1); }
+      30%  { transform: translateY(-12px) scale(1.08); }
+      60%  { transform: translateY(-4px) scale(1.04); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes materialFly {
+      0% {
+        transform: translate(0, 0) scale(0.4) rotate(-20deg);
+        opacity: 0;
       }
-      .status-box{min-height:auto}
-      .question h3{font-size:17px}
-      .section .sub{font-size:15px}
+      18% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(210px, -130px) scale(1.1) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes confettiBurst {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) rotate(var(--rot)) scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes starFloat {
+      0% {
+        transform: translateY(16px) scale(0.3) rotate(0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-70px) scale(1.2) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.4) translateY(10px);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes birdFly {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(14px, -8px); }
+    }
+
+    @media (max-width: 960px) {
+      .game {
+        grid-template-columns: 1fr;
+      }
+
+      .scene {
+        position: static;
+      }
+
+      .question-text {
+        font-size: 25px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .title h1 {
+        font-size: 31px;
+      }
+
+      .title p {
+        font-size: 18px;
+      }
+
+      .question-text {
+        font-size: 22px;
+      }
+
+      .world {
+        min-height: 610px;
+      }
+
+      .house {
+        transform: translateX(-50%) scale(0.88);
+      }
+
+      input[type="text"] {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap" id="top">
-    <section class="hero">
-      <h1>Большой урок-тренажёр по компьютеру</h1>
-      <p class="lead">
-        Здесь собраны все прошлые темы в одном уроке: обычные сочетания клавиш, клавиши F1–F12,
-        браузер, специальные клавиши и скрытые фишки. Урок сделан так, чтобы было удобно проходить
-        и на компьютере, и на телефоне.
-      </p>
-      <div class="badges">
-        <div class="badge">5 больших разделов</div>
-        <div class="badge">70+ заданий</div>
-        <div class="badge">Крупные кнопки для телефона</div>
-        <div class="badge">Автопроверка и сертификат</div>
-      </div>
-    </section>
+  <div class="wrap">
+    <div class="title">
+      <h1>🦫 Бобёр строит домик</h1>
+      <p>Решай задачи на площадь и периметр — помоги бобру построить уютный дом.</p>
+    </div>
 
-    <div class="sticky-bar">
-      <div class="status">
-        <div class="status-box">
-          <div class="status-label">Общий прогресс</div>
-          <div class="progress-shell"><div class="progress-bar" id="globalBar"></div></div>
+    <div class="game">
+      <div class="panel">
+        <div class="meta">
+          <div class="pill" id="taskCounter">Задача 1 из 15</div>
+          <div class="pill" id="scoreCounter">Верно: 0</div>
+          <div class="pill" id="buildCounter">Построено: 0/15</div>
         </div>
-        <div class="status-box">
-          <div class="status-label">Баллы</div>
-          <div class="status-value"><span id="scoreNow">0</span> / <span id="scoreMax">0</span></div>
+
+        <div class="progress">
+          <div class="progress__bar" id="progressBar"></div>
         </div>
-        <div class="status-box">
-          <div class="status-label">Решено заданий</div>
-          <div class="status-value"><span id="doneNow">0</span> / <span id="doneMax">0</span></div>
+
+        <div class="question-box">
+          <div class="question-number" id="questionNumber">Задача 1</div>
+          <div class="question-text" id="questionText"></div>
+          <div class="help-text">Пиши только число. Можно нажать Enter.</div>
+        </div>
+
+        <div class="input-row">
+          <input type="text" id="answerInput" placeholder="Введи ответ" autocomplete="off" />
+          <button class="btn-check" id="checkBtn">Проверить</button>
+          <button class="btn-hint" id="hintBtn">Подсказка</button>
+        </div>
+
+        <div class="message info" id="message">Реши первую задачу.</div>
+
+        <div class="finish" id="finishBox">
+          <h2>Ура! Домик готов 🎉</h2>
+          <p id="finishText"></p>
+          <button class="btn-restart" id="restartBtn">Играть заново</button>
+        </div>
+      </div>
+
+      <div class="panel scene">
+        <div class="world" id="world">
+          <div class="sun"></div>
+          <div class="speech" id="speech">Мне нужны материалы для стройки!</div>
+
+          <div class="build-area">
+            <div class="house">
+              <div class="part foundation-left" id="part1"></div>
+              <div class="part foundation-right" id="part2"></div>
+              <div class="part floor" id="part3"></div>
+              <div class="part wall-left" id="part4"></div>
+              <div class="part wall-right" id="part5"></div>
+              <div class="part wall-back" id="part6"></div>
+              <div class="part wall-front" id="part7"></div>
+              <div class="part roof-left" id="part8"></div>
+              <div class="part roof-right" id="part9"></div>
+              <div class="part door" id="part10"></div>
+              <div class="part window-left" id="part11"></div>
+              <div class="part window-right" id="part12"></div>
+              <div class="part chimney" id="part13"></div>
+              <div class="part fence" id="part14"></div>
+              <div class="part flowers" id="part15">
+                <div class="flower f1"></div>
+                <div class="flower f2"></div>
+                <div class="flower f3"></div>
+                <div class="flower f4"></div>
+                <div class="flower f5"></div>
+              </div>
+              <div class="bird" id="bird">🐦</div>
+            </div>
+
+            <div class="beaver-zone">
+              <div class="beaver" id="beaver">🦫</div>
+              <div class="beaver-text" id="beaverText">Строим домик</div>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="small-card" id="leftInfo">Правильных ответов: 0</div>
+            <div class="small-card" id="rightInfo">Осталось задач: 15</div>
+          </div>
+
+          <div class="materials">
+            <h3>Строительные материалы</h3>
+            <div class="material-list" id="materialList"></div>
+          </div>
+
+          <div class="ground"></div>
         </div>
       </div>
     </div>
-
-    <nav class="toc">
-      <a href="#section-hotkeys">1. Горячие клавиши</a>
-      <a href="#section-fkeys">2. Клавиши F1–F12</a>
-      <a href="#section-browser">3. Браузер</a>
-      <a href="#section-special">4. Специальные клавиши</a>
-      <a href="#section-secret">5. Секретные фишки</a>
-      <a href="#section-final">6. Итог и сертификат</a>
-    </nav>
-
-    <section class="section" id="section-hotkeys">
-      <h2>1. Горячие клавиши</h2>
-      <p class="sub">Вспоминаем самые нужные сочетания: копировать, вставить, сохранить, найти, выделить всё и переключать окна.</p>
-      <div class="tips">
-        <div class="tip"><strong>Как запомнить:</strong> Представь, что клавиатура — это пульт управления. Одни кнопки помогают работать с текстом, другие — управлять окнами.</div>
-        <div class="tip"><strong>Пример:</strong> Сделал рисунок и боишься потерять? Нажми <b>Ctrl + S</b>, чтобы сохранить работу.</div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 1</div>
-        <h3>Какая комбинация копирует выделенный текст или файл?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + C</button>
-          <button class="btn-option">Ctrl + V</button>
-          <button class="btn-option">Ctrl + X</button>
-          <button class="btn-option">Ctrl + F</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 2</div>
-        <h3>Как вставить то, что уже скопировано?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + S</button>
-          <button class="btn-option">Ctrl + V</button>
-          <button class="btn-option">Ctrl + A</button>
-          <button class="btn-option">Alt + Tab</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 3</div>
-        <h3>Как быстро отменить последнее действие?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + Y</button>
-          <button class="btn-option">Ctrl + H</button>
-          <button class="btn-option">Ctrl + Z</button>
-          <button class="btn-option">Ctrl + P</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="3">
-        <div class="q-meta">Вопрос 4</div>
-        <h3>Как переключиться на другое открытое окно?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + T</button>
-          <button class="btn-option">Win + E</button>
-          <button class="btn-option">Ctrl + Shift + T</button>
-          <button class="btn-option">Alt + Tab</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 5</div>
-        <h3>Как выделить весь текст на странице или в документе?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + A</button>
-          <button class="btn-option">Ctrl + C</button>
-          <button class="btn-option">Home</button>
-          <button class="btn-option">Ctrl + End</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 6</div>
-        <h3>Ты ищешь слово в длинном тексте. Что нажать?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + P</button>
-          <button class="btn-option">Ctrl + X</button>
-          <button class="btn-option">Ctrl + F</button>
-          <button class="btn-option">Ctrl + I</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 7</div>
-        <h3>Как сохранить документ?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + T</button>
-          <button class="btn-option">Ctrl + S</button>
-          <button class="btn-option">Win + D</button>
-          <button class="btn-option">Alt + F4</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 8</div>
-        <h3>Какая комбинация возвращает то, что ты только что отменил?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + Z</button>
-          <button class="btn-option">Ctrl + A</button>
-          <button class="btn-option">Ctrl + Y</button>
-          <button class="btn-option">Ctrl + W</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 9</div>
-        <h3>Как закрыть текущее окно программы?</h3>
-        <div class="options">
-          <button class="btn-option">Win + L</button>
-          <button class="btn-option">Alt + F4</button>
-          <button class="btn-option">Ctrl + H</button>
-          <button class="btn-option">F2</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 10</div>
-        <h3>Ты случайно закрыл вкладку в браузере. Как вернуть её обратно?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + Shift + T</button>
-          <button class="btn-option">Ctrl + Tab</button>
-          <button class="btn-option">Ctrl + P</button>
-          <button class="btn-option">Shift + Delete</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question pair-question">
-        <div class="q-meta">Задание на сопоставление</div>
-        <h3>Соедини действие и правильную комбинацию.</h3>
-        <div class="pair-grid">
-          <div class="pair-item">
-            <label>Открыть новую вкладку</label>
-            <select data-correct="Ctrl + T">
-              <option value="">Выбери ответ</option>
-              <option>Ctrl + T</option>
-              <option>Ctrl + Shift + T</option>
-              <option>Win + E</option>
-              <option>Ctrl + P</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>Печать</label>
-            <select data-correct="Ctrl + P">
-              <option value="">Выбери ответ</option>
-              <option>Ctrl + A</option>
-              <option>Ctrl + P</option>
-              <option>Alt + Tab</option>
-              <option>Ctrl + C</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>Открыть проводник</label>
-            <select data-correct="Win + E">
-              <option value="">Выбери ответ</option>
-              <option>Win + E</option>
-              <option>Ctrl + F</option>
-              <option>Alt + F4</option>
-              <option>Ctrl + S</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>Заблокировать компьютер</label>
-            <select data-correct="Win + L">
-              <option value="">Выбери ответ</option>
-              <option>Ctrl + L</option>
-              <option>Win + L</option>
-              <option>Win + D</option>
-              <option>Ctrl + Z</option>
-            </select>
-          </div>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn pair-check">Проверить сопоставление</button>
-          <button class="show-answers pair-show">Показать правильные ответы</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-    </section>
-
-    <section class="section" id="section-fkeys">
-      <h2>2. Клавиши F1–F12</h2>
-      <p class="sub">Теперь вспоминаем верхний ряд клавиш. Они часто помогают быстрее работать в браузере, проводнике и программах.</p>
-      <div class="tips">
-        <div class="tip"><strong>Полезно знать:</strong> На ноутбуках иногда вместе с F-клавишами работают яркость, звук и другие функции через кнопку <b>Fn</b>.</div>
-        <div class="tip"><strong>Пример:</strong> В проводнике клавиша <b>F2</b> быстро переименовывает файл. Это сильно удобнее, чем искать пункт мышкой.</div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 1</div>
-        <h3>Какая клавиша чаще всего открывает справку или помощь?</h3>
-        <div class="options">
-          <button class="btn-option">F11</button>
-          <button class="btn-option">F5</button>
-          <button class="btn-option">F1</button>
-          <button class="btn-option">F2</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 2</div>
-        <h3>Как быстро переименовать выделенный файл?</h3>
-        <div class="options">
-          <button class="btn-option">F4</button>
-          <button class="btn-option">F2</button>
-          <button class="btn-option">F8</button>
-          <button class="btn-option">F10</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 3</div>
-        <h3>Как обновить страницу в браузере?</h3>
-        <div class="options">
-          <button class="btn-option">F5</button>
-          <button class="btn-option">F6</button>
-          <button class="btn-option">F9</button>
-          <button class="btn-option">F12</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="3">
-        <div class="q-meta">Вопрос 4</div>
-        <h3>Какая клавиша переносит курсор в адресную строку браузера?</h3>
-        <div class="options">
-          <button class="btn-option">F11</button>
-          <button class="btn-option">F1</button>
-          <button class="btn-option">F2</button>
-          <button class="btn-option">F6</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 5</div>
-        <h3>Как включить полноэкранный режим в браузере?</h3>
-        <div class="options">
-          <button class="btn-option">F12</button>
-          <button class="btn-option">F11</button>
-          <button class="btn-option">F3</button>
-          <button class="btn-option">F7</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 6</div>
-        <h3>Какая клавиша обычно открывает инструменты разработчика в браузере?</h3>
-        <div class="options">
-          <button class="btn-option">F4</button>
-          <button class="btn-option">F8</button>
-          <button class="btn-option">F12</button>
-          <button class="btn-option">F10</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 7</div>
-        <h3>Какой клавишей часто открывают поиск на странице или поиск внутри некоторых программ?</h3>
-        <div class="options">
-          <button class="btn-option">F3</button>
-          <button class="btn-option">F7</button>
-          <button class="btn-option">F9</button>
-          <button class="btn-option">F10</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="3">
-        <div class="q-meta">Вопрос 8</div>
-        <h3>Какой F-клавишей иногда открывают меню программы через клавиатуру?</h3>
-        <div class="options">
-          <button class="btn-option">F1</button>
-          <button class="btn-option">F8</button>
-          <button class="btn-option">F4</button>
-          <button class="btn-option">F10</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question pair-question">
-        <div class="q-meta">Практика</div>
-        <h3>Соедини клавишу и действие.</h3>
-        <div class="pair-grid">
-          <div class="pair-item">
-            <label>F1</label>
-            <select data-correct="Справка / помощь">
-              <option value="">Выбери ответ</option>
-              <option>Справка / помощь</option>
-              <option>Обновить страницу</option>
-              <option>Переименовать файл</option>
-              <option>Полный экран</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>F2</label>
-            <select data-correct="Переименовать файл">
-              <option value="">Выбери ответ</option>
-              <option>Открыть адресную строку</option>
-              <option>Полный экран</option>
-              <option>Переименовать файл</option>
-              <option>Справка / помощь</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>F5</label>
-            <select data-correct="Обновить страницу">
-              <option value="">Выбери ответ</option>
-              <option>Обновить страницу</option>
-              <option>Справка / помощь</option>
-              <option>Поиск на странице</option>
-              <option>Удалить файл</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>F11</label>
-            <select data-correct="Полный экран">
-              <option value="">Выбери ответ</option>
-              <option>Инструменты разработчика</option>
-              <option>Полный экран</option>
-              <option>Печать</option>
-              <option>Поиск на странице</option>
-            </select>
-          </div>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn pair-check">Проверить сопоставление</button>
-          <button class="show-answers pair-show">Показать правильные ответы</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question builder" data-answer="F11">
-        <div class="q-meta">Собери клавишу</div>
-        <h3>Какую клавишу нажать, чтобы браузер перешёл в полноэкранный режим?</h3>
-        <div class="answer-box"></div>
-        <div class="key-bank">
-          <button class="mini-key">F1</button>
-          <button class="mini-key">F5</button>
-          <button class="mini-key">F11</button>
-          <button class="mini-key">F12</button>
-          <button class="mini-key">F2</button>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn builder-check">Проверить</button>
-          <button class="show-answers builder-reset">Сбросить</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-    </section>
-
-    <section class="section" id="section-browser">
-      <h2>3. Браузер: вкладки, поиск, адресная строка, загрузки</h2>
-      <p class="sub">Здесь мы закрепляем, как устроен браузер и как быстро находить нужную информацию.</p>
-      <div class="tips">
-        <div class="tip"><strong>Адресная строка</strong> — это место, куда можно писать адрес сайта или поисковый запрос.</div>
-        <div class="tip"><strong>Загрузки</strong> — это файлы, которые ты скачал из интернета: картинки, документы, программы.</div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 1</div>
-        <h3>Где в браузере обычно пишут адрес сайта?</h3>
-        <div class="options">
-          <button class="btn-option">Во вкладке</button>
-          <button class="btn-option">В адресной строке</button>
-          <button class="btn-option">В панели загрузок</button>
-          <button class="btn-option">В истории</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 2</div>
-        <h3>Что такое вкладка в браузере?</h3>
-        <div class="options">
-          <button class="btn-option">Кнопка для печати</button>
-          <button class="btn-option">Только название сайта</button>
-          <button class="btn-option">Отдельная открытая страница</button>
-          <button class="btn-option">Папка с картинками</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 3</div>
-        <h3>Ты скачал картинку. Где её чаще всего искать сначала?</h3>
-        <div class="options">
-          <button class="btn-option">В папке «Загрузки»</button>
-          <button class="btn-option">В корзине</button>
-          <button class="btn-option">В блокноте</button>
-          <button class="btn-option">На панели задач</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="3">
-        <div class="q-meta">Вопрос 4</div>
-        <h3>Что безопаснее вводить в поиск, если нужно узнать про планеты?</h3>
-        <div class="options">
-          <button class="btn-option">Скачать всё бесплатно</button>
-          <button class="btn-option">Супер взлом</button>
-          <button class="btn-option">Нажми срочно приз</button>
-          <button class="btn-option">Планеты Солнечной системы для детей</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 5</div>
-        <h3>Как открыть новую вкладку через клавиатуру?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + W</button>
-          <button class="btn-option">Ctrl + T</button>
-          <button class="btn-option">Ctrl + Shift + T</button>
-          <button class="btn-option">Alt + F4</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 6</div>
-        <h3>Ты случайно закрыл вкладку с важным сайтом. Что сделать?</h3>
-        <div class="options">
-          <button class="btn-option">Удалить браузер</button>
-          <button class="btn-option">Нажать Esc</button>
-          <button class="btn-option">Нажать Ctrl + Shift + T</button>
-          <button class="btn-option">Нажать F2</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 7</div>
-        <h3>Если сайт не показывает свежую информацию, что можно попробовать?</h3>
-        <div class="options">
-          <button class="btn-option">Обновить страницу</button>
-          <button class="btn-option">Переименовать вкладку</button>
-          <button class="btn-option">Открыть Paint</button>
-          <button class="btn-option">Нажать Caps Lock</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question tf-question">
-        <div class="q-meta">Верно или нет</div>
-        <h3>В адресную строку можно писать не только адрес сайта, но и обычный поисковый запрос.</h3>
-        <div class="tf-buttons">
-          <button class="btn-option tf-btn" data-answer="true">Верно</button>
-          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question tf-question">
-        <div class="q-meta">Верно или нет</div>
-        <h3>Все скачанные файлы навсегда остаются только в браузере и не сохраняются на компьютере.</h3>
-        <div class="tf-buttons">
-          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
-          <button class="btn-option tf-btn" data-answer="true">Верно</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question builder" data-answer="Ctrl + Shift + T">
-        <div class="q-meta">Собери комбинацию</div>
-        <h3>Собери сочетание, которое возвращает случайно закрытую вкладку.</h3>
-        <div class="answer-box"></div>
-        <div class="key-bank">
-          <button class="mini-key">Ctrl</button>
-          <button class="mini-key">Shift</button>
-          <button class="mini-key">T</button>
-          <button class="mini-key">W</button>
-          <button class="mini-key">F4</button>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn builder-check">Проверить</button>
-          <button class="show-answers builder-reset">Сбросить</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-    </section>
-
-    <section class="section" id="section-special">
-      <h2>4. Специальные клавиши</h2>
-      <p class="sub">Это клавиши управления: Enter, Esc, Tab, Shift, Backspace, Delete, Home, End, Page Up и Page Down.</p>
-      <div class="tips">
-        <div class="tip"><strong>Enter</strong> подтверждает действие или переносит на новую строку.</div>
-        <div class="tip"><strong>Esc</strong> часто помогает выйти, закрыть меню или отменить режим.</div>
-      </div>
-
-      <div class="question quiz" data-answer="3">
-        <div class="q-meta">Вопрос 1</div>
-        <h3>Какая клавиша часто подтверждает действие?</h3>
-        <div class="options">
-          <button class="btn-option">Esc</button>
-          <button class="btn-option">Tab</button>
-          <button class="btn-option">Shift</button>
-          <button class="btn-option">Enter</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 2</div>
-        <h3>Чем часто пользуются, чтобы закрыть окно меню или выйти из полноэкранного режима?</h3>
-        <div class="options">
-          <button class="btn-option">Esc</button>
-          <button class="btn-option">Home</button>
-          <button class="btn-option">Delete</button>
-          <button class="btn-option">Page Down</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 3</div>
-        <h3>Какая клавиша стирает символ слева от курсора?</h3>
-        <div class="options">
-          <button class="btn-option">Delete</button>
-          <button class="btn-option">Shift</button>
-          <button class="btn-option">Backspace</button>
-          <button class="btn-option">End</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 4</div>
-        <h3>Какая клавиша удаляет символ справа от курсора или удаляет выделенный объект?</h3>
-        <div class="options">
-          <button class="btn-option">Backspace</button>
-          <button class="btn-option">Delete</button>
-          <button class="btn-option">Home</button>
-          <button class="btn-option">Alt</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 5</div>
-        <h3>Какая клавиша помогает перейти к следующему полю в форме или к следующему элементу?</h3>
-        <div class="options">
-          <button class="btn-option">Tab</button>
-          <button class="btn-option">Esc</button>
-          <button class="btn-option">Page Up</button>
-          <button class="btn-option">Ctrl</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 6</div>
-        <h3>Какая клавиша переносит курсор в начало строки?</h3>
-        <div class="options">
-          <button class="btn-option">End</button>
-          <button class="btn-option">Page Down</button>
-          <button class="btn-option">Home</button>
-          <button class="btn-option">Enter</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 7</div>
-        <h3>Какая клавиша переносит курсор в конец строки?</h3>
-        <div class="options">
-          <button class="btn-option">Home</button>
-          <button class="btn-option">End</button>
-          <button class="btn-option">Shift</button>
-          <button class="btn-option">Esc</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question tf-question">
-        <div class="q-meta">Верно или нет</div>
-        <h3>Page Down обычно помогает пролистать страницу вниз.</h3>
-        <div class="tf-buttons">
-          <button class="btn-option tf-btn" data-answer="true">Верно</button>
-          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question tf-question">
-        <div class="q-meta">Верно или нет</div>
-        <h3>Shift сам по себе всегда печатает целые слова.</h3>
-        <div class="tf-buttons">
-          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
-          <button class="btn-option tf-btn" data-answer="true">Верно</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question builder" data-answer="Shift">
-        <div class="q-meta">Выбери клавишу</div>
-        <h3>Какую клавишу удерживают, когда хотят написать одну большую букву?</h3>
-        <div class="answer-box"></div>
-        <div class="key-bank">
-          <button class="mini-key">Esc</button>
-          <button class="mini-key">Shift</button>
-          <button class="mini-key">Tab</button>
-          <button class="mini-key">Home</button>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn builder-check">Проверить</button>
-          <button class="show-answers builder-reset">Сбросить</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-    </section>
-
-    <section class="section" id="section-secret">
-      <h2>5. Секретные и неожиданные фишки</h2>
-      <p class="sub">Здесь собраны клавиши и комбинации, о которых часто не знают. Они могут показаться маленькими, но сильно ускоряют работу.</p>
-      <div class="tips">
-        <div class="tip"><strong>Win + V</strong> открывает историю буфера обмена. Можно выбрать не только последний, а один из недавно скопированных фрагментов.</div>
-        <div class="tip"><strong>Win + .</strong> быстро открывает панель эмодзи и символов. Это удобно не только для смайликов, но и для значков.</div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 1</div>
-        <h3>Какая комбинация открывает историю буфера обмена в Windows?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + V</button>
-          <button class="btn-option">Win + V</button>
-          <button class="btn-option">Win + C</button>
-          <button class="btn-option">Ctrl + H</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Вопрос 2</div>
-        <h3>Как удалить сразу целое слово слева от курсора?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + Backspace</button>
-          <button class="btn-option">Shift + Delete</button>
-          <button class="btn-option">Alt + Tab</button>
-          <button class="btn-option">Ctrl + End</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 3</div>
-        <h3>Как сделать снимок только активного окна, а не всего экрана?</h3>
-        <div class="options">
-          <button class="btn-option">PrtSc</button>
-          <button class="btn-option">Win + Shift + S</button>
-          <button class="btn-option">Alt + PrtSc</button>
-          <button class="btn-option">F12</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="3">
-        <div class="q-meta">Вопрос 4</div>
-        <h3>Какая комбинация открывает панель эмодзи и специальных символов?</h3>
-        <div class="options">
-          <button class="btn-option">Win + ;</button>
-          <button class="btn-option">Ctrl + .</button>
-          <button class="btn-option">Alt + E</button>
-          <button class="btn-option">Win + .</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Вопрос 5</div>
-        <h3>Как открыть контекстное меню, если мышкой нажимать неудобно?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + M</button>
-          <button class="btn-option">Shift + F10</button>
-          <button class="btn-option">Alt + Z</button>
-          <button class="btn-option">F3</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Вопрос 6</div>
-        <h3>Какая комбинация часто быстро открывает окно с выделением области для снимка экрана?</h3>
-        <div class="options">
-          <button class="btn-option">Win + V</button>
-          <button class="btn-option">Ctrl + Shift + S</button>
-          <button class="btn-option">Win + Shift + S</button>
-          <button class="btn-option">Ctrl + Alt + S</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question tf-question">
-        <div class="q-meta">Верно или нет</div>
-        <h3>История буфера обмена полезна, когда ты копировал несколько разных фраз и хочешь выбрать одну из них позже.</h3>
-        <div class="tf-buttons">
-          <button class="btn-option tf-btn" data-answer="true">Верно</button>
-          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question tf-question">
-        <div class="q-meta">Верно или нет</div>
-        <h3>Ctrl + Backspace удаляет только одну букву слева от курсора.</h3>
-        <div class="tf-buttons">
-          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
-          <button class="btn-option tf-btn" data-answer="true">Верно</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question builder" data-answer="Win + V">
-        <div class="q-meta">Собери комбинацию</div>
-        <h3>Собери комбинацию, которая открывает историю буфера обмена.</h3>
-        <div class="answer-box"></div>
-        <div class="key-bank">
-          <button class="mini-key">Win</button>
-          <button class="mini-key">V</button>
-          <button class="mini-key">C</button>
-          <button class="mini-key">Shift</button>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn builder-check">Проверить</button>
-          <button class="show-answers builder-reset">Сбросить</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question builder" data-answer="Shift + F10">
-        <div class="q-meta">Собери комбинацию</div>
-        <h3>Собери сочетание для открытия контекстного меню без мышки.</h3>
-        <div class="answer-box"></div>
-        <div class="key-bank">
-          <button class="mini-key">Shift</button>
-          <button class="mini-key">F10</button>
-          <button class="mini-key">F12</button>
-          <button class="mini-key">Ctrl</button>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn builder-check">Проверить</button>
-          <button class="show-answers builder-reset">Сбросить</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-    </section>
-
-    <section class="section" id="section-final">
-      <h2>6. Финальное смешанное испытание</h2>
-      <p class="sub">Последний блок. Здесь задания смешаны из всех тем сразу.</p>
-
-      <div class="question quiz" data-answer="0">
-        <div class="q-meta">Финал 1</div>
-        <h3>Ты хочешь найти слово в тексте. Что нажать?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + F</button>
-          <button class="btn-option">Ctrl + P</button>
-          <button class="btn-option">F11</button>
-          <button class="btn-option">Win + V</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="3">
-        <div class="q-meta">Финал 2</div>
-        <h3>Ты хочешь быстро перейти в полноэкранный режим браузера.</h3>
-        <div class="options">
-          <button class="btn-option">F5</button>
-          <button class="btn-option">F2</button>
-          <button class="btn-option">Esc</button>
-          <button class="btn-option">F11</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Финал 3</div>
-        <h3>Какой клавишей чаще всего удаляют символ слева от курсора?</h3>
-        <div class="options">
-          <button class="btn-option">Delete</button>
-          <button class="btn-option">Backspace</button>
-          <button class="btn-option">Enter</button>
-          <button class="btn-option">Tab</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="2">
-        <div class="q-meta">Финал 4</div>
-        <h3>Что нажать, чтобы открыть историю буфера обмена?</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + V</button>
-          <button class="btn-option">Win + E</button>
-          <button class="btn-option">Win + V</button>
-          <button class="btn-option">Ctrl + C</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question quiz" data-answer="1">
-        <div class="q-meta">Финал 5</div>
-        <h3>Ты хочешь вернуться к только что закрытой вкладке.</h3>
-        <div class="options">
-          <button class="btn-option">Ctrl + W</button>
-          <button class="btn-option">Ctrl + Shift + T</button>
-          <button class="btn-option">Alt + Tab</button>
-          <button class="btn-option">Home</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question tf-question">
-        <div class="q-meta">Финал 6</div>
-        <h3>Esc часто помогает выйти из режима, закрыть меню или отменить действие.</h3>
-        <div class="tf-buttons">
-          <button class="btn-option tf-btn" data-answer="true">Верно</button>
-          <button class="btn-option tf-btn" data-answer="false">Неверно</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question pair-question">
-        <div class="q-meta">Финал 7</div>
-        <h3>Последнее сопоставление.</h3>
-        <div class="pair-grid">
-          <div class="pair-item">
-            <label>Ctrl + S</label>
-            <select data-correct="Сохранить">
-              <option value="">Выбери ответ</option>
-              <option>Сохранить</option>
-              <option>Помощь</option>
-              <option>Вернуть вкладку</option>
-              <option>История буфера</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>F1</label>
-            <select data-correct="Помощь">
-              <option value="">Выбери ответ</option>
-              <option>Сохранить</option>
-              <option>Окно меню</option>
-              <option>Помощь</option>
-              <option>Начало строки</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>Home</label>
-            <select data-correct="Начало строки">
-              <option value="">Выбери ответ</option>
-              <option>Начало строки</option>
-              <option>Конец строки</option>
-              <option>Новая вкладка</option>
-              <option>Контекстное меню</option>
-            </select>
-          </div>
-          <div class="pair-item">
-            <label>Shift + F10</label>
-            <select data-correct="Контекстное меню">
-              <option value="">Выбери ответ</option>
-              <option>Контекстное меню</option>
-              <option>Поиск</option>
-              <option>Выделить всё</option>
-              <option>Обновить</option>
-            </select>
-          </div>
-        </div>
-        <div class="row-actions">
-          <button class="check-btn pair-check">Проверить сопоставление</button>
-          <button class="show-answers pair-show">Показать правильные ответы</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="final-card">
-        <div class="status-label">Итог урока</div>
-        <div class="final-score" id="finalPercent">0%</div>
-        <p id="finalText">Решай задания, и здесь появится итог.</p>
-
-        <div class="certificate" id="certificate">
-          <strong>Сертификат ученика</strong><br>
-          Ты прошёл большой урок по работе с компьютером и закрепил темы:
-          сочетания клавиш, F1–F12, браузер, специальные клавиши и скрытые фишки.
-          <br><br>
-          Твой результат: <b id="certScore">0 / 0</b>
-        </div>
-
-        <div class="foot-actions">
-          <a href="#top" class="nav-top">Наверх</a>
-          <button class="reset-btn" id="resetAll">Сбросить все ответы</button>
-        </div>
-      </div>
-    </section>
   </div>
 
   <script>
-    const state = {
-      total: 0,
-      done: 0,
-      score: 0
-    };
+    const tasks = [
+      {
+        question: "У прямоугольника длина 8 см, ширина 3 см. Найди периметр.",
+        answer: 22,
+        hint: "Периметр прямоугольника: (длина + ширина) × 2."
+      },
+      {
+        question: "У квадрата сторона 6 см. Найди периметр.",
+        answer: 24,
+        hint: "Периметр квадрата: сторона × 4."
+      },
+      {
+        question: "Длина прямоугольника 9 м, ширина 4 м. Найди периметр.",
+        answer: 26,
+        hint: "Сначала сложи 9 и 4, потом умножь на 2."
+      },
+      {
+        question: "Периметр квадрата 20 см. Чему равна его сторона?",
+        answer: 5,
+        hint: "У квадрата 4 одинаковые стороны. 20 ÷ 4."
+      },
+      {
+        question: "У прямоугольника одна сторона 7 см, другая 5 см. Найди периметр.",
+        answer: 24,
+        hint: "(7 + 5) × 2."
+      },
+      {
+        question: "Сторона квадрата 9 дм. Найди периметр.",
+        answer: 36,
+        hint: "9 × 4."
+      },
+      {
+        question: "Периметр прямоугольника 18 см, одна сторона 5 см. Найди другую сторону.",
+        answer: 4,
+        hint: "Полупериметр: 18 ÷ 2 = 9. Вторая сторона: 9 - 5."
+      },
+      {
+        question: "У прямоугольника длина 7 см, ширина 3 см. Найди площадь.",
+        answer: 21,
+        hint: "Площадь прямоугольника: длина × ширина."
+      },
+      {
+        question: "У квадрата сторона 5 см. Найди площадь.",
+        answer: 25,
+        hint: "Площадь квадрата: сторона × сторону."
+      },
+      {
+        question: "Длина прямоугольника 10 м, ширина 2 м. Найди площадь.",
+        answer: 20,
+        hint: "10 × 2."
+      },
+      {
+        question: "Сторона квадрата 8 дм. Найди площадь.",
+        answer: 64,
+        hint: "8 × 8."
+      },
+      {
+        question: "У прямоугольника длина 6 см, ширина 4 см. Найди площадь.",
+        answer: 24,
+        hint: "6 × 4."
+      },
+      {
+        question: "У прямоугольника длина 12 см, ширина 2 см. Найди сначала периметр.",
+        answer: 28,
+        hint: "(12 + 2) × 2."
+      },
+      {
+        question: "У квадрата сторона 7 см. Найди сначала площадь.",
+        answer: 49,
+        hint: "7 × 7."
+      },
+      {
+        question: "У прямоугольника длина 9 м, ширина 6 м. Что больше: площадь или периметр? В ответ запиши только большее число.",
+        answer: 54,
+        hint: "Площадь: 9 × 6. Периметр: (9 + 6) × 2. Выбери большее."
+      }
+    ];
 
-    const allQuestions = [];
-    document.querySelectorAll('.quiz, .tf-question, .pair-question, .builder').forEach(q => allQuestions.push(q));
-    state.total = allQuestions.length;
-    document.getElementById('scoreMax').textContent = state.total;
-    document.getElementById('doneMax').textContent = state.total;
+    const materialIcons = ["🪵", "🪵", "🟫", "🪵", "🪵", "🪵", "🪵", "🧱", "🧱", "🚪", "🪟", "🪟", "🧱", "🪵", "🌸"];
 
-    function updateStatus(){
-      document.getElementById('scoreNow').textContent = state.score;
-      document.getElementById('doneNow').textContent = state.done;
-      const percent = state.total ? Math.round((state.done / state.total) * 100) : 0;
-      document.getElementById('globalBar').style.width = percent + '%';
+    let currentIndex = 0;
+    let correctAnswers = 0;
+    let builtParts = 0;
 
-      const scorePercent = state.total ? Math.round((state.score / state.total) * 100) : 0;
-      document.getElementById('finalPercent').textContent = scorePercent + '%';
+    const taskCounter = document.getElementById("taskCounter");
+    const scoreCounter = document.getElementById("scoreCounter");
+    const buildCounter = document.getElementById("buildCounter");
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const answerInput = document.getElementById("answerInput");
+    const checkBtn = document.getElementById("checkBtn");
+    const hintBtn = document.getElementById("hintBtn");
+    const message = document.getElementById("message");
+    const progressBar = document.getElementById("progressBar");
+    const speech = document.getElementById("speech");
+    const beaver = document.getElementById("beaver");
+    const beaverText = document.getElementById("beaverText");
+    const leftInfo = document.getElementById("leftInfo");
+    const rightInfo = document.getElementById("rightInfo");
+    const materialList = document.getElementById("materialList");
+    const finishBox = document.getElementById("finishBox");
+    const finishText = document.getElementById("finishText");
+    const restartBtn = document.getElementById("restartBtn");
+    const world = document.getElementById("world");
+    const bird = document.getElementById("bird");
 
-      let text = 'Решай задания, и здесь появится итог.';
-      if(state.done === 0){
-        text = 'Пока нет решённых заданий.';
-      } else if(scorePercent < 40){
-        text = 'Хорошее начало. Ещё немного практики, и будет намного легче.';
-      } else if(scorePercent < 70){
-        text = 'Уже уверенно. Видно, что основные темы начинают запоминаться.';
-      } else if(scorePercent < 90){
-        text = 'Очень хороший результат. Ты отлично ориентируешься в клавишах и браузере.';
+    const houseParts = Array.from({ length: 15 }, (_, i) => document.getElementById(`part${i + 1}`));
+
+    function renderTask() {
+      if (currentIndex >= tasks.length) {
+        showFinish();
+        return;
+      }
+
+      const task = tasks[currentIndex];
+
+      taskCounter.textContent = `Задача ${currentIndex + 1} из ${tasks.length}`;
+      scoreCounter.textContent = `Верно: ${correctAnswers}`;
+      buildCounter.textContent = `Построено: ${builtParts}/15`;
+      questionNumber.textContent = `Задача ${currentIndex + 1}`;
+      questionText.textContent = task.question;
+      leftInfo.textContent = `Правильных ответов: ${correctAnswers}`;
+      rightInfo.textContent = `Осталось задач: ${tasks.length - currentIndex}`;
+      progressBar.style.width = `${(currentIndex / tasks.length) * 100}%`;
+
+      answerInput.value = "";
+      answerInput.focus();
+      updateScene();
+    }
+
+    function setMessage(text, type = "info") {
+      message.textContent = text;
+      message.className = `message ${type}`;
+    }
+
+    function updateScene() {
+      houseParts.forEach((part, index) => {
+        part.classList.toggle("show", index < builtParts);
+      });
+
+      if (builtParts >= 15) {
+        bird.classList.add("show");
       } else {
-        text = 'Отлично. Это уже уровень очень уверенного пользователя.';
+        bird.classList.remove("show");
       }
-      document.getElementById('finalText').textContent = text;
-      document.getElementById('certScore').textContent = state.score + ' / ' + state.total;
-    }
 
-    function markDone(question, isCorrect){
-      if(question.dataset.checked === '1') return;
-      question.dataset.checked = '1';
-      state.done += 1;
-      if(isCorrect) state.score += 1;
-      updateStatus();
-    }
+      materialList.innerHTML = "";
 
-    function setFeedback(question, okText, badText, isCorrect){
-      const fb = question.querySelector('.feedback');
-      if(!fb) return;
-      fb.className = 'feedback ' + (isCorrect ? 'ok' : 'bad');
-      fb.textContent = isCorrect ? okText : badText;
-    }
-
-    document.querySelectorAll('.quiz').forEach(question => {
-      const buttons = question.querySelectorAll('.btn-option');
-      buttons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-          if(question.dataset.checked === '1') return;
-          buttons.forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-
-          const correctIndex = Number(question.dataset.answer);
-          const isCorrect = index === correctIndex;
-          buttons[correctIndex].classList.add('correct');
-          if(!isCorrect) btn.classList.add('wrong');
-          markDone(question, isCorrect);
-
-          setFeedback(
-            question,
-            'Верно.',
-            'Не совсем. Правильный ответ уже подсвечен.',
-            isCorrect
-          );
-        });
-      });
-    });
-
-    document.querySelectorAll('.tf-question').forEach(question => {
-      const buttons = question.querySelectorAll('.tf-btn');
-      buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          if(question.dataset.checked === '1') return;
-          const value = btn.dataset.answer;
-          const correctValue = buttons[0].dataset.answer === 'true' && question.querySelector('h3').textContent.includes('не сохраняются на компьютере')
-            ? 'false'
-            : btn.parentElement.querySelector('[data-answer="true"]') && question.querySelector('h3').textContent.includes('не сохраняются на компьютере')
-              ? 'false'
-              : null;
-        });
-      });
-    });
-
-    // explicit truth values stored in question dataset for clarity
-    document.querySelectorAll('.tf-question').forEach((question) => {
-      const text = question.querySelector('h3').textContent.trim();
-      let correct = 'true';
-      if(text.includes('не сохраняются на компьютере')) correct = 'false';
-      if(text.includes('Shift сам по себе всегда печатает целые слова')) correct = 'false';
-      if(text.includes('Ctrl + Backspace удаляет только одну букву')) correct = 'false';
-      question.dataset.truth = correct;
-
-      const buttons = question.querySelectorAll('.tf-btn');
-      buttons.forEach(btn => {
-        btn.onclick = () => {
-          if(question.dataset.checked === '1') return;
-          const value = btn.dataset.answer;
-          const isCorrect = value === question.dataset.truth;
-          buttons.forEach(b => {
-            if(b.dataset.answer === question.dataset.truth) b.classList.add('correct');
-          });
-          if(!isCorrect) btn.classList.add('wrong');
-          markDone(question, isCorrect);
-          setFeedback(
-            question,
-            'Верно.',
-            'Неверно. Правильный вариант уже подсвечен.',
-            isCorrect
-          );
-        };
-      });
-    });
-
-    document.querySelectorAll('.pair-question').forEach(question => {
-      const checkBtn = question.querySelector('.pair-check');
-      const showBtn = question.querySelector('.pair-show');
-      const selects = question.querySelectorAll('select');
-
-      checkBtn.addEventListener('click', () => {
-        if(question.dataset.checked === '1') return;
-        let allCorrect = true;
-        selects.forEach(sel => {
-          const ok = sel.value === sel.dataset.correct;
-          sel.style.borderColor = ok ? '#7ad29f' : '#ef9f9f';
-          sel.style.background = ok ? '#eefcf4' : '#fff2f2';
-          if(!ok) allCorrect = false;
-        });
-        markDone(question, allCorrect);
-        setFeedback(
-          question,
-          'Все пары собраны верно.',
-          'Есть ошибки. Неправильные поля подсвечены.',
-          allCorrect
-        );
-      });
-
-      showBtn.addEventListener('click', () => {
-        selects.forEach(sel => {
-          sel.value = sel.dataset.correct;
-          sel.style.borderColor = '#7ad29f';
-          sel.style.background = '#eefcf4';
-        });
-      });
-    });
-
-    document.querySelectorAll('.builder').forEach(question => {
-      const answerBox = question.querySelector('.answer-box');
-      const keys = question.querySelectorAll('.mini-key');
-      const checkBtn = question.querySelector('.builder-check');
-      const resetBtn = question.querySelector('.builder-reset');
-      let picked = [];
-
-      function renderPicked(){
-        answerBox.innerHTML = '';
-        if(!picked.length){
-          answerBox.textContent = 'Здесь появится выбранная клавиша или комбинация';
-          return;
+      if (builtParts === 0) {
+        materialList.innerHTML = "<span style='font-size:18px;color:#6b7a82;'>Пока пусто</span>";
+      } else {
+        for (let i = 0; i < builtParts; i++) {
+          const span = document.createElement("span");
+          span.className = "mat";
+          span.textContent = materialIcons[i];
+          materialList.appendChild(span);
         }
-        picked.forEach(k => {
-          const span = document.createElement('span');
-          span.className = 'ans-pill';
-          span.textContent = k;
-          answerBox.appendChild(span);
-        });
       }
-      renderPicked();
+    }
 
-      keys.forEach(key => {
-        key.addEventListener('click', () => {
-          if(question.dataset.checked === '1') return;
-          const value = key.textContent.trim();
-          const idx = picked.indexOf(value);
-          if(idx >= 0){
-            picked.splice(idx, 1);
-            key.classList.remove('active');
+    function normalizeNumber(value) {
+      return Number(String(value).trim().replace(",", "."));
+    }
+
+    function createFlyingMaterial(icon) {
+      const mat = document.createElement("div");
+      mat.className = "material-fly";
+      mat.textContent = icon;
+      world.appendChild(mat);
+
+      setTimeout(() => {
+        mat.remove();
+      }, 950);
+    }
+
+    function createConfetti(amount = 20) {
+      const colors = ["#ffd54f", "#ff8a65", "#ff78b2", "#7dd3fc", "#86efac", "#c4b5fd"];
+      for (let i = 0; i < amount; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.background = colors[i % colors.length];
+        piece.style.setProperty("--tx", `${Math.random() * 760 - 380}px`);
+        piece.style.setProperty("--ty", `${Math.random() * 500 - 260}px`);
+        piece.style.setProperty("--rot", `${Math.random() * 720 - 360}deg`);
+        world.appendChild(piece);
+
+        setTimeout(() => {
+          piece.remove();
+        }, 1300);
+      }
+    }
+
+    function createStars() {
+      const symbols = ["⭐", "✨", "🌟"];
+      for (let i = 0; i < 7; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        star.style.left = 25 + Math.random() * 50 + "%";
+        star.style.top = 28 + Math.random() * 25 + "%";
+        star.style.animationDelay = i * 0.05 + "s";
+        world.appendChild(star);
+
+        setTimeout(() => {
+          star.remove();
+        }, 1000);
+      }
+    }
+
+    function cheerBeaver(text) {
+      beaver.classList.remove("happy");
+      void beaver.offsetWidth;
+      beaver.classList.add("happy");
+      beaverText.textContent = text;
+
+      setTimeout(() => {
+        beaver.classList.remove("happy");
+      }, 700);
+    }
+
+    function checkAnswer() {
+      if (currentIndex >= tasks.length) return;
+
+      const rawValue = answerInput.value.trim();
+
+      if (!rawValue) {
+        setMessage("Сначала введи ответ.", "error");
+        speech.textContent = "Напиши число в поле ответа.";
+        beaverText.textContent = "Жду ответ";
+        return;
+      }
+
+      const userAnswer = normalizeNumber(rawValue);
+
+      if (Number.isNaN(userAnswer)) {
+        setMessage("Нужно ввести число.", "error");
+        speech.textContent = "Нужен числовой ответ.";
+        beaverText.textContent = "Только число";
+        return;
+      }
+
+      const task = tasks[currentIndex];
+
+      if (userAnswer === task.answer) {
+        correctAnswers++;
+        builtParts++;
+
+        createFlyingMaterial(materialIcons[builtParts - 1]);
+        createStars();
+        if (builtParts % 3 === 0) {
+          createConfetti(10);
+        }
+
+        cheerBeaver("Отлично!");
+        updateScene();
+
+        setMessage("Верно! Домик строится дальше.", "success");
+        speech.textContent = "Верно! Добавляем новую часть.";
+        currentIndex++;
+
+        setTimeout(() => {
+          if (currentIndex < tasks.length) {
+            renderTask();
+            setMessage("Хорошо. Переходим дальше.", "info");
+            speech.textContent = "Следующая задача!";
+            beaverText.textContent = "Строим дальше";
           } else {
-            picked.push(value);
-            key.classList.add('active');
+            showFinish();
           }
-          renderPicked();
-        });
-      });
+        }, 900);
+      } else {
+        setMessage("Пока неверно. Попробуй ещё раз.", "error");
+        speech.textContent = "Проверь вычисления ещё раз.";
+        beaverText.textContent = "Попробуй снова";
+        answerInput.focus();
+        answerInput.select();
+      }
+    }
 
-      checkBtn.addEventListener('click', () => {
-        if(question.dataset.checked === '1') return;
-        const built = picked.join(' + ');
-        const target = question.dataset.answer.trim();
-        const isCorrect = built === target;
-        keys.forEach(k => {
-          if(target.split(' + ').includes(k.textContent.trim())){
-            if(isCorrect) k.classList.add('correct');
-          }
-        });
-        if(!isCorrect){
-          picked.forEach(kv => {
-            keys.forEach(k => {
-              if(k.textContent.trim() === kv && !target.split(' + ').includes(kv)){
-                k.classList.add('wrong');
-              }
-            });
-          });
-        }
-        markDone(question, isCorrect);
-        setFeedback(
-          question,
-          'Верно.',
-          'Не совсем. Можно сбросить и собрать ещё раз уже в новой копии урока или подсмотреть ответ.',
-          isCorrect
-        );
-      });
+    function showHint() {
+      if (currentIndex >= tasks.length) return;
+      setMessage(`Подсказка: ${tasks[currentIndex].hint}`, "info");
+      speech.textContent = "Вот подсказка.";
+      beaverText.textContent = "Подумай";
+      answerInput.focus();
+    }
 
-      resetBtn.addEventListener('click', () => {
-        if(question.dataset.checked === '1') return;
-        picked = [];
-        keys.forEach(k => k.classList.remove('active', 'wrong', 'correct'));
-        renderPicked();
-      });
+    function showFinish() {
+      progressBar.style.width = "100%";
+      finishBox.style.display = "block";
+      questionText.textContent = "Все задачи решены!";
+      questionNumber.textContent = "Финиш";
+      setMessage("Игра завершена. Молодец!", "success");
+      speech.textContent = "Ура! Домик готов!";
+      beaverText.textContent = "Дом построен";
+      rightInfo.textContent = "Осталось задач: 0";
+      finishText.textContent = `Ты решил(а) все ${tasks.length} задач. Бобёр достроил домик полностью.`;
+      answerInput.disabled = true;
+      checkBtn.disabled = true;
+      hintBtn.disabled = true;
+      updateScene();
+      bird.classList.add("show");
+      createConfetti(50);
+      createStars();
+      createStars();
+    }
+
+    function restartGame() {
+      currentIndex = 0;
+      correctAnswers = 0;
+      builtParts = 0;
+
+      finishBox.style.display = "none";
+      answerInput.disabled = false;
+      checkBtn.disabled = false;
+      hintBtn.disabled = false;
+      speech.textContent = "Мне нужны материалы для стройки!";
+      beaverText.textContent = "Строим домик";
+      setMessage("Реши первую задачу.", "info");
+      updateScene();
+      renderTask();
+    }
+
+    checkBtn.addEventListener("click", checkAnswer);
+    hintBtn.addEventListener("click", showHint);
+    restartBtn.addEventListener("click", restartGame);
+
+    answerInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        checkAnswer();
+      }
     });
 
-    document.getElementById('resetAll').addEventListener('click', () => {
-      if(!confirm('Сбросить весь прогресс в этом уроке?')) return;
-      window.location.reload();
-    });
-
-    updateStatus();
+    updateScene();
+    renderTask();
   </script>
 </body>
 </html>
