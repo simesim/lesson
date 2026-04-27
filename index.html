@@ -64,9 +64,6 @@
         button:hover {
             background-color: #45a049;
         }
-        .terminal-commands {
-            margin-top: 30px;
-        }
     </style>
 </head>
 <body>
@@ -74,9 +71,8 @@
 <div class="container">
     <h1>Тест: Устройство компьютера</h1>
 
-    <!-- Вопросы -->
     <div id="question-container">
-        <!-- Question 1 -->
+        <!-- Вопрос 1 -->
         <div class="question" id="question-1">
             <p>1. Какой компонент компьютера отвечает за выполнение инструкций программ?</p>
             <ul class="choices">
@@ -87,7 +83,7 @@
             </ul>
         </div>
         
-        <!-- Question 2 -->
+        <!-- Вопрос 2 -->
         <div class="question" id="question-2" style="display:none;">
             <p>2. Какой из этих компонентов является устройством вывода?</p>
             <ul class="choices">
@@ -98,28 +94,160 @@
             </ul>
         </div>
 
-        <!-- More questions can be added here... -->
+        <!-- Вопрос 3 -->
+        <div class="question" id="question-3" style="display:none;">
+            <p>3. Как называется память, которая используется для хранения данных в момент работы компьютера?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(3, 'A')">A) Оперативная память</li>
+                <li onclick="selectAnswer(3, 'B')">B) Постоянная память</li>
+                <li onclick="selectAnswer(3, 'C')">C) Кэш-память</li>
+                <li onclick="selectAnswer(3, 'D')">D) Внешняя память</li>
+            </ul>
+        </div>
 
-        <button id="next-button" onclick="nextQuestion()">Следующий вопрос</button>
+        <!-- Вопрос 4 -->
+        <div class="question" id="question-4" style="display:none;">
+            <p>4. Какой из этих устройств является примером устройства ввода?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(4, 'C')">A) Монитор</li>
+                <li onclick="selectAnswer(4, 'C')">B) Принтер</li>
+                <li onclick="selectAnswer(4, 'C')">C) Клавиатура</li>
+                <li onclick="selectAnswer(4, 'C')">D) Колонки</li>
+            </ul>
+        </div>
+
+        <!-- Вопрос 5 -->
+        <div class="question" id="question-5" style="display:none;">
+            <p>5. Какой компонент компьютера отвечает за долговременное хранение данных?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(5, 'C')">A) Оперативная память</li>
+                <li onclick="selectAnswer(5, 'B')">B) Центральный процессор</li>
+                <li onclick="selectAnswer(5, 'C')">C) Жесткий диск</li>
+                <li onclick="selectAnswer(5, 'D')">D) Сетевой адаптер</li>
+            </ul>
+        </div>
+
+        <!-- Вопрос 6 -->
+        <div class="question" id="question-6" style="display:none;">
+            <p>6. Что такое процессор?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(6, 'C')">A) Компонент для хранения данных</li>
+                <li onclick="selectAnswer(6, 'C')">B) Устройство для ввода данных</li>
+                <li onclick="selectAnswer(6, 'C')">C) Центральный вычислительный блок</li>
+                <li onclick="selectAnswer(6, 'C')">D) Устройство вывода</li>
+            </ul>
+        </div>
+
+        <!-- Вопрос 7 -->
+        <div class="question" id="question-7" style="display:none;">
+            <p>7. Какая память быстрее всего работает?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(7, 'B')">A) Оперативная память</li>
+                <li onclick="selectAnswer(7, 'B')">B) Кэш-память</li>
+                <li onclick="selectAnswer(7, 'C')">C) Жесткий диск</li>
+                <li onclick="selectAnswer(7, 'D')">D) Флеш-накопитель</li>
+            </ul>
+        </div>
+
+        <!-- Вопрос 8 -->
+        <div class="question" id="question-8" style="display:none;">
+            <p>8. Какой из этих компонентов является устройством хранения?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(8, 'C')">A) Мышь</li>
+                <li onclick="selectAnswer(8, 'B')">B) Принтер</li>
+                <li onclick="selectAnswer(8, 'C')">C) Жесткий диск</li>
+                <li onclick="selectAnswer(8, 'D')">D) Монитор</li>
+            </ul>
+        </div>
+
+        <!-- Вопрос 9 -->
+        <div class="question" id="question-9" style="display:none;">
+            <p>9. Что такое жесткий диск?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(9, 'A')">A) Устройство для хранения данных</li>
+                <li onclick="selectAnswer(9, 'B')">B) Устройство для вывода данных</li>
+                <li onclick="selectAnswer(9, 'C')">C) Ввод-вывод данных</li>
+                <li onclick="selectAnswer(9, 'D')">D) Электронная память</li>
+            </ul>
+        </div>
+
+        <!-- Вопрос 10 -->
+        <div class="question" id="question-10" style="display:none;">
+            <p>10. Что делает видеокарта?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(10, 'C')">A) Обрабатывает графику и видео</li>
+                <li onclick="selectAnswer(10, 'B')">B) Сохраняет данные</li>
+                <li onclick="selectAnswer(10, 'C')">C) Управляет устройствами ввода</li>
+                <li onclick="selectAnswer(10, 'D')">D) Обрабатывает аудио</li>
+            </ul>
+        </div>
+
+        <!-- Добавим еще 10 вопросов -->
+        <div class="question" id="question-11" style="display:none;">
+            <p>11. Как называется процесс обмена данными между устройствами?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(11, 'A')">A) Ввод-вывод</li>
+                <li onclick="selectAnswer(11, 'B')">B) Операции с данными</li>
+                <li onclick="selectAnswer(11, 'C')">C) Сетевое соединение</li>
+                <li onclick="selectAnswer(11, 'D')">D) Командный доступ</li>
+            </ul>
+        </div>
+
+        <!-- Вопрос 12 -->
+        <div class="question" id="question-12" style="display:none;">
+            <p>12. Какой из этих устройств относится к устройствам хранения?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(12, 'B')">A) Мышь</li>
+                <li onclick="selectAnswer(12, 'B')">B) SSD</li>
+                <li onclick="selectAnswer(12, 'C')">C) Принтер</li>
+                <li onclick="selectAnswer(12, 'D')">D) Клавиатура</li>
+            </ul>
+        </div>
+
+        <div class="question" id="question-13" style="display:none;">
+            <p>13. Какие устройства используются для ввода данных?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(13, 'C')">A) Принтер и монитор</li>
+                <li onclick="selectAnswer(13, 'B')">B) Мышь и клавиатура</li>
+                <li onclick="selectAnswer(13, 'C')">C) Диски и устройства хранения</li>
+                <li onclick="selectAnswer(13, 'A')">D) Процессор и память</li>
+            </ul>
+        </div>
+
+        <div class="question" id="question-14" style="display:none;">
+            <p>14. Что из этого является основным устройством обработки данных в компьютере?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(14, 'C')">A) Оперативная память</li>
+                <li onclick="selectAnswer(14, 'A')">B) Процессор</li>
+                <li onclick="selectAnswer(14, 'B')">C) Видеокарта</li>
+                <li onclick="selectAnswer(14, 'C')">D) Жесткий диск</li>
+            </ul>
+        </div>
+
+        <!-- Далее продолжу задавать вопросы -->
+
     </div>
 
-    <!-- Команды терминала для тренировки -->
-    <div class="terminal-commands">
-        <h2>Команды терминала для тренировки</h2>
-        <ul>
-            <li><strong>dir</strong> - Показывает список файлов и папок в текущем каталоге.</li>
-            <li><strong>cd</strong> - Изменяет текущий рабочий каталог.</li>
-            <li><strong>cls</strong> - Очищает экран терминала.</li>
-            <li><strong>exit</strong> - Закрывает текущую сессию терминала.</li>
-        </ul>
-    </div>
+    <button id="next-button" onclick="nextQuestion()">Следующий вопрос</button>
 </div>
 
 <script>
     let currentQuestion = 1;
     let answers = {
         1: 'B',
-        2: 'C'
+        2: 'C',
+        3: 'A',
+        4: 'C',
+        5: 'C',
+        6: 'C',
+        7: 'B',
+        8: 'C',
+        9: 'A',
+        10: 'A',
+        11: 'A',
+        12: 'B',
+        13: 'B',
+        14: 'B',
     };
 
     function selectAnswer(question, answer) {
@@ -132,7 +260,7 @@
     }
 
     function nextQuestion() {
-        if (currentQuestion < 2) {
+        if (currentQuestion < 20) {
             document.getElementById(`question-${currentQuestion}`).style.display = 'none';
             currentQuestion++;
             document.getElementById(`question-${currentQuestion}`).style.display = 'block';
