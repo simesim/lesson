@@ -1,213 +1,150 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Урок: Терминал Windows — команды, тесты и задания</title>
-  <style>
-    :root{
-      --bg:#0e1117; --card:#161b22; --card2:#1f2630; --text:#e6edf3; --muted:#9da7b3;
-      --accent:#58a6ff; --good:#3fb950; --bad:#f85149; --warn:#d29922; --line:#30363d;
-      --btn:#238636; --btn2:#21262d;
-    }
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#0e1117 22%,#0e1117);color:var(--text);line-height:1.55}
-    header{padding:28px 16px 18px;text-align:center;border-bottom:1px solid var(--line);background:radial-gradient(circle at 50% 0%,#17365f55,transparent 55%)}
-    h1{font-size:clamp(26px,8vw,46px);margin:0 0 8px} h2{font-size:24px;margin:12px 0} h3{margin:14px 0 8px}
-    p{margin:8px 0}.subtitle{color:var(--muted);max-width:850px;margin:0 auto;font-size:17px}
-    nav{position:sticky;top:0;z-index:20;background:#0e1117f2;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px;overflow-x:auto;white-space:nowrap}
-    nav a{display:inline-block;color:var(--text);text-decoration:none;background:var(--btn2);border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:4px;font-size:14px}
-    nav a:hover{border-color:var(--accent)}
-    main{max-width:980px;margin:0 auto;padding:14px}
-    section{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 10px 24px #0004}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.mini{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px}
-    code,kbd{font-family:Consolas,Menlo,monospace;background:#0b1220;border:1px solid var(--line);border-radius:7px;padding:2px 6px;color:#d2e7ff}
-    pre{white-space:pre-wrap;word-break:break-word;background:#05080d;border:1px solid var(--line);border-radius:14px;padding:12px;overflow:auto;color:#d2e7ff}
-    .command-list details{background:var(--card2);border:1px solid var(--line);border-radius:13px;margin:8px 0;padding:10px}.command-list summary{cursor:pointer;font-weight:700}.tag{display:inline-block;color:#0b1220;background:var(--accent);border-radius:999px;padding:2px 8px;font-size:12px;margin-left:6px}
-    button{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:6px 0;background:var(--btn2);color:var(--text);font-size:16px;text-align:left;cursor:pointer;touch-action:manipulation}
-    button:hover{border-color:var(--accent)} button.correct{background:#12391f;border-color:var(--good)} button.wrong{background:#3c1717;border-color:var(--bad)} button.primary{text-align:center;background:var(--btn);font-weight:700;border-color:#2ea043}
-    .result{font-weight:700;margin-top:8px}.good{color:var(--good)}.bad{color:var(--bad)}.warn{color:var(--warn)}
-    input,select,textarea{width:100%;background:#0b1220;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px;margin:6px 0}
-    .terminal{background:#05080d;border:1px solid #39424e;border-radius:16px;overflow:hidden}.bar{background:#202733;padding:8px 12px;color:var(--muted);font-size:13px}.screen{padding:12px;font-family:Consolas,Menlo,monospace;min-height:120px}.prompt{color:#7ee787}.out{color:#d2e7ff}.hint{color:var(--muted);font-size:14px}.score{position:sticky;bottom:8px;background:#0b1220e9;border:1px solid var(--line);border-radius:16px;padding:10px;margin-top:12px;text-align:center;backdrop-filter:blur(8px)}
-    .parrot{font-size:18px;line-height:1.15;text-align:center;min-height:120px}.shake{animation:dance .45s infinite alternate}@keyframes dance{from{transform:rotate(-4deg) translateX(-3px)}to{transform:rotate(4deg) translateX(3px)}}
-    .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;margin:3px;background:#0b1220;color:var(--muted);font-size:13px}.small{font-size:13px;color:var(--muted)}
-    @media(max-width:560px){main{padding:10px}section{padding:13px;border-radius:15px}button{font-size:15px;padding:12px}h2{font-size:21px}.grid{grid-template-columns:1fr}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Устройство компьютера</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .choices {
+            list-style: none;
+            padding: 0;
+        }
+        .choices li {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+        .choices li:hover {
+            background-color: #d1d1d1;
+        }
+        .selected {
+            background-color: #99cc99;
+        }
+        .incorrect {
+            background-color: #ffcccb;
+        }
+        .correct {
+            background-color: #99ff99;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .terminal-commands {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-<header>
-  <h1>🪟 Терминал Windows</h1>
-  <p class="subtitle">Урок на 45–60 минут: теория, полезные команды CMD и PowerShell, интерактивные тесты, мини-тренажёр и танцующий попугай.</p>
-</header>
-<nav>
-  <a href="#theory">Теория</a><a href="#commands">Команды</a><a href="#simulator">Тренажёр</a><a href="#tasks">Задания</a><a href="#quiz">Тест</a><a href="#parrot">Попугай</a><a href="#teacher">Учителю</a>
-</nav>
-<main>
-<section id="theory">
-  <h2>1. Что такое терминал?</h2>
-  <p><b>Терминал</b> — это окно, где пользователь пишет команды текстом. В Windows чаще всего используют:</p>
-  <div class="grid">
-    <div class="mini"><h3>CMD</h3><p>Старая командная строка Windows. Команды: <code>dir</code>, <code>cd</code>, <code>cls</code>, <code>ipconfig</code>.</p></div>
-    <div class="mini"><h3>PowerShell</h3><p>Более мощная оболочка. Команды: <code>Get-ChildItem</code>, <code>Get-Process</code>, <code>Get-Date</code>.</p></div>
-    <div class="mini"><h3>Windows Terminal</h3><p>Современное приложение, где можно открывать CMD, PowerShell и WSL во вкладках.</p></div>
-  </div>
-  <p><span class="pill">Папка</span><span class="pill">Файл</span><span class="pill">Путь</span><span class="pill">Команда</span><span class="pill">Аргумент</span><span class="pill">Вывод</span></p>
-  <h3>Главная идея</h3>
-  <p>Команда обычно состоит из названия и дополнительных параметров. Например: <code>dir /p</code>, где <code>dir</code> — команда, а <code>/p</code> — параметр.</p>
-</section>
 
-<section id="commands" class="command-list">
-  <h2>2. Полезные команды Windows</h2>
-  <p class="hint">Нажимай на команду, чтобы раскрыть объяснение. Это удобно делать с телефона.</p>
-  <details open><summary><code>dir</code> <span class="tag">CMD</span></summary><p>Показывает файлы и папки в текущей папке.</p><pre>C:\Users\Student&gt; dir</pre></details>
-  <details><summary><code>cd</code> <span class="tag">CMD</span></summary><p>Переход в другую папку. <code>cd ..</code> — подняться на уровень выше.</p><pre>cd Desktop
-cd ..</pre></details>
-  <details><summary><code>cls</code> <span class="tag">CMD</span></summary><p>Очищает экран терминала.</p></details>
-  <details><summary><code>mkdir</code> <span class="tag">CMD</span></summary><p>Создаёт новую папку.</p><pre>mkdir lesson</pre></details>
-  <details><summary><code>rmdir</code> <span class="tag">CMD</span></summary><p>Удаляет пустую папку. Осторожно: удаление нельзя делать случайно.</p><pre>rmdir lesson</pre></details>
-  <details><summary><code>copy</code> <span class="tag">CMD</span></summary><p>Копирует файл.</p><pre>copy notes.txt backup.txt</pre></details>
-  <details><summary><code>move</code> <span class="tag">CMD</span></summary><p>Перемещает или переименовывает файл.</p><pre>move old.txt new.txt</pre></details>
-  <details><summary><code>del</code> <span class="tag">CMD</span></summary><p>Удаляет файл. Команда опасная: лучше сначала проверить, что удаляешь.</p><pre>del trash.txt</pre></details>
-  <details><summary><code>type</code> <span class="tag">CMD</span></summary><p>Показывает содержимое текстового файла.</p><pre>type readme.txt</pre></details>
-  <details><summary><code>echo</code> <span class="tag">CMD</span></summary><p>Выводит текст или записывает текст в файл.</p><pre>echo Привет!
-echo Hello &gt; hello.txt</pre></details>
-  <details><summary><code>help</code> <span class="tag">CMD</span></summary><p>Показывает список команд CMD или справку по команде.</p><pre>help
-help dir</pre></details>
-  <details><summary><code>whoami</code> <span class="tag">CMD/PS</span></summary><p>Показывает имя текущего пользователя.</p></details>
-  <details><summary><code>ipconfig</code> <span class="tag">CMD</span></summary><p>Показывает информацию о сетевых адаптерах и IP-адресах.</p></details>
-  <details><summary><code>ping</code> <span class="tag">CMD</span></summary><p>Проверяет, отвечает ли другой компьютер или сайт.</p><pre>ping ya.ru</pre></details>
-  <details><summary><code>tasklist</code> <span class="tag">CMD</span></summary><p>Показывает запущенные процессы.</p></details>
-  <details><summary><code>Get-ChildItem</code> <span class="tag">PowerShell</span></summary><p>PowerShell-аналог команды <code>dir</code>. Также можно писать коротко: <code>gci</code>.</p></details>
-  <details><summary><code>Set-Location</code> <span class="tag">PowerShell</span></summary><p>PowerShell-аналог команды <code>cd</code>. Коротко: <code>sl</code>.</p></details>
-  <details><summary><code>Get-Process</code> <span class="tag">PowerShell</span></summary><p>Показывает запущенные процессы.</p></details>
-  <details><summary><code>Get-Date</code> <span class="tag">PowerShell</span></summary><p>Показывает дату и время.</p></details>
-  <details><summary><code>Clear-Host</code> <span class="tag">PowerShell</span></summary><p>Очищает экран PowerShell. Коротко: <code>cls</code>.</p></details>
-</section>
+<div class="container">
+    <h1>Тест: Устройство компьютера</h1>
 
-<section id="simulator">
-  <h2>3. Мини-тренажёр терминала</h2>
-  <p>Введи одну из команд: <code>dir</code>, <code>cd desktop</code>, <code>cd ..</code>, <code>cls</code>, <code>whoami</code>, <code>ipconfig</code>, <code>echo привет</code>, <code>mkdir test</code>, <code>ping ya.ru</code>, <code>help</code>.</p>
-  <div class="terminal">
-    <div class="bar">Windows Terminal — учебная симуляция</div>
-    <div class="screen" id="screen"><span class="prompt">C:\Users\Student&gt;</span> <span class="out">готов к командам</span></div>
-  </div>
-  <input id="cmdInput" placeholder="Напиши команду здесь" autocomplete="off" />
-  <button class="primary" onclick="runCommand()">▶ Выполнить</button>
-  <p class="hint">Это симулятор. Он ничего не удаляет и не меняет на устройстве.</p>
-</section>
+    <!-- Вопросы -->
+    <div id="question-container">
+        <!-- Question 1 -->
+        <div class="question" id="question-1">
+            <p>1. Какой компонент компьютера отвечает за выполнение инструкций программ?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(1, 'B')">A) Оперативная память</li>
+                <li onclick="selectAnswer(1, 'B')">B) Центральный процессор</li>
+                <li onclick="selectAnswer(1, 'B')">C) Жесткий диск</li>
+                <li onclick="selectAnswer(1, 'B')">D) Монитор</li>
+            </ul>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question" id="question-2" style="display:none;">
+            <p>2. Какой из этих компонентов является устройством вывода?</p>
+            <ul class="choices">
+                <li onclick="selectAnswer(2, 'C')">A) Клавиатура</li>
+                <li onclick="selectAnswer(2, 'C')">B) Мышь</li>
+                <li onclick="selectAnswer(2, 'C')">C) Принтер</li>
+                <li onclick="selectAnswer(2, 'C')">D) Микрофон</li>
+            </ul>
+        </div>
 
-<section id="tasks">
-  <h2>4. Быстрые интерактивные задания</h2>
-  <div id="tasksBox"></div>
-</section>
+        <!-- More questions can be added here... -->
 
-<section id="quiz">
-  <h2>5. Большой тест</h2>
-  <p>Выбери ответы. После каждого вопроса сразу видно, правильно или нет.</p>
-  <div id="quizBox"></div>
-  <div class="score" id="scoreBox">Баллы: 0 / 0</div>
-</section>
+        <button id="next-button" onclick="nextQuestion()">Следующий вопрос</button>
+    </div>
 
-<section id="parrot">
-  <h2>6. Смешная команда: танцующий попугай</h2>
-  <p>В реальном терминале можно выводить ASCII-art через <code>echo</code>. Здесь — безопасная демонстрация.</p>
-  <div class="mini parrot shake" id="parrotBox">(\_/)<br>( •_•)<br>/ &gt;🦜  танцует терминальный попугай</div>
-  <button onclick="toggleParrot()">🦜 Включить / выключить танец</button>
-  <pre>echo        __
-echo       (o )___
-echo        ( ._&gt; /
-echo        `---'   terminal parrot!</pre>
-</section>
+    <!-- Команды терминала для тренировки -->
+    <div class="terminal-commands">
+        <h2>Команды терминала для тренировки</h2>
+        <ul>
+            <li><strong>dir</strong> - Показывает список файлов и папок в текущем каталоге.</li>
+            <li><strong>cd</strong> - Изменяет текущий рабочий каталог.</li>
+            <li><strong>cls</strong> - Очищает экран терминала.</li>
+            <li><strong>exit</strong> - Закрывает текущую сессию терминала.</li>
+        </ul>
+    </div>
+</div>
 
-<section id="teacher">
-  <h2>7. Подсказка для проведения урока</h2>
-  <div class="grid">
-    <div class="mini"><b>5 минут</b><p>Объяснить, что такое терминал, CMD и PowerShell.</p></div>
-    <div class="mini"><b>10 минут</b><p>Разобрать команды из списка. Ученики раскрывают карточки на телефонах.</p></div>
-    <div class="mini"><b>15 минут</b><p>Пройти тренажёр и задания.</p></div>
-    <div class="mini"><b>15–25 минут</b><p>Большой тест. Можно проходить индивидуально или командами.</p></div>
-  </div>
-</section>
-</main>
 <script>
-let points=0,totalAnswered=0;
-const taskData=[
- {q:'Нужно посмотреть файлы в папке. Какую команду выбрать?', a:['dir','cls','del'], c:0, e:'dir показывает содержимое папки.'},
- {q:'Нужно очистить экран терминала.', a:['cls','copy','ping'], c:0, e:'cls очищает окно CMD.'},
- {q:'Нужно создать папку lesson.', a:['mkdir lesson','del lesson','type lesson'], c:0, e:'mkdir создаёт папку.'},
- {q:'Нужно подняться на папку выше.', a:['cd ..','cd up','go back'], c:0, e:'cd .. переходит на уровень выше.'},
- {q:'Нужно проверить связь с сайтом.', a:['ping ya.ru','copy ya.ru','whoami ya.ru'], c:0, e:'ping проверяет доступность узла.'},
- {q:'Какая команда покажет текущего пользователя?', a:['whoami','username','me'], c:0, e:'whoami показывает имя пользователя.'},
- {q:'Что опаснее выполнять без проверки?', a:['del file.txt','dir','help'], c:0, e:'del удаляет файл.'},
- {q:'Как посмотреть содержимое text.txt?', a:['type text.txt','read text.txt','open text.txt'], c:0, e:'type выводит текст файла.'}
-];
-const quizData=[
- {q:'Windows Terminal — это...', a:['приложение для вкладок с терминалами','антивирус','только игра'], c:0},
- {q:'CMD — это...', a:['командная строка Windows','графический редактор','браузер'], c:0},
- {q:'PowerShell обычно мощнее CMD, потому что...', a:['работает с объектами и скриптами','умеет только очищать экран','не принимает команды'], c:0},
- {q:'Команда dir нужна для...', a:['просмотра файлов и папок','удаления Windows','выключения монитора'], c:0},
- {q:'Команда cd нужна для...', a:['перехода между папками','проверки интернета','создания текста'], c:0},
- {q:'Что делает cls?', a:['очищает экран','копирует файл','показывает IP'], c:0},
- {q:'mkdir test создаёт...', a:['папку test','файл test.exe','сеть test'], c:0},
- {q:'del notes.txt...', a:['удаляет файл notes.txt','показывает notes.txt','копирует notes.txt'], c:0},
- {q:'copy a.txt b.txt...', a:['копирует a.txt в b.txt','удаляет оба файла','переходит в папку b.txt'], c:0},
- {q:'move old.txt new.txt может...', a:['переименовать файл','очистить экран','показать IP'], c:0},
- {q:'type readme.txt...', a:['показывает содержимое файла','создаёт папку','проверяет сеть'], c:0},
- {q:'echo Привет...', a:['выводит текст Привет','удаляет текст Привет','запускает браузер'], c:0},
- {q:'help dir покажет...', a:['справку по команде dir','список сайтов','пароль пользователя'], c:0},
- {q:'whoami показывает...', a:['имя текущего пользователя','погоду','скорость процессора'], c:0},
- {q:'ipconfig нужен, чтобы...', a:['посмотреть сетевую информацию','создать папку','показать дату'], c:0},
- {q:'ping используется для...', a:['проверки доступности узла','рисования картинок','изменения имени файла'], c:0},
- {q:'tasklist показывает...', a:['список процессов','список школьников','список команд Wi‑Fi'], c:0},
- {q:'Get-Date в PowerShell...', a:['показывает дату и время','удаляет дату','создаёт папку Date'], c:0},
- {q:'Get-Process в PowerShell...', a:['показывает процессы','очищает историю браузера','делает скриншот'], c:0},
- {q:'Get-ChildItem похож на...', a:['dir','del','shutdown'], c:0},
- {q:'Безопасная команда для новичка:', a:['dir','del *.*','format C:'], c:0},
- {q:'Путь C:\\Users\\Student означает...', a:['папку Student внутри Users на диске C','адрес сайта','команду удаления'], c:0},
- {q:'Символ > в echo Hello > file.txt обычно...', a:['записывает вывод в файл','запускает игру','проверяет интернет'], c:0},
- {q:'Что лучше сделать перед удалением файла?', a:['проверить текущую папку и имя файла','нажать случайную команду','закрыть глаза'], c:0},
- {q:'Команды с пробелами и параметрами читают...', a:['слева направо','только справа налево','только снизу вверх'], c:0},
- {q:'Команда cd Desktop означает...', a:['перейти в папку Desktop','создать Desktop','удалить Desktop'], c:0},
- {q:'rmdir удаляет...', a:['пустую папку','IP-адрес','процессор'], c:0},
- {q:'Clear-Host — это команда...', a:['PowerShell для очистки экрана','CMD для копирования','браузера для поиска'], c:0},
- {q:'Почему терминал полезен?', a:['быстро выполнять действия командами','только смотреть мультики','заменяет клавиатуру'], c:0},
- {q:'Что означает “вывод команды”?', a:['результат, который терминал показывает на экране','провод от монитора','ошибка клавиатуры'], c:0}
-];
-function makeQuestion(item, box, prefix){
- const card=document.createElement('div'); card.className='mini';
- const h=document.createElement('h3'); h.textContent=item.q; card.appendChild(h);
- const res=document.createElement('div'); res.className='result';
- item.a.forEach((ans,i)=>{ const b=document.createElement('button'); b.textContent=ans; b.onclick=()=>{
-   if(card.dataset.done) return; card.dataset.done='1'; totalAnswered++;
-   [...card.querySelectorAll('button')].forEach((x,idx)=>{if(idx===item.c)x.classList.add('correct')});
-   if(i===item.c){points++; b.classList.add('correct'); res.innerHTML='<span class="good">Правильно!</span> '+(item.e||'');}
-   else{b.classList.add('wrong'); res.innerHTML='<span class="bad">Не совсем.</span> Правильный ответ: <b>'+item.a[item.c]+'</b>. '+(item.e||'');}
-   updateScore();
- }; card.appendChild(b); });
- card.appendChild(res); box.appendChild(card);
-}
-function updateScore(){document.getElementById('scoreBox').textContent='Баллы: '+points+' / '+totalAnswered;}
-const tasksBox=document.getElementById('tasksBox'); taskData.forEach(x=>makeQuestion(x,tasksBox,'t'));
-const quizBox=document.getElementById('quizBox'); quizData.forEach(x=>makeQuestion(x,quizBox,'q'));
-function runCommand(){
- const input=document.getElementById('cmdInput'); const s=input.value.trim().toLowerCase(); const screen=document.getElementById('screen'); let out='';
- if(!s) return;
- if(s==='dir') out=' Volume in drive C is Windows\n\n Directory of C:\\Users\\Student\n\nDesktop    Documents    Downloads\nnotes.txt  parrot.txt';
- else if(s==='cd desktop') out='C:\\Users\\Student\\Desktop&gt; теперь ты в папке Desktop';
- else if(s==='cd ..') out='C:\\Users&gt; переход на уровень выше';
- else if(s==='cls') {screen.innerHTML='<span class="prompt">C:\\Users\\Student&gt;</span> <span class="out">экран очищен</span>'; input.value=''; return;}
- else if(s==='whoami') out='school\\student';
- else if(s==='ipconfig') out='IPv4 Address . . . . . . . . . . : 192.168.1.25\nDefault Gateway . . . . . . . . : 192.168.1.1';
- else if(s.startsWith('echo ')) out=s.slice(5);
- else if(s==='mkdir test') out='Папка test создана. Учебная симуляция: реально ничего не создано.';
- else if(s==='ping ya.ru') out='Pinging ya.ru [77.88.55.242] with 32 bytes of data:\nReply from 77.88.55.242: bytes=32 time=24ms TTL=55';
- else if(s==='help') out='Доступные учебные команды: dir, cd, cls, whoami, ipconfig, echo, mkdir, ping';
- else out='Команда не распознана в учебном симуляторе. Попробуй: dir, help, whoami, ping ya.ru';
- screen.innerHTML += '<br><span class="prompt">C:\\Users\\Student&gt;</span> '+input.value+'<br><span class="out">'+out.replaceAll('\n','<br>')+'</span>';
- input.value=''; screen.scrollTop=screen.scrollHeight;
-}
-document.getElementById('cmdInput').addEventListener('keydown',e=>{if(e.key==='Enter')runCommand()});
-function toggleParrot(){document.getElementById('parrotBox').classList.toggle('shake')}
+    let currentQuestion = 1;
+    let answers = {
+        1: 'B',
+        2: 'C'
+    };
+
+    function selectAnswer(question, answer) {
+        let selectedQuestion = document.getElementById(`question-${question}`);
+        let options = selectedQuestion.getElementsByClassName('choices')[0].children;
+        for (let option of options) {
+            option.classList.remove('selected');
+        }
+        event.target.classList.add('selected');
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < 2) {
+            document.getElementById(`question-${currentQuestion}`).style.display = 'none';
+            currentQuestion++;
+            document.getElementById(`question-${currentQuestion}`).style.display = 'block';
+        } else {
+            alert('Вы прошли все вопросы!');
+        }
+    }
+
+    window.onload = function() {
+        document.getElementById('next-button').style.display = 'block';
+    }
 </script>
+
 </body>
 </html>
