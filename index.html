@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>💻 Компьютерная грамотность · Урок 60 мин</title>
+  <title>🧠 Квиз‑игра: 30 вопросов компьютерной грамотности</title>
   <style>
     * {
       margin: 0;
@@ -13,760 +13,531 @@
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(145deg, #e3edf7 0%, #f5f9ff 100%);
+      background: linear-gradient(135deg, #e5f0fc 0%, #f3f9ff 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 1rem;
+      padding: 1.2rem;
       margin: 0;
-      color: #1a2b3f;
+      color: #12273f;
     }
 
-    .lesson-container {
-      max-width: 950px;
+    .quiz-wrapper {
+      max-width: 650px;
       width: 100%;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-radius: 2.8rem;
-      box-shadow: 0 30px 55px -15px rgba(0,20,40,0.2), inset 0 1px 1px rgba(255,255,255,0.8);
-      padding: 2rem 2rem 2.2rem;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 50px -15px rgba(0,15,30,0.2), inset 0 1px 1px rgba(255,255,255,0.8);
+      padding: 2rem 1.8rem;
       border: 1px solid rgba(255,255,255,0.7);
-      transition: all 0.2s;
     }
 
     h1 {
-      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-size: clamp(1.8rem, 6vw, 2.2rem);
       font-weight: 700;
-      background: linear-gradient(135deg, #0c2942, #1e5677);
+      background: linear-gradient(140deg, #0b2b41, #1f5679);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.4rem;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-
-    .xp-badge {
-      background: #ffbb2e;
-      color: #2e2400;
-      padding: 0.5rem 1.4rem;
-      border-radius: 3rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      margin-left: auto;
-      box-shadow: 0 8px 18px rgba(255,170,0,0.45);
-      -webkit-text-fill-color: #2e2400;
-      background: #ffb703;
-      letter-spacing: 0.3px;
-    }
-
-    .subtitle {
-      color: #3e5568;
-      margin-bottom: 2rem;
-      font-size: 1rem;
-      border-left: 5px solid #2a7db5;
-      padding-left: 1.2rem;
-      font-weight: 500;
-    }
-
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 2rem;
-      background: rgba(255,255,255,0.7);
-      padding: 0.4rem;
-      border-radius: 3rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.04);
-    }
-
-    .tab-btn {
-      flex: 1 0 auto;
-      background: transparent;
-      border: none;
-      padding: 0.8rem 1rem;
-      border-radius: 2.8rem;
-      font-weight: 650;
-      color: #2f455c;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      min-width: 70px;
-    }
-
-    .tab-btn.active {
-      background: #ffffff;
-      box-shadow: 0 8px 20px -6px rgba(20,100,180,0.25);
-      color: #083452;
-      font-weight: 700;
-    }
-
-    .section {
-      display: none;
-      animation: fade 0.25s ease;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-    .card {
-      background: white;
-      border-radius: 2rem;
-      padding: 1.8rem;
-      margin-bottom: 1.8rem;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
-      border: 1px solid #e8f0f9;
-    }
-
-    h2 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #0b2f44;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-
-    .component {
-      background: #f4f9ff;
-      border-radius: 1.5rem;
-      padding: 1rem;
-      text-align: center;
-      font-weight: 600;
-      border: 1px solid #d3e4f5;
-    }
-
-    .game-area {
-      background: #f1f6fc;
-      border-radius: 2rem;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border: 2px dashed #b3cef0;
-    }
-
-    .drag-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .drag-item {
-      background: white;
-      border: 2px solid #cadef0;
-      border-radius: 1.4rem;
-      padding: 0.7rem 1.2rem;
-      font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      touch-action: manipulation;
-    }
-
-    .drag-item.selected {
-      border: 3px solid #1c6ab0;
-      background: #ebf5ff;
-      transform: scale(1.02);
-    }
-
-    .drop-zone {
-      min-height: 90px;
-      background: #e3effb;
-      border-radius: 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-      padding: 1.2rem;
-      border: 2px solid #8fb3da;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-
-    .drop-zone.drag-over {
-      background: #d2e7ff;
-      border-color: #1f67b0;
-    }
-
-    .quiz-option {
-      background: #f2f7fd;
-      padding: 0.7rem 1rem;
-      border-radius: 1.2rem;
-      margin: 0.4rem 0;
+      margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      cursor: pointer;
-      transition: 0.2s;
-      border: 1px solid transparent;
-      font-size: 0.95rem;
+      flex-wrap: wrap;
     }
 
-    .quiz-option:hover { background: #e1eefc; }
-    .quiz-option input { margin-right: 0.2rem; transform: scale(1.2); }
+    .xp-badge {
+      background: #ffb82e;
+      color: #2e2000;
+      padding: 0.4rem 1.2rem;
+      border-radius: 3rem;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-left: auto;
+      box-shadow: 0 6px 14px rgba(255,170,0,0.5);
+      -webkit-text-fill-color: #2e2000;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .progress-area {
+      background: #ebf4fe;
+      border-radius: 2rem;
+      padding: 0.7rem 1.2rem;
+      margin: 1.3rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .progress-text {
+      font-weight: 650;
+      color: #1c4461;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 10px;
+      background: #cddff2;
+      border-radius: 10px;
+      overflow: hidden;
+      min-width: 100px;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #1f5b8c;
+      border-radius: 10px;
+      transition: width 0.2s;
+    }
+
+    .question-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.8rem;
+      margin: 1.2rem 0;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+      border: 1px solid #e2edf9;
+    }
+
+    .question-text {
+      font-size: 1.2rem;
+      font-weight: 650;
+      margin-bottom: 1.3rem;
+      line-height: 1.4;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .option-btn {
+      background: #f2f7fd;
+      border: 2px solid transparent;
+      border-radius: 1.2rem;
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      font-weight: 550;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #15293e;
+    }
+
+    .option-btn:hover {
+      background: #e1edfc;
+    }
+
+    .option-btn.correct-choice {
+      background: #d4edda;
+      border-color: #2a7a3a;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong-choice {
+      background: #ffe0e0;
+      border-color: #b12a2a;
+    }
+
+    .option-btn.disabled {
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .explanation {
+      background: #f9fafe;
+      border-radius: 1rem;
+      padding: 0.8rem 1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #2e4b63;
+      border-left: 4px solid #2d7fc1;
+    }
 
     .btn {
-      background: #1d4b76;
+      background: #1b4b73;
       border: none;
       color: white;
       font-weight: 700;
-      padding: 0.85rem 1.8rem;
-      border-radius: 2.8rem;
-      font-size: 0.95rem;
+      padding: 0.9rem 2rem;
+      border-radius: 2.5rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: 0.2s;
-      margin-top: 0.8rem;
-      box-shadow: 0 6px 14px rgba(26,73,114,0.35);
-      display: inline-block;
-      min-height: 48px;
-      min-width: 80px;
+      min-height: 50px;
+      min-width: 140px;
+      box-shadow: 0 6px 16px rgba(26,73,114,0.35);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .btn:active { transform: scale(0.96); }
     .btn:disabled { opacity: 0.5; }
 
-    .feedback {
-      font-weight: 600;
-      margin: 0.7rem 0;
-      padding: 0.6rem 1rem;
-      border-radius: 1.2rem;
-      font-size: 0.95rem;
+    .result-area {
+      text-align: center;
     }
 
-    .success { background: #dff0d8; color: #265e2c; }
-    .error { background: #ffe0e0; color: #a12b2b; }
-
-    .key-shortcut {
-      background: #232a33;
-      color: white;
-      padding: 0.3rem 0.7rem;
-      border-radius: 0.7rem;
-      font-family: 'Fira Code', monospace;
-      font-weight: 600;
-      margin: 0 0.2rem;
+    .score-circle {
+      font-size: 3rem;
+      font-weight: 800;
+      background: #d7e9ff;
       display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 50%;
+      margin: 1rem 0;
     }
 
-    hr {
-      margin: 1.5rem 0;
-      border: 0;
-      height: 1px;
-      background: #dce5f0;
-    }
-
-    @media (max-width: 600px) {
-      .lesson-container {
-        padding: 1.3rem 1rem;
-        border-radius: 2rem;
-      }
-      .card {
-        padding: 1.2rem;
-      }
-      .tabs {
-        gap: 0.2rem;
-      }
-      .tab-btn {
-        font-size: 0.8rem;
-        padding: 0.6rem 0.6rem;
-      }
-      .drag-item {
-        padding: 0.6rem 0.9rem;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .btn {
-        width: 100%;
-        margin-top: 0.6rem;
-      }
-      .drag-container {
-        gap: 0.4rem;
-      }
+    @media (max-width: 500px) {
+      .quiz-wrapper { padding: 1.3rem 1rem; }
+      .option-btn { padding: 0.8rem; }
     }
   </style>
 </head>
 <body>
-<div class="lesson-container">
+<div class="quiz-wrapper">
   <h1>
-    🖥️ Компьютерная грамотность
+    🎮 Квиз‑игра
     <span class="xp-badge" id="xpDisplay">⚡ 0 XP</span>
   </h1>
-  <div class="subtitle">Урок на час • Устройство, ввод/вывод, апгрейд, лайфхаки ОС</div>
-
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="intro">📘 Старт</button>
-    <button class="tab-btn" data-tab="parts">🧠 Состав ПК</button>
-    <button class="tab-btn" data-tab="io">⌨️ Ввод/Вывод</button>
-    <button class="tab-btn" data-tab="upgrade">🚀 Апгрейд</button>
-    <button class="tab-btn" data-tab="os">⚙️ ОС и фишки</button>
-    <button class="tab-btn" data-tab="final">🏆 Тест</button>
-  </div>
-
-  <!-- Введение -->
-  <div class="section active" id="intro">
-    <div class="card">
-      <h2>👋 Привет!</h2>
-      <p>Сегодня вы разберётесь, из чего состоит компьютер, как работают устройства ввода и вывода, чем можно ускорить систему и какие горячие клавиши спасут вам нервы. Зарабатывайте очки опыта (XP) за правильные ответы и игры!</p>
-      <div class="grid-2">
-        <div class="component"><span>🧩</span> 5 модулей</div>
-        <div class="component"><span>🎮</span> Игры и тесты</div>
-        <div class="component"><span>⏱️</span> ~60 минут</div>
-        <div class="component"><span>⭐</span> XP за успехи</div>
-      </div>
+  <div class="progress-area">
+    <span class="progress-text" id="questionCounter">1/30</span>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
     </div>
   </div>
 
-  <!-- Состав ПК -->
-  <div class="section" id="parts">
-    <div class="card">
-      <h2>🧱 Из чего состоит компьютер</h2>
-      <p><strong>Процессор (CPU)</strong> – «мозг», выполняет вычисления. <strong>ОЗУ (RAM)</strong> – временная память для запущенных программ. <strong>SSD/HDD</strong> – хранилище файлов. <strong>Видеокарта (GPU)</strong> – графика. <strong>Материнская плата</strong> – соединяет всё. <strong>Блок питания</strong> – даёт энергию.</p>
-      <div class="game-area">
-        <h3>🎯 Собери компьютер (тапни компонент, затем тапни по корпусу)</h3>
-        <div class="drag-container" id="dragParts">
-          <div class="drag-item" data-part="cpu"><span>🧠</span> Процессор</div>
-          <div class="drag-item" data-part="ram"><span>🧮</span> ОЗУ</div>
-          <div class="drag-item" data-part="ssd"><span>💾</span> SSD</div>
-          <div class="drag-item" data-part="gpu"><span>🎨</span> Видеокарта</div>
-          <div class="drag-item" data-part="mobo"><span>📟</span> Мат.плата</div>
-          <div class="drag-item" data-part="psu"><span>🔌</span> Блок питания</div>
-        </div>
-        <div class="drop-zone" id="pcCase">
-          <span style="color:#4d6279;">🖥️ Тапните сюда после выбора компонента</span>
-        </div>
-        <div id="buildFeedback" class="feedback"></div>
-      </div>
-      <!-- Мини-квиз о составе -->
-      <div style="margin-top:1.5rem;">
-        <h3>📋 Быстрый опрос: что за что отвечает?</h3>
-        <div id="partsQuiz"></div>
-        <button class="btn" id="checkPartsQuiz">Проверить знания</button>
-        <div id="partsQuizFeedback" class="feedback"></div>
-      </div>
-    </div>
+  <div id="quizContainer" class="question-card"></div>
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+    <button class="btn" id="nextBtn" style="display: none;">Далее ➡️</button>
   </div>
-
-  <!-- Ввод и вывод -->
-  <div class="section" id="io">
-    <div class="card">
-      <h2>⌨️ Устройства ввода и вывода</h2>
-      <p><strong>Ввод</strong> – передают информацию от вас компьютеру. <strong>Вывод</strong> – показывают/воспроизводят результат.</p>
-      <div class="game-area">
-        <h3>🎮 Сортер: определи тип устройства</h3>
-        <div id="ioContainer" style="display:flex; flex-wrap:wrap; gap:0.6rem; margin:1rem 0; font-size:1.8rem; justify-content:center;"></div>
-        <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
-          <button class="btn" id="btnInput">📥 ВВОД</button>
-          <button class="btn" id="btnOutput">📤 ВЫВОД</button>
-        </div>
-        <div id="ioFeedback" class="feedback"></div>
-        <div id="ioScore" style="font-weight:600;"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Апгрейд -->
-  <div class="section" id="upgrade">
-    <div class="card">
-      <h2>🚀 Чем можно улучшить компьютер</h2>
-      <p>Замена HDD на SSD, добавление ОЗУ, установка более мощной видеокарты, чистка от пыли, замена термопасты.</p>
-      <div class="game-area">
-        <h3>📊 Мини-тест по апгрейду (3 вопроса)</h3>
-        <div id="upgradeQuiz"></div>
-        <button class="btn" id="checkUpgrade">Проверить ответы</button>
-        <div id="upgradeFeedback" class="feedback"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ОС и лайфхаки -->
-  <div class="section" id="os">
-    <div class="card">
-      <h2>⚙️ Лайфхаки операционной системы</h2>
-      <p>Горячие клавиши экономят кучу времени. Основные комбинации (Windows):</p>
-      <ul style="list-style:none; padding-left:0; display:flex; flex-wrap:wrap; gap:0.5rem;">
-        <li><span class="key-shortcut">Win+L</span> Блокировка</li>
-        <li><span class="key-shortcut">Win+D</span> Рабочий стол</li>
-        <li><span class="key-shortcut">Alt+Tab</span> Окна</li>
-        <li><span class="key-shortcut">Ctrl+Shift+Esc</span> Диспетчер</li>
-        <li><span class="key-shortcut">Win+V</span> Буфер обмена</li>
-        <li><span class="key-shortcut">Ctrl+Z</span> Отмена</li>
-        <li><span class="key-shortcut">Win+E</span> Проводник</li>
-        <li><span class="key-shortcut">Win+R</span> Выполнить</li>
-      </ul>
-      <div class="game-area">
-        <h3>⌨️ Тренажёр горячих клавиш (5 вопросов)</h3>
-        <p id="shortcutQuestion"></p>
-        <div id="shortcutOptions" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
-        <div id="shortcutFeedback" class="feedback"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Финальный тест -->
-  <div class="section" id="final">
-    <div class="card">
-      <h2>🏆 Итоговый тест (8 вопросов)</h2>
-      <div id="finalQuiz"></div>
-      <button class="btn" id="checkFinal">Завершить тест</button>
-      <div id="finalFeedback" class="feedback"></div>
-      <div id="finalXp"></div>
-    </div>
-  </div>
+  <div id="finalResult" style="display: none;" class="result-area"></div>
 </div>
 
 <script>
   (function() {
-    // XP
+    // Массив из 30 вопросов с пояснениями
+    const questions = [
+      {
+        question: "1. Что такое процессор (CPU)?",
+        options: ["Устройство для долговременного хранения", "«Мозг» компьютера, выполняющий вычисления", "Устройство вывода изображения", "Блок питания"],
+        correct: 1,
+        explanation: "Процессор — центральный вычислительный компонент, обрабатывает инструкции программ."
+      },
+      {
+        question: "2. Для чего нужна оперативная память (RAM)?",
+        options: ["Хранить файлы после выключения", "Временно хранить данные запущенных программ", "Улучшать графику", "Охлаждать процессор"],
+        correct: 1,
+        explanation: "ОЗУ — быстрая энергозависимая память для текущих задач. При выключении данные стираются."
+      },
+      {
+        question: "3. SSD — это…",
+        options: ["Тип монитора", "Оперативная память", "Твердотельный накопитель для хранения данных", "Система охлаждения"],
+        correct: 2,
+        explanation: "SSD (Solid‑State Drive) — быстрый накопитель без движущихся частей."
+      },
+      {
+        question: "4. Какое устройство относится к устройствам ВВОДА?",
+        options: ["Монитор", "Принтер", "Мышь", "Колонки"],
+        correct: 2,
+        explanation: "Мышь передаёт команды от пользователя в компьютер."
+      },
+      {
+        question: "5. Какое устройство относится к устройствам ВЫВОДА?",
+        options: ["Клавиатура", "Микрофон", "Монитор", "Сканер"],
+        correct: 2,
+        explanation: "Монитор отображает информацию, полученную от компьютера."
+      },
+      {
+        question: "6. Какая комбинация клавиш копирует выделенный текст?",
+        options: ["Ctrl+X", "Ctrl+V", "Ctrl+C", "Ctrl+Z"],
+        correct: 2,
+        explanation: "Ctrl+C — копировать, Ctrl+V — вставить, Ctrl+X — вырезать."
+      },
+      {
+        question: "7. Чтобы вставить скопированный объект, нужно нажать:",
+        options: ["Ctrl+P", "Ctrl+V", "Shift+Ins", "Ctrl+Ins"],
+        correct: 1,
+        explanation: "Стандартное сочетание для вставки — Ctrl+V."
+      },
+      {
+        question: "8. Какая комбинация отменяет последнее действие?",
+        options: ["Ctrl+Y", "Ctrl+Z", "Ctrl+Shift+Z", "Alt+Backspace"],
+        correct: 1,
+        explanation: "Ctrl+Z — универсальная отмена во многих программах."
+      },
+      {
+        question: "9. Что делает сочетание Win+D?",
+        options: ["Блокирует компьютер", "Открывает диспетчер задач", "Сворачивает все окна / показывает рабочий стол", "Переключает язык"],
+        correct: 2,
+        explanation: "Win+D мгновенно сворачивает все окна и показывает рабочий стол."
+      },
+      {
+        question: "10. Как быстро открыть Диспетчер задач?",
+        options: ["Ctrl+Alt+Del (выбрать пункт)", "Ctrl+Shift+Esc", "Win+T", "Alt+F4"],
+        correct: 1,
+        explanation: "Ctrl+Shift+Esc запускает Диспетчер задач напрямую, без дополнительного меню."
+      },
+      {
+        question: "11. Зачем нужен блок питания в компьютере?",
+        options: ["Преобразует электричество и питает компоненты", "Охлаждает процессор", "Хранит резервные копии", "Усиливает Wi‑Fi"],
+        correct: 0,
+        explanation: "Блок питания (PSU) подаёт стабильное напряжение на все комплектующие."
+      },
+      {
+        question: "12. Материнская плата выполняет функцию:",
+        options: ["Обработки графики", "Соединения всех компонентов и передачи данных", "Звукозаписи", "Зарядки аккумулятора"],
+        correct: 1,
+        explanation: "Материнская плата — основа, к которой подключаются процессор, ОЗУ, видеокарта и др."
+      },
+      {
+        question: "13. Какое расширение обычно имеет текстовый документ?",
+        options: [".exe", ".jpg", ".txt", ".mp3"],
+        correct: 2,
+        explanation: ".txt — простой текстовый файл, .exe — исполняемый, .jpg — изображение."
+      },
+      {
+        question: "14. Как создать новую папку в Проводнике Windows?",
+        options: ["Дважды кликнуть по пустому месту", "Правая кнопка мыши → Создать → Папку", "Нажать Delete", "Нажать F5"],
+        correct: 1,
+        explanation: "Контекстное меню (правая кнопка) → Создать → Папку. Также работает Ctrl+Shift+N."
+      },
+      {
+        question: "15. Что такое фишинг?",
+        options: ["Антивирусная программа", "Мошенничество с целью кражи личных данных", "Игровая приставка", "Название процессора"],
+        correct: 1,
+        explanation: "Фишинг — злоумышленники выдают себя за надёжные организации, чтобы получить пароли и данные."
+      },
+      {
+        question: "16. Какая программа помогает защитить компьютер от вирусов?",
+        options: ["Браузер", "Файловый менеджер", "Антивирус", "Калькулятор"],
+        correct: 2,
+        explanation: "Антивирус (например, Microsoft Defender) обнаруживает и удаляет вредоносные программы."
+      },
+      {
+        question: "17. Облачное хранилище (например, OneDrive) — это:",
+        options: ["Жёсткий диск внутри ПК", "Флешка", "Удалённые серверы для хранения файлов в интернете", "Оперативная память"],
+        correct: 2,
+        explanation: "Данные хранятся на серверах в дата‑центрах, доступны через интернет."
+      },
+      {
+        question: "18. Что из перечисленного НЕ является веб‑браузером?",
+        options: ["Google Chrome", "Mozilla Firefox", "Microsoft Word", "Opera"],
+        correct: 2,
+        explanation: "Microsoft Word — текстовый редактор, а не браузер."
+      },
+      {
+        question: "19. Для чего служит кулер (вентилятор) в системном блоке?",
+        options: ["Увеличение скорости интернета", "Охлаждение компонентов", "Подсветка корпуса", "Усиление звука"],
+        correct: 1,
+        explanation: "Кулер отводит тепло от процессора, видеокарты и других деталей."
+      },
+      {
+        question: "20. Как посмотреть основные характеристики компьютера (ОЗУ, процессор) в Windows?",
+        options: ["Нажать Win+Pause (или правой кнопкой по «Этот компьютер» → Свойства)", "Нажать Alt+F4", "Запустить Paint", "Нажать F1"],
+        correct: 0,
+        explanation: "Окно «Система» показывает процессор, объём ОЗУ и версию Windows."
+      },
+      {
+        question: "21. Что произойдёт при нажатии Alt+F4 на рабочем столе?",
+        options: ["Откроется справка", "Закроется активное окно (или меню завершения работы)", "Запустится игра", "Сделается скриншот"],
+        correct: 1,
+        explanation: "Alt+F4 закрывает текущее окно. На рабочем столе вызывает диалог выключения."
+      },
+      {
+        question: "22. Как сделать снимок всего экрана (скриншот) стандартными средствами Windows?",
+        options: ["Нажать кнопку Print Screen (PrtSc)", "Нажать Ctrl+P", "Правой кнопкой по рабочему столу", "Нажать Win+L"],
+        correct: 0,
+        explanation: "Print Screen копирует снимок экрана в буфер обмена. Win+Shift+S — выделение области."
+      },
+      {
+        question: "23. Какой тип накопителя обычно работает быстрее?",
+        options: ["HDD (жёсткий диск)", "SSD (твердотельный)", "DVD‑диск", "Дискета"],
+        correct: 1,
+        explanation: "SSD не имеет движущихся частей и значительно быстрее HDD."
+      },
+      {
+        question: "24. Какое устройство может одновременно быть и вводом, и выводом?",
+        options: ["Принтер", "Колонки", "Сенсорный экран", "Микрофон"],
+        correct: 2,
+        explanation: "Сенсорный экран принимает касания (ввод) и отображает картинку (вывод)."
+      },
+      {
+        question: "25. Какая память очищается при выключении питания компьютера?",
+        options: ["Оперативная память (RAM)", "SSD", "Жёсткий диск", "USB‑флешка"],
+        correct: 0,
+        explanation: "ОЗУ энергозависима — все данные в ней теряются при отключении питания."
+      },
+      {
+        question: "26. Зачем нужна учётная запись Microsoft в Windows?",
+        options: ["Только для игр", "Синхронизация настроек и доступ к облачным сервисам", "Для работы калькулятора", "Без неё компьютер не включится"],
+        correct: 1,
+        explanation: "Учётная запись позволяет хранить файлы в OneDrive, синхронизировать пароли и настройки."
+      },
+      {
+        question: "27. Как безопасно выключить зависший компьютер, если он не реагирует?",
+        options: ["Дёрнуть шнур питания", "Удерживать кнопку питания несколько секунд до отключения", "Ждать, пока само пройдёт", "Нажать все клавиши сразу"],
+        correct: 1,
+        explanation: "Длительное удержание кнопки питания принудительно обесточит систему."
+      },
+      {
+        question: "28. Какая комбинация открывает поиск в Windows (поиск файлов, приложений)?",
+        options: ["Win+S (или Win+Q)", "Win+L", "Ctrl+F", "Win+E"],
+        correct: 0,
+        explanation: "Win+S открывает строку поиска, где можно найти документы и программы."
+      },
+      {
+        question: "29. Что такое драйвер?",
+        options: ["Программа, управляющая работой устройства", "Вирус", "Файл с паролями", "Беспроводная сеть"],
+        correct: 0,
+        explanation: "Драйвер обеспечивает взаимодействие ОС с конкретным оборудованием (принтером, видеокартой)."
+      },
+      {
+        question: "30. BIOS/UEFI — это…",
+        options: ["Новая операционная система", "Программа начальной загрузки и настройки оборудования", "Текстовый редактор", "Антивирус"],
+        correct: 1,
+        explanation: "BIOS/UEFI запускается при включении, проверяет компоненты и загружает ОС."
+      }
+    ];
+
+    let currentIndex = 0;
+    let score = 0;
     let xp = 0;
+    let answered = false;
+    const totalQuestions = questions.length;
+
     const xpDisplay = document.getElementById('xpDisplay');
+    const questionCounter = document.getElementById('questionCounter');
+    const progressFill = document.getElementById('progressFill');
+    const quizContainer = document.getElementById('quizContainer');
+    const nextBtn = document.getElementById('nextBtn');
+    const finalResultDiv = document.getElementById('finalResult');
+
+    function updateProgress() {
+      questionCounter.textContent = `${currentIndex+1}/${totalQuestions}`;
+      const percent = ((currentIndex) / totalQuestions) * 100; // до перехода к следующему
+      progressFill.style.width = `${percent}%`;
+    }
+
     function addXP(points) {
       xp += points;
       xpDisplay.textContent = `⚡ ${xp} XP`;
     }
 
-    // Навигация
-    const tabs = document.querySelectorAll('.tab-btn');
-    const sections = document.querySelectorAll('.section');
-    tabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabs.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    // ---------- СБОРКА ПК (touch + drag) ----------
-    const dragItems = document.querySelectorAll('#dragParts .drag-item');
-    const dropZone = document.getElementById('pcCase');
-    const buildFeedback = document.getElementById('buildFeedback');
-    let builtParts = new Set();
-    let selectedPart = null;
-
-    function clearSelection() {
-      if (selectedPart) {
-        selectedPart.classList.remove('selected');
-        selectedPart = null;
+    function renderQuestion() {
+      if (currentIndex >= totalQuestions) {
+        showFinalResult();
+        return;
       }
+      const q = questions[currentIndex];
+      answered = false;
+      nextBtn.style.display = 'none';
+      
+      let html = `<div class="question-text">${q.question}</div><div class="options-grid">`;
+      q.options.forEach((opt, idx) => {
+        html += `<button class="option-btn" data-option-index="${idx}">${opt}</button>`;
+      });
+      html += `</div><div id="explanationArea" class="explanation" style="display: none;"></div>`;
+      quizContainer.innerHTML = html;
+
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', optionClickHandler);
+      });
+
+      updateProgress();
     }
 
-    dragItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (builtParts.has(item.dataset.part)) {
-          buildFeedback.textContent = '⚠️ Этот компонент уже установлен.';
-          buildFeedback.className = 'feedback error';
-          return;
+    function optionClickHandler(e) {
+      if (answered) return;
+      const selectedBtn = e.currentTarget;
+      const selectedIdx = parseInt(selectedBtn.getAttribute('data-option-index'));
+      const q = questions[currentIndex];
+      const correctIdx = q.correct;
+      const explanationArea = document.getElementById('explanationArea');
+
+      // Блокируем все кнопки
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.add('disabled'));
+
+      // Подсвечиваем правильный и неправильный
+      document.querySelectorAll('.option-btn').forEach((btn, idx) => {
+        if (idx === correctIdx) {
+          btn.classList.add('correct-choice');
+        } else if (idx === selectedIdx && selectedIdx !== correctIdx) {
+          btn.classList.add('wrong-choice');
         }
-        clearSelection();
-        item.classList.add('selected');
-        selectedPart = item;
       });
 
-      item.addEventListener('dragstart', e => {
-        e.dataTransfer.setData('text/plain', item.dataset.part);
-        item.style.opacity = '0.6';
-        clearSelection();
-      });
-      item.addEventListener('dragend', e => { item.style.opacity = '1'; });
-    });
+      // Показываем объяснение
+      explanationArea.style.display = 'block';
+      explanationArea.textContent = '💡 ' + q.explanation;
 
-    dropZone.addEventListener('click', () => {
-      if (!selectedPart) {
-        buildFeedback.textContent = 'Сначала выберите компонент (тапните по нему).';
-        buildFeedback.className = 'feedback error';
-        return;
+      if (selectedIdx === correctIdx) {
+        score++;
+        addXP(5);
       }
-      const part = selectedPart.dataset.part;
-      if (builtParts.has(part)) {
-        buildFeedback.textContent = '⚠️ Уже установлен.';
-        buildFeedback.className = 'feedback error';
-        clearSelection();
-        return;
-      }
-      addPartToCase(part);
-      clearSelection();
-    });
 
-    dropZone.addEventListener('dragover', e => {
-      e.preventDefault();
-      dropZone.classList.add('drag-over');
-    });
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-    dropZone.addEventListener('drop', e => {
-      e.preventDefault();
-      dropZone.classList.remove('drag-over');
-      const part = e.dataTransfer.getData('text/plain');
-      if (!part) return;
-      if (builtParts.has(part)) {
-        buildFeedback.textContent = '⚠️ Уже установлен.';
-        buildFeedback.className = 'feedback error';
-        return;
-      }
-      addPartToCase(part);
-    });
+      answered = true;
+      nextBtn.style.display = 'inline-flex';
+    }
 
-    function addPartToCase(part) {
-      builtParts.add(part);
-      const tag = document.createElement('span');
-      tag.style.background='white'; tag.style.padding='0.3rem 0.7rem'; tag.style.borderRadius='2rem';
-      tag.textContent = {cpu:'🧠', ram:'🧮', ssd:'💾', gpu:'🎨', mobo:'📟', psu:'🔌'}[part] || part;
-      dropZone.appendChild(tag);
-      if (builtParts.size === 6) {
-        buildFeedback.textContent = '✅ Компьютер собран! +30 XP';
-        buildFeedback.className = 'feedback success';
-        addXP(30);
+    function nextQuestion() {
+      currentIndex++;
+      if (currentIndex < totalQuestions) {
+        renderQuestion();
       } else {
-        buildFeedback.textContent = `Установлено ${builtParts.size}/6.`;
-        buildFeedback.className = 'feedback';
+        showFinalResult();
       }
     }
 
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.drag-item') && !e.target.closest('#pcCase')) {
-        clearSelection();
-      }
-    });
-
-    // ---------- Мини-квиз о составе ----------
-    const partsQuizDiv = document.getElementById('partsQuiz');
-    partsQuizDiv.innerHTML = `
-      <p><strong>1. Что хранит данные, пока компьютер включен?</strong></p>
-      <label class="quiz-option"><input type="radio" name="pq1" value="0"> Жёсткий диск</label>
-      <label class="quiz-option"><input type="radio" name="pq1" value="1"> Оперативная память</label>
-      <label class="quiz-option"><input type="radio" name="pq1" value="2"> Блок питания</label>
-      <p style="margin-top:1rem;"><strong>2. Какая деталь отвечает за обработку графики?</strong></p>
-      <label class="quiz-option"><input type="radio" name="pq2" value="0"> Процессор</label>
-      <label class="quiz-option"><input type="radio" name="pq2" value="1"> Видеокарта</label>
-      <label class="quiz-option"><input type="radio" name="pq2" value="2"> Звуковая карта</label>
-      <p style="margin-top:1rem;"><strong>3. SSD — это…</strong></p>
-      <label class="quiz-option"><input type="radio" name="pq3" value="0"> Тип монитора</label>
-      <label class="quiz-option"><input type="radio" name="pq3" value="1"> Твердотельный накопитель</label>
-      <label class="quiz-option"><input type="radio" name="pq3" value="2"> Система охлаждения</label>
-    `;
-    document.getElementById('checkPartsQuiz').addEventListener('click', () => {
-      const q1 = document.querySelector('input[name="pq1"]:checked');
-      const q2 = document.querySelector('input[name="pq2"]:checked');
-      const q3 = document.querySelector('input[name="pq3"]:checked');
-      const fb = document.getElementById('partsQuizFeedback');
-      if (!q1 || !q2 || !q3) {
-        fb.textContent = 'Ответьте на все вопросы.';
-        fb.className = 'feedback error'; return;
-      }
-      let score = 0;
-      if (q1.value === '1') score++;
-      if (q2.value === '1') score++;
-      if (q3.value === '1') score++;
-      if (score === 3) {
-        fb.textContent = '🎉 Отлично! Все 3 верно. +12 XP';
-        fb.className = 'feedback success';
-        addXP(12);
-      } else {
-        fb.textContent = `Результат: ${score}/3. Попробуйте ещё.`;
-        fb.className = 'feedback error';
-      }
-    });
-
-    // ---------- ВВОД / ВЫВОД (расширенный список) ----------
-    const devices = [
-      { name: 'Мышь', type: 'input', emoji: '🖱️' },
-      { name: 'Монитор', type: 'output', emoji: '🖥️' },
-      { name: 'Клавиатура', type: 'input', emoji: '⌨️' },
-      { name: 'Принтер', type: 'output', emoji: '🖨️' },
-      { name: 'Микрофон', type: 'input', emoji: '🎤' },
-      { name: 'Колонки', type: 'output', emoji: '🔊' },
-      { name: 'Веб-камера', type: 'input', emoji: '📷' },
-      { name: 'Проектор', type: 'output', emoji: '📽️' },
-      { name: 'Сканер', type: 'input', emoji: '📠' },
-      { name: 'Наушники', type: 'output', emoji: '🎧' },
-      { name: 'Джойстик', type: 'input', emoji: '🕹️' }
-    ];
-    let currentDeviceIndex = 0;
-    let ioCompleted = false;
-    const ioContainer = document.getElementById('ioContainer');
-    const ioFeedback = document.getElementById('ioFeedback');
-    const ioScore = document.getElementById('ioScore');
-
-    function showNextDevice() {
-      if (currentDeviceIndex >= devices.length) {
-        if (!ioCompleted) {
-          ioContainer.innerHTML = '<span style="font-weight:700;">🎉 Все 11 устройств отсортированы! +25 XP</span>';
-          addXP(25);
-          ioCompleted = true;
-          ioScore.textContent = '';
-        }
-        return;
-      }
-      const d = devices[currentDeviceIndex];
-      ioContainer.innerHTML = `<div style="font-size:2.2rem; background:white; padding:1rem 2rem; border-radius:2rem;">${d.emoji} ${d.name}</div>`;
-      ioFeedback.textContent = '';
+    function showFinalResult() {
+      quizContainer.innerHTML = '';
+      nextBtn.style.display = 'none';
+      progressFill.style.width = '100%';
+      questionCounter.textContent = `${totalQuestions}/${totalQuestions}`;
+      
+      let message = '';
+      if (score === totalQuestions) message = '🏆 Идеально! Вы настоящий эксперт!';
+      else if (score >= 22) message = '🎉 Отличный результат! Вы хорошо разбираетесь в ПК.';
+      else if (score >= 14) message = '👍 Хорошо! Есть что вспомнить, но база крепкая.';
+      else message = '📚 Продолжайте изучать компьютерную грамотность, всё получится!';
+      
+      finalResultDiv.style.display = 'block';
+      finalResultDiv.innerHTML = `
+        <div class="score-circle">${score}/${totalQuestions}</div>
+        <h2>${message}</h2>
+        <p style="margin-top:1rem;">Вы заработали <strong>${xp} XP</strong></p>
+        <button class="btn" id="restartBtn" style="margin-top:1.5rem;">🔄 Пройти заново</button>
+      `;
+      document.getElementById('restartBtn').addEventListener('click', restartQuiz);
     }
-    showNextDevice();
 
-    document.getElementById('btnInput').addEventListener('click', () => {
-      if (currentDeviceIndex >= devices.length) return;
-      const d = devices[currentDeviceIndex];
-      if (d.type === 'input') {
-        ioFeedback.textContent = '✅ Верно! Это устройство ввода.';
-        ioFeedback.className = 'feedback success';
-        currentDeviceIndex++;
-        showNextDevice();
-      } else {
-        ioFeedback.textContent = '❌ Неверно. Это устройство вывода.';
-        ioFeedback.className = 'feedback error';
-      }
-    });
-    document.getElementById('btnOutput').addEventListener('click', () => {
-      if (currentDeviceIndex >= devices.length) return;
-      const d = devices[currentDeviceIndex];
-      if (d.type === 'output') {
-        ioFeedback.textContent = '✅ Верно! Это устройство вывода.';
-        ioFeedback.className = 'feedback success';
-        currentDeviceIndex++;
-        showNextDevice();
-      } else {
-        ioFeedback.textContent = '❌ Неверно. Это устройство ввода.';
-        ioFeedback.className = 'feedback error';
-      }
-    });
-
-    // ---------- АПГРЕЙД (3 вопроса) ----------
-    document.getElementById('upgradeQuiz').innerHTML = `
-      <p><strong>1. Что даст наибольший прирост скорости загрузки старого ноутбука?</strong></p>
-      <label class="quiz-option"><input type="radio" name="uq1" value="0"> Добавить ОЗУ</label>
-      <label class="quiz-option"><input type="radio" name="uq1" value="1"> Заменить HDD на SSD</label>
-      <label class="quiz-option"><input type="radio" name="uq1" value="2"> Новый монитор</label>
-      <p><strong>2. Для чего нужна термопаста?</strong></p>
-      <label class="quiz-option"><input type="radio" name="uq2" value="0"> Ускорение интернета</label>
-      <label class="quiz-option"><input type="radio" name="uq2" value="1"> Улучшение теплоотвода от процессора</label>
-      <label class="quiz-option"><input type="radio" name="uq2" value="2"> Защита от вирусов</label>
-      <p><strong>3. Что из перечисленного чаще всего требует замены для современных игр?</strong></p>
-      <label class="quiz-option"><input type="radio" name="uq3" value="0"> Блок питания</label>
-      <label class="quiz-option"><input type="radio" name="uq3" value="1"> Видеокарта</label>
-      <label class="quiz-option"><input type="radio" name="uq3" value="2"> Корпус</label>
-    `;
-    document.getElementById('checkUpgrade').addEventListener('click', () => {
-      const a1 = document.querySelector('input[name="uq1"]:checked');
-      const a2 = document.querySelector('input[name="uq2"]:checked');
-      const a3 = document.querySelector('input[name="uq3"]:checked');
-      const fb = document.getElementById('upgradeFeedback');
-      if (!a1 || !a2 || !a3) { fb.textContent = 'Ответьте на все вопросы.'; fb.className = 'feedback error'; return; }
-      let sc = 0;
-      if (a1.value === '1') sc++;
-      if (a2.value === '1') sc++;
-      if (a3.value === '1') sc++;
-      if (sc === 3) {
-        fb.textContent = '🚀 Идеально! 3/3. +15 XP';
-        fb.className = 'feedback success';
-        addXP(15);
-      } else {
-        fb.textContent = `Результат: ${sc}/3. Подумайте ещё.`;
-        fb.className = 'feedback error';
-      }
-    });
-
-    // ---------- ТРЕНАЖЁР ГОРЯЧИХ КЛАВИШ (5 вопросов) ----------
-    const shortcuts = [
-      { q: 'Какая комбинация блокирует компьютер?', opts: ['Win+L', 'Ctrl+L', 'Alt+F4'], correct: 0 },
-      { q: 'Как открыть Диспетчер задач?', opts: ['Ctrl+Alt+Del', 'Ctrl+Shift+Esc', 'Win+T'], correct: 1 },
-      { q: 'Как быстро свернуть все окна?', opts: ['Win+D', 'Win+M', 'Alt+Tab'], correct: 0 },
-      { q: 'Что делает Win+E?', opts: ['Открывает браузер', 'Открывает Проводник', 'Блокирует ПК'], correct: 1 },
-      { q: 'Какая комбинация открывает окно «Выполнить»?', opts: ['Win+R', 'Ctrl+R', 'Win+Run'], correct: 0 }
-    ];
-    let shortcutIdx = 0;
-    const shortcutQ = document.getElementById('shortcutQuestion');
-    const shortcutOpts = document.getElementById('shortcutOptions');
-    const shortcutFb = document.getElementById('shortcutFeedback');
-
-    function loadShortcut() {
-      if (shortcutIdx >= shortcuts.length) {
-        shortcutQ.textContent = '🎯 Тренажёр пройден! +18 XP';
-        shortcutOpts.innerHTML = '';
-        addXP(18);
-        return;
-      }
-      const s = shortcuts[shortcutIdx];
-      shortcutQ.textContent = s.q;
-      shortcutOpts.innerHTML = s.opts.map((opt, i) => 
-        `<button class="btn" data-idx="${i}" style="margin:0.3rem;">${opt}</button>`
-      ).join('');
-      document.querySelectorAll('#shortcutOptions .btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const idx = parseInt(e.target.getAttribute('data-idx'));
-          if (idx === s.correct) {
-            shortcutFb.textContent = '✅ Верно!';
-            shortcutFb.className = 'feedback success';
-            shortcutIdx++;
-            loadShortcut();
-          } else {
-            shortcutFb.textContent = '❌ Неправильно, попробуйте снова.';
-            shortcutFb.className = 'feedback error';
-          }
-        });
-      });
+    function restartQuiz() {
+      currentIndex = 0;
+      score = 0;
+      xp = 0;
+      answered = false;
+      xpDisplay.textContent = '⚡ 0 XP';
+      finalResultDiv.style.display = 'none';
+      renderQuestion();
     }
-    loadShortcut();
 
-    // ---------- ФИНАЛЬНЫЙ ТЕСТ (8 вопросов) ----------
-    const finalQuestions = [
-      { q: 'Процессор выполняет:', opts: ['Хранение данных', 'Вычисления', 'Вывод звука'], ans: 1 },
-      { q: 'Какое устройство ВВОДА?', opts: ['Монитор', 'Принтер', 'Сканер'], ans: 2 },
-      { q: 'SSD — это:', opts: ['Твердотельный накопитель', 'Оперативная память', 'Видеокарта'], ans: 0 },
-      { q: 'Win+L делает:', opts: ['Выключает ПК', 'Блокирует экран', 'Открывает поиск'], ans: 1 },
-      { q: 'Чтобы одновременно работало больше программ, нужно увеличить:', opts: ['ОЗУ', 'Размер экрана', 'Мощность БП'], ans: 0 },
-      { q: 'Как открыть историю буфера обмена (Windows 10/11)?', opts: ['Win+V', 'Ctrl+V', 'Win+C'], ans: 0 },
-      { q: 'Какое устройство одновременно ввода и вывода?', opts: ['Сенсорный экран', 'Колонки', 'Принтер'], ans: 0 },
-      { q: 'Замена термопасты помогает:', opts: ['Увеличить скорость Wi-Fi', 'Снизить температуру процессора', 'Добавить памяти'], ans: 1 }
-    ];
-    document.getElementById('finalQuiz').innerHTML = finalQuestions.map((q, i) => `
-      <div style="margin-bottom:1.4rem;"><strong>${i+1}. ${q.q}</strong>
-        ${q.opts.map((opt, j) => `<label class="quiz-option"><input type="radio" name="fq${i}" value="${j}"> ${opt}</label>`).join('')}
-      </div>
-    `).join('');
+    nextBtn.addEventListener('click', nextQuestion);
 
-    document.getElementById('checkFinal').addEventListener('click', () => {
-      let score = 0;
-      finalQuestions.forEach((q, i) => {
-        const sel = document.querySelector(`input[name="fq${i}"]:checked`);
-        if (sel && parseInt(sel.value) === q.ans) score++;
-      });
-      const fb = document.getElementById('finalFeedback');
-      if (score === finalQuestions.length) {
-        fb.textContent = `🏅 Идеально! ${score}/${finalQuestions.length}. +30 XP`;
-        fb.className = 'feedback success';
-        addXP(30);
-      } else if (score >= 5) {
-        fb.textContent = `👍 Хорошо! ${score}/${finalQuestions.length}. +15 XP`;
-        fb.className = 'feedback success';
-        addXP(15);
-      } else {
-        fb.textContent = `📚 ${score}/${finalQuestions.length}. Повторите материал.`;
-        fb.className = 'feedback error';
-      }
-    });
-
+    // Старт
+    renderQuestion();
   })();
 </script>
 </body>
