@@ -1,278 +1,773 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест: Устройство компьютера</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .question {
-            margin: 20px 0;
-        }
-        .choices {
-            list-style: none;
-            padding: 0;
-        }
-        .choices li {
-            margin: 10px 0;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f1f1f1;
-        }
-        .choices li:hover {
-            background-color: #d1d1d1;
-        }
-        .selected {
-            background-color: #99cc99;
-        }
-        .incorrect {
-            background-color: #ffcccb;
-        }
-        .correct {
-            background-color: #99ff99;
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>💻 Компьютерная грамотность · Урок 60 мин</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #e3edf7 0%, #f5f9ff 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1rem;
+      margin: 0;
+      color: #1a2b3f;
+    }
+
+    .lesson-container {
+      max-width: 950px;
+      width: 100%;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 2.8rem;
+      box-shadow: 0 30px 55px -15px rgba(0,20,40,0.2), inset 0 1px 1px rgba(255,255,255,0.8);
+      padding: 2rem 2rem 2.2rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      transition: all 0.2s;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #0c2942, #1e5677);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .xp-badge {
+      background: #ffbb2e;
+      color: #2e2400;
+      padding: 0.5rem 1.4rem;
+      border-radius: 3rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-left: auto;
+      box-shadow: 0 8px 18px rgba(255,170,0,0.45);
+      -webkit-text-fill-color: #2e2400;
+      background: #ffb703;
+      letter-spacing: 0.3px;
+    }
+
+    .subtitle {
+      color: #3e5568;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      border-left: 5px solid #2a7db5;
+      padding-left: 1.2rem;
+      font-weight: 500;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+      background: rgba(255,255,255,0.7);
+      padding: 0.4rem;
+      border-radius: 3rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+    }
+
+    .tab-btn {
+      flex: 1 0 auto;
+      background: transparent;
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 2.8rem;
+      font-weight: 650;
+      color: #2f455c;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      min-width: 70px;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      box-shadow: 0 8px 20px -6px rgba(20,100,180,0.25);
+      color: #083452;
+      font-weight: 700;
+    }
+
+    .section {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.8rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+      border: 1px solid #e8f0f9;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #0b2f44;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .component {
+      background: #f4f9ff;
+      border-radius: 1.5rem;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      border: 1px solid #d3e4f5;
+    }
+
+    .game-area {
+      background: #f1f6fc;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border: 2px dashed #b3cef0;
+    }
+
+    .drag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .drag-item {
+      background: white;
+      border: 2px solid #cadef0;
+      border-radius: 1.4rem;
+      padding: 0.7rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      touch-action: manipulation;
+    }
+
+    .drag-item.selected {
+      border: 3px solid #1c6ab0;
+      background: #ebf5ff;
+      transform: scale(1.02);
+    }
+
+    .drop-zone {
+      min-height: 90px;
+      background: #e3effb;
+      border-radius: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1.2rem;
+      border: 2px solid #8fb3da;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .drop-zone.drag-over {
+      background: #d2e7ff;
+      border-color: #1f67b0;
+    }
+
+    .quiz-option {
+      background: #f2f7fd;
+      padding: 0.7rem 1rem;
+      border-radius: 1.2rem;
+      margin: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+    }
+
+    .quiz-option:hover { background: #e1eefc; }
+    .quiz-option input { margin-right: 0.2rem; transform: scale(1.2); }
+
+    .btn {
+      background: #1d4b76;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 0.85rem 1.8rem;
+      border-radius: 2.8rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.8rem;
+      box-shadow: 0 6px 14px rgba(26,73,114,0.35);
+      display: inline-block;
+      min-height: 48px;
+      min-width: 80px;
+    }
+
+    .btn:active { transform: scale(0.96); }
+    .btn:disabled { opacity: 0.5; }
+
+    .feedback {
+      font-weight: 600;
+      margin: 0.7rem 0;
+      padding: 0.6rem 1rem;
+      border-radius: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .success { background: #dff0d8; color: #265e2c; }
+    .error { background: #ffe0e0; color: #a12b2b; }
+
+    .key-shortcut {
+      background: #232a33;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.7rem;
+      font-family: 'Fira Code', monospace;
+      font-weight: 600;
+      margin: 0 0.2rem;
+      display: inline-block;
+    }
+
+    hr {
+      margin: 1.5rem 0;
+      border: 0;
+      height: 1px;
+      background: #dce5f0;
+    }
+
+    @media (max-width: 600px) {
+      .lesson-container {
+        padding: 1.3rem 1rem;
+        border-radius: 2rem;
+      }
+      .card {
+        padding: 1.2rem;
+      }
+      .tabs {
+        gap: 0.2rem;
+      }
+      .tab-btn {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.6rem;
+      }
+      .drag-item {
+        padding: 0.6rem 0.9rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .btn {
+        width: 100%;
+        margin-top: 0.6rem;
+      }
+      .drag-container {
+        gap: 0.4rem;
+      }
+    }
+  </style>
 </head>
 <body>
+<div class="lesson-container">
+  <h1>
+    🖥️ Компьютерная грамотность
+    <span class="xp-badge" id="xpDisplay">⚡ 0 XP</span>
+  </h1>
+  <div class="subtitle">Урок на час • Устройство, ввод/вывод, апгрейд, лайфхаки ОС</div>
 
-<div class="container">
-    <h1>Тест: Устройство компьютера</h1>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="intro">📘 Старт</button>
+    <button class="tab-btn" data-tab="parts">🧠 Состав ПК</button>
+    <button class="tab-btn" data-tab="io">⌨️ Ввод/Вывод</button>
+    <button class="tab-btn" data-tab="upgrade">🚀 Апгрейд</button>
+    <button class="tab-btn" data-tab="os">⚙️ ОС и фишки</button>
+    <button class="tab-btn" data-tab="final">🏆 Тест</button>
+  </div>
 
-    <div id="question-container">
-        <!-- Вопрос 1 -->
-        <div class="question" id="question-1">
-            <p>1. Какой компонент компьютера отвечает за выполнение инструкций программ?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(1, 'B')">A) Оперативная память</li>
-                <li onclick="selectAnswer(1, 'B')">B) Центральный процессор</li>
-                <li onclick="selectAnswer(1, 'B')">C) Жесткий диск</li>
-                <li onclick="selectAnswer(1, 'B')">D) Монитор</li>
-            </ul>
-        </div>
-        
-        <!-- Вопрос 2 -->
-        <div class="question" id="question-2" style="display:none;">
-            <p>2. Какой из этих компонентов является устройством вывода?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(2, 'C')">A) Клавиатура</li>
-                <li onclick="selectAnswer(2, 'C')">B) Мышь</li>
-                <li onclick="selectAnswer(2, 'C')">C) Принтер</li>
-                <li onclick="selectAnswer(2, 'C')">D) Микрофон</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 3 -->
-        <div class="question" id="question-3" style="display:none;">
-            <p>3. Как называется память, которая используется для хранения данных в момент работы компьютера?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(3, 'A')">A) Оперативная память</li>
-                <li onclick="selectAnswer(3, 'B')">B) Постоянная память</li>
-                <li onclick="selectAnswer(3, 'C')">C) Кэш-память</li>
-                <li onclick="selectAnswer(3, 'D')">D) Внешняя память</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 4 -->
-        <div class="question" id="question-4" style="display:none;">
-            <p>4. Какой из этих устройств является примером устройства ввода?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(4, 'C')">A) Монитор</li>
-                <li onclick="selectAnswer(4, 'C')">B) Принтер</li>
-                <li onclick="selectAnswer(4, 'C')">C) Клавиатура</li>
-                <li onclick="selectAnswer(4, 'C')">D) Колонки</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 5 -->
-        <div class="question" id="question-5" style="display:none;">
-            <p>5. Какой компонент компьютера отвечает за долговременное хранение данных?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(5, 'C')">A) Оперативная память</li>
-                <li onclick="selectAnswer(5, 'B')">B) Центральный процессор</li>
-                <li onclick="selectAnswer(5, 'C')">C) Жесткий диск</li>
-                <li onclick="selectAnswer(5, 'D')">D) Сетевой адаптер</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 6 -->
-        <div class="question" id="question-6" style="display:none;">
-            <p>6. Что такое процессор?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(6, 'C')">A) Компонент для хранения данных</li>
-                <li onclick="selectAnswer(6, 'C')">B) Устройство для ввода данных</li>
-                <li onclick="selectAnswer(6, 'C')">C) Центральный вычислительный блок</li>
-                <li onclick="selectAnswer(6, 'C')">D) Устройство вывода</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 7 -->
-        <div class="question" id="question-7" style="display:none;">
-            <p>7. Какая память быстрее всего работает?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(7, 'B')">A) Оперативная память</li>
-                <li onclick="selectAnswer(7, 'B')">B) Кэш-память</li>
-                <li onclick="selectAnswer(7, 'C')">C) Жесткий диск</li>
-                <li onclick="selectAnswer(7, 'D')">D) Флеш-накопитель</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 8 -->
-        <div class="question" id="question-8" style="display:none;">
-            <p>8. Какой из этих компонентов является устройством хранения?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(8, 'C')">A) Мышь</li>
-                <li onclick="selectAnswer(8, 'B')">B) Принтер</li>
-                <li onclick="selectAnswer(8, 'C')">C) Жесткий диск</li>
-                <li onclick="selectAnswer(8, 'D')">D) Монитор</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 9 -->
-        <div class="question" id="question-9" style="display:none;">
-            <p>9. Что такое жесткий диск?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(9, 'A')">A) Устройство для хранения данных</li>
-                <li onclick="selectAnswer(9, 'B')">B) Устройство для вывода данных</li>
-                <li onclick="selectAnswer(9, 'C')">C) Ввод-вывод данных</li>
-                <li onclick="selectAnswer(9, 'D')">D) Электронная память</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 10 -->
-        <div class="question" id="question-10" style="display:none;">
-            <p>10. Что делает видеокарта?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(10, 'C')">A) Обрабатывает графику и видео</li>
-                <li onclick="selectAnswer(10, 'B')">B) Сохраняет данные</li>
-                <li onclick="selectAnswer(10, 'C')">C) Управляет устройствами ввода</li>
-                <li onclick="selectAnswer(10, 'D')">D) Обрабатывает аудио</li>
-            </ul>
-        </div>
-
-        <!-- Добавим еще 10 вопросов -->
-        <div class="question" id="question-11" style="display:none;">
-            <p>11. Как называется процесс обмена данными между устройствами?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(11, 'A')">A) Ввод-вывод</li>
-                <li onclick="selectAnswer(11, 'B')">B) Операции с данными</li>
-                <li onclick="selectAnswer(11, 'C')">C) Сетевое соединение</li>
-                <li onclick="selectAnswer(11, 'D')">D) Командный доступ</li>
-            </ul>
-        </div>
-
-        <!-- Вопрос 12 -->
-        <div class="question" id="question-12" style="display:none;">
-            <p>12. Какой из этих устройств относится к устройствам хранения?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(12, 'B')">A) Мышь</li>
-                <li onclick="selectAnswer(12, 'B')">B) SSD</li>
-                <li onclick="selectAnswer(12, 'C')">C) Принтер</li>
-                <li onclick="selectAnswer(12, 'D')">D) Клавиатура</li>
-            </ul>
-        </div>
-
-        <div class="question" id="question-13" style="display:none;">
-            <p>13. Какие устройства используются для ввода данных?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(13, 'C')">A) Принтер и монитор</li>
-                <li onclick="selectAnswer(13, 'B')">B) Мышь и клавиатура</li>
-                <li onclick="selectAnswer(13, 'C')">C) Диски и устройства хранения</li>
-                <li onclick="selectAnswer(13, 'A')">D) Процессор и память</li>
-            </ul>
-        </div>
-
-        <div class="question" id="question-14" style="display:none;">
-            <p>14. Что из этого является основным устройством обработки данных в компьютере?</p>
-            <ul class="choices">
-                <li onclick="selectAnswer(14, 'C')">A) Оперативная память</li>
-                <li onclick="selectAnswer(14, 'A')">B) Процессор</li>
-                <li onclick="selectAnswer(14, 'B')">C) Видеокарта</li>
-                <li onclick="selectAnswer(14, 'C')">D) Жесткий диск</li>
-            </ul>
-        </div>
-
-        <!-- Далее продолжу задавать вопросы -->
-
+  <!-- Введение -->
+  <div class="section active" id="intro">
+    <div class="card">
+      <h2>👋 Привет!</h2>
+      <p>Сегодня вы разберётесь, из чего состоит компьютер, как работают устройства ввода и вывода, чем можно ускорить систему и какие горячие клавиши спасут вам нервы. Зарабатывайте очки опыта (XP) за правильные ответы и игры!</p>
+      <div class="grid-2">
+        <div class="component"><span>🧩</span> 5 модулей</div>
+        <div class="component"><span>🎮</span> Игры и тесты</div>
+        <div class="component"><span>⏱️</span> ~60 минут</div>
+        <div class="component"><span>⭐</span> XP за успехи</div>
+      </div>
     </div>
+  </div>
 
-    <button id="next-button" onclick="nextQuestion()">Следующий вопрос</button>
+  <!-- Состав ПК -->
+  <div class="section" id="parts">
+    <div class="card">
+      <h2>🧱 Из чего состоит компьютер</h2>
+      <p><strong>Процессор (CPU)</strong> – «мозг», выполняет вычисления. <strong>ОЗУ (RAM)</strong> – временная память для запущенных программ. <strong>SSD/HDD</strong> – хранилище файлов. <strong>Видеокарта (GPU)</strong> – графика. <strong>Материнская плата</strong> – соединяет всё. <strong>Блок питания</strong> – даёт энергию.</p>
+      <div class="game-area">
+        <h3>🎯 Собери компьютер (тапни компонент, затем тапни по корпусу)</h3>
+        <div class="drag-container" id="dragParts">
+          <div class="drag-item" data-part="cpu"><span>🧠</span> Процессор</div>
+          <div class="drag-item" data-part="ram"><span>🧮</span> ОЗУ</div>
+          <div class="drag-item" data-part="ssd"><span>💾</span> SSD</div>
+          <div class="drag-item" data-part="gpu"><span>🎨</span> Видеокарта</div>
+          <div class="drag-item" data-part="mobo"><span>📟</span> Мат.плата</div>
+          <div class="drag-item" data-part="psu"><span>🔌</span> Блок питания</div>
+        </div>
+        <div class="drop-zone" id="pcCase">
+          <span style="color:#4d6279;">🖥️ Тапните сюда после выбора компонента</span>
+        </div>
+        <div id="buildFeedback" class="feedback"></div>
+      </div>
+      <!-- Мини-квиз о составе -->
+      <div style="margin-top:1.5rem;">
+        <h3>📋 Быстрый опрос: что за что отвечает?</h3>
+        <div id="partsQuiz"></div>
+        <button class="btn" id="checkPartsQuiz">Проверить знания</button>
+        <div id="partsQuizFeedback" class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ввод и вывод -->
+  <div class="section" id="io">
+    <div class="card">
+      <h2>⌨️ Устройства ввода и вывода</h2>
+      <p><strong>Ввод</strong> – передают информацию от вас компьютеру. <strong>Вывод</strong> – показывают/воспроизводят результат.</p>
+      <div class="game-area">
+        <h3>🎮 Сортер: определи тип устройства</h3>
+        <div id="ioContainer" style="display:flex; flex-wrap:wrap; gap:0.6rem; margin:1rem 0; font-size:1.8rem; justify-content:center;"></div>
+        <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+          <button class="btn" id="btnInput">📥 ВВОД</button>
+          <button class="btn" id="btnOutput">📤 ВЫВОД</button>
+        </div>
+        <div id="ioFeedback" class="feedback"></div>
+        <div id="ioScore" style="font-weight:600;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Апгрейд -->
+  <div class="section" id="upgrade">
+    <div class="card">
+      <h2>🚀 Чем можно улучшить компьютер</h2>
+      <p>Замена HDD на SSD, добавление ОЗУ, установка более мощной видеокарты, чистка от пыли, замена термопасты.</p>
+      <div class="game-area">
+        <h3>📊 Мини-тест по апгрейду (3 вопроса)</h3>
+        <div id="upgradeQuiz"></div>
+        <button class="btn" id="checkUpgrade">Проверить ответы</button>
+        <div id="upgradeFeedback" class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ОС и лайфхаки -->
+  <div class="section" id="os">
+    <div class="card">
+      <h2>⚙️ Лайфхаки операционной системы</h2>
+      <p>Горячие клавиши экономят кучу времени. Основные комбинации (Windows):</p>
+      <ul style="list-style:none; padding-left:0; display:flex; flex-wrap:wrap; gap:0.5rem;">
+        <li><span class="key-shortcut">Win+L</span> Блокировка</li>
+        <li><span class="key-shortcut">Win+D</span> Рабочий стол</li>
+        <li><span class="key-shortcut">Alt+Tab</span> Окна</li>
+        <li><span class="key-shortcut">Ctrl+Shift+Esc</span> Диспетчер</li>
+        <li><span class="key-shortcut">Win+V</span> Буфер обмена</li>
+        <li><span class="key-shortcut">Ctrl+Z</span> Отмена</li>
+        <li><span class="key-shortcut">Win+E</span> Проводник</li>
+        <li><span class="key-shortcut">Win+R</span> Выполнить</li>
+      </ul>
+      <div class="game-area">
+        <h3>⌨️ Тренажёр горячих клавиш (5 вопросов)</h3>
+        <p id="shortcutQuestion"></p>
+        <div id="shortcutOptions" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
+        <div id="shortcutFeedback" class="feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Финальный тест -->
+  <div class="section" id="final">
+    <div class="card">
+      <h2>🏆 Итоговый тест (8 вопросов)</h2>
+      <div id="finalQuiz"></div>
+      <button class="btn" id="checkFinal">Завершить тест</button>
+      <div id="finalFeedback" class="feedback"></div>
+      <div id="finalXp"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-    let currentQuestion = 1;
-    let answers = {
-        1: 'B',
-        2: 'C',
-        3: 'A',
-        4: 'C',
-        5: 'C',
-        6: 'C',
-        7: 'B',
-        8: 'C',
-        9: 'A',
-        10: 'A',
-        11: 'A',
-        12: 'B',
-        13: 'B',
-        14: 'B',
-    };
+  (function() {
+    // XP
+    let xp = 0;
+    const xpDisplay = document.getElementById('xpDisplay');
+    function addXP(points) {
+      xp += points;
+      xpDisplay.textContent = `⚡ ${xp} XP`;
+    }
 
-    function selectAnswer(question, answer) {
-        let selectedQuestion = document.getElementById(`question-${question}`);
-        let options = selectedQuestion.getElementsByClassName('choices')[0].children;
-        for (let option of options) {
-            option.classList.remove('selected');
+    // Навигация
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.section');
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ---------- СБОРКА ПК (touch + drag) ----------
+    const dragItems = document.querySelectorAll('#dragParts .drag-item');
+    const dropZone = document.getElementById('pcCase');
+    const buildFeedback = document.getElementById('buildFeedback');
+    let builtParts = new Set();
+    let selectedPart = null;
+
+    function clearSelection() {
+      if (selectedPart) {
+        selectedPart.classList.remove('selected');
+        selectedPart = null;
+      }
+    }
+
+    dragItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (builtParts.has(item.dataset.part)) {
+          buildFeedback.textContent = '⚠️ Этот компонент уже установлен.';
+          buildFeedback.className = 'feedback error';
+          return;
         }
-        event.target.classList.add('selected');
+        clearSelection();
+        item.classList.add('selected');
+        selectedPart = item;
+      });
+
+      item.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', item.dataset.part);
+        item.style.opacity = '0.6';
+        clearSelection();
+      });
+      item.addEventListener('dragend', e => { item.style.opacity = '1'; });
+    });
+
+    dropZone.addEventListener('click', () => {
+      if (!selectedPart) {
+        buildFeedback.textContent = 'Сначала выберите компонент (тапните по нему).';
+        buildFeedback.className = 'feedback error';
+        return;
+      }
+      const part = selectedPart.dataset.part;
+      if (builtParts.has(part)) {
+        buildFeedback.textContent = '⚠️ Уже установлен.';
+        buildFeedback.className = 'feedback error';
+        clearSelection();
+        return;
+      }
+      addPartToCase(part);
+      clearSelection();
+    });
+
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      const part = e.dataTransfer.getData('text/plain');
+      if (!part) return;
+      if (builtParts.has(part)) {
+        buildFeedback.textContent = '⚠️ Уже установлен.';
+        buildFeedback.className = 'feedback error';
+        return;
+      }
+      addPartToCase(part);
+    });
+
+    function addPartToCase(part) {
+      builtParts.add(part);
+      const tag = document.createElement('span');
+      tag.style.background='white'; tag.style.padding='0.3rem 0.7rem'; tag.style.borderRadius='2rem';
+      tag.textContent = {cpu:'🧠', ram:'🧮', ssd:'💾', gpu:'🎨', mobo:'📟', psu:'🔌'}[part] || part;
+      dropZone.appendChild(tag);
+      if (builtParts.size === 6) {
+        buildFeedback.textContent = '✅ Компьютер собран! +30 XP';
+        buildFeedback.className = 'feedback success';
+        addXP(30);
+      } else {
+        buildFeedback.textContent = `Установлено ${builtParts.size}/6.`;
+        buildFeedback.className = 'feedback';
+      }
     }
 
-    function nextQuestion() {
-        if (currentQuestion < 20) {
-            document.getElementById(`question-${currentQuestion}`).style.display = 'none';
-            currentQuestion++;
-            document.getElementById(`question-${currentQuestion}`).style.display = 'block';
-        } else {
-            alert('Вы прошли все вопросы!');
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.drag-item') && !e.target.closest('#pcCase')) {
+        clearSelection();
+      }
+    });
+
+    // ---------- Мини-квиз о составе ----------
+    const partsQuizDiv = document.getElementById('partsQuiz');
+    partsQuizDiv.innerHTML = `
+      <p><strong>1. Что хранит данные, пока компьютер включен?</strong></p>
+      <label class="quiz-option"><input type="radio" name="pq1" value="0"> Жёсткий диск</label>
+      <label class="quiz-option"><input type="radio" name="pq1" value="1"> Оперативная память</label>
+      <label class="quiz-option"><input type="radio" name="pq1" value="2"> Блок питания</label>
+      <p style="margin-top:1rem;"><strong>2. Какая деталь отвечает за обработку графики?</strong></p>
+      <label class="quiz-option"><input type="radio" name="pq2" value="0"> Процессор</label>
+      <label class="quiz-option"><input type="radio" name="pq2" value="1"> Видеокарта</label>
+      <label class="quiz-option"><input type="radio" name="pq2" value="2"> Звуковая карта</label>
+      <p style="margin-top:1rem;"><strong>3. SSD — это…</strong></p>
+      <label class="quiz-option"><input type="radio" name="pq3" value="0"> Тип монитора</label>
+      <label class="quiz-option"><input type="radio" name="pq3" value="1"> Твердотельный накопитель</label>
+      <label class="quiz-option"><input type="radio" name="pq3" value="2"> Система охлаждения</label>
+    `;
+    document.getElementById('checkPartsQuiz').addEventListener('click', () => {
+      const q1 = document.querySelector('input[name="pq1"]:checked');
+      const q2 = document.querySelector('input[name="pq2"]:checked');
+      const q3 = document.querySelector('input[name="pq3"]:checked');
+      const fb = document.getElementById('partsQuizFeedback');
+      if (!q1 || !q2 || !q3) {
+        fb.textContent = 'Ответьте на все вопросы.';
+        fb.className = 'feedback error'; return;
+      }
+      let score = 0;
+      if (q1.value === '1') score++;
+      if (q2.value === '1') score++;
+      if (q3.value === '1') score++;
+      if (score === 3) {
+        fb.textContent = '🎉 Отлично! Все 3 верно. +12 XP';
+        fb.className = 'feedback success';
+        addXP(12);
+      } else {
+        fb.textContent = `Результат: ${score}/3. Попробуйте ещё.`;
+        fb.className = 'feedback error';
+      }
+    });
+
+    // ---------- ВВОД / ВЫВОД (расширенный список) ----------
+    const devices = [
+      { name: 'Мышь', type: 'input', emoji: '🖱️' },
+      { name: 'Монитор', type: 'output', emoji: '🖥️' },
+      { name: 'Клавиатура', type: 'input', emoji: '⌨️' },
+      { name: 'Принтер', type: 'output', emoji: '🖨️' },
+      { name: 'Микрофон', type: 'input', emoji: '🎤' },
+      { name: 'Колонки', type: 'output', emoji: '🔊' },
+      { name: 'Веб-камера', type: 'input', emoji: '📷' },
+      { name: 'Проектор', type: 'output', emoji: '📽️' },
+      { name: 'Сканер', type: 'input', emoji: '📠' },
+      { name: 'Наушники', type: 'output', emoji: '🎧' },
+      { name: 'Джойстик', type: 'input', emoji: '🕹️' }
+    ];
+    let currentDeviceIndex = 0;
+    let ioCompleted = false;
+    const ioContainer = document.getElementById('ioContainer');
+    const ioFeedback = document.getElementById('ioFeedback');
+    const ioScore = document.getElementById('ioScore');
+
+    function showNextDevice() {
+      if (currentDeviceIndex >= devices.length) {
+        if (!ioCompleted) {
+          ioContainer.innerHTML = '<span style="font-weight:700;">🎉 Все 11 устройств отсортированы! +25 XP</span>';
+          addXP(25);
+          ioCompleted = true;
+          ioScore.textContent = '';
         }
+        return;
+      }
+      const d = devices[currentDeviceIndex];
+      ioContainer.innerHTML = `<div style="font-size:2.2rem; background:white; padding:1rem 2rem; border-radius:2rem;">${d.emoji} ${d.name}</div>`;
+      ioFeedback.textContent = '';
     }
+    showNextDevice();
 
-    window.onload = function() {
-        document.getElementById('next-button').style.display = 'block';
+    document.getElementById('btnInput').addEventListener('click', () => {
+      if (currentDeviceIndex >= devices.length) return;
+      const d = devices[currentDeviceIndex];
+      if (d.type === 'input') {
+        ioFeedback.textContent = '✅ Верно! Это устройство ввода.';
+        ioFeedback.className = 'feedback success';
+        currentDeviceIndex++;
+        showNextDevice();
+      } else {
+        ioFeedback.textContent = '❌ Неверно. Это устройство вывода.';
+        ioFeedback.className = 'feedback error';
+      }
+    });
+    document.getElementById('btnOutput').addEventListener('click', () => {
+      if (currentDeviceIndex >= devices.length) return;
+      const d = devices[currentDeviceIndex];
+      if (d.type === 'output') {
+        ioFeedback.textContent = '✅ Верно! Это устройство вывода.';
+        ioFeedback.className = 'feedback success';
+        currentDeviceIndex++;
+        showNextDevice();
+      } else {
+        ioFeedback.textContent = '❌ Неверно. Это устройство ввода.';
+        ioFeedback.className = 'feedback error';
+      }
+    });
+
+    // ---------- АПГРЕЙД (3 вопроса) ----------
+    document.getElementById('upgradeQuiz').innerHTML = `
+      <p><strong>1. Что даст наибольший прирост скорости загрузки старого ноутбука?</strong></p>
+      <label class="quiz-option"><input type="radio" name="uq1" value="0"> Добавить ОЗУ</label>
+      <label class="quiz-option"><input type="radio" name="uq1" value="1"> Заменить HDD на SSD</label>
+      <label class="quiz-option"><input type="radio" name="uq1" value="2"> Новый монитор</label>
+      <p><strong>2. Для чего нужна термопаста?</strong></p>
+      <label class="quiz-option"><input type="radio" name="uq2" value="0"> Ускорение интернета</label>
+      <label class="quiz-option"><input type="radio" name="uq2" value="1"> Улучшение теплоотвода от процессора</label>
+      <label class="quiz-option"><input type="radio" name="uq2" value="2"> Защита от вирусов</label>
+      <p><strong>3. Что из перечисленного чаще всего требует замены для современных игр?</strong></p>
+      <label class="quiz-option"><input type="radio" name="uq3" value="0"> Блок питания</label>
+      <label class="quiz-option"><input type="radio" name="uq3" value="1"> Видеокарта</label>
+      <label class="quiz-option"><input type="radio" name="uq3" value="2"> Корпус</label>
+    `;
+    document.getElementById('checkUpgrade').addEventListener('click', () => {
+      const a1 = document.querySelector('input[name="uq1"]:checked');
+      const a2 = document.querySelector('input[name="uq2"]:checked');
+      const a3 = document.querySelector('input[name="uq3"]:checked');
+      const fb = document.getElementById('upgradeFeedback');
+      if (!a1 || !a2 || !a3) { fb.textContent = 'Ответьте на все вопросы.'; fb.className = 'feedback error'; return; }
+      let sc = 0;
+      if (a1.value === '1') sc++;
+      if (a2.value === '1') sc++;
+      if (a3.value === '1') sc++;
+      if (sc === 3) {
+        fb.textContent = '🚀 Идеально! 3/3. +15 XP';
+        fb.className = 'feedback success';
+        addXP(15);
+      } else {
+        fb.textContent = `Результат: ${sc}/3. Подумайте ещё.`;
+        fb.className = 'feedback error';
+      }
+    });
+
+    // ---------- ТРЕНАЖЁР ГОРЯЧИХ КЛАВИШ (5 вопросов) ----------
+    const shortcuts = [
+      { q: 'Какая комбинация блокирует компьютер?', opts: ['Win+L', 'Ctrl+L', 'Alt+F4'], correct: 0 },
+      { q: 'Как открыть Диспетчер задач?', opts: ['Ctrl+Alt+Del', 'Ctrl+Shift+Esc', 'Win+T'], correct: 1 },
+      { q: 'Как быстро свернуть все окна?', opts: ['Win+D', 'Win+M', 'Alt+Tab'], correct: 0 },
+      { q: 'Что делает Win+E?', opts: ['Открывает браузер', 'Открывает Проводник', 'Блокирует ПК'], correct: 1 },
+      { q: 'Какая комбинация открывает окно «Выполнить»?', opts: ['Win+R', 'Ctrl+R', 'Win+Run'], correct: 0 }
+    ];
+    let shortcutIdx = 0;
+    const shortcutQ = document.getElementById('shortcutQuestion');
+    const shortcutOpts = document.getElementById('shortcutOptions');
+    const shortcutFb = document.getElementById('shortcutFeedback');
+
+    function loadShortcut() {
+      if (shortcutIdx >= shortcuts.length) {
+        shortcutQ.textContent = '🎯 Тренажёр пройден! +18 XP';
+        shortcutOpts.innerHTML = '';
+        addXP(18);
+        return;
+      }
+      const s = shortcuts[shortcutIdx];
+      shortcutQ.textContent = s.q;
+      shortcutOpts.innerHTML = s.opts.map((opt, i) => 
+        `<button class="btn" data-idx="${i}" style="margin:0.3rem;">${opt}</button>`
+      ).join('');
+      document.querySelectorAll('#shortcutOptions .btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.target.getAttribute('data-idx'));
+          if (idx === s.correct) {
+            shortcutFb.textContent = '✅ Верно!';
+            shortcutFb.className = 'feedback success';
+            shortcutIdx++;
+            loadShortcut();
+          } else {
+            shortcutFb.textContent = '❌ Неправильно, попробуйте снова.';
+            shortcutFb.className = 'feedback error';
+          }
+        });
+      });
     }
+    loadShortcut();
+
+    // ---------- ФИНАЛЬНЫЙ ТЕСТ (8 вопросов) ----------
+    const finalQuestions = [
+      { q: 'Процессор выполняет:', opts: ['Хранение данных', 'Вычисления', 'Вывод звука'], ans: 1 },
+      { q: 'Какое устройство ВВОДА?', opts: ['Монитор', 'Принтер', 'Сканер'], ans: 2 },
+      { q: 'SSD — это:', opts: ['Твердотельный накопитель', 'Оперативная память', 'Видеокарта'], ans: 0 },
+      { q: 'Win+L делает:', opts: ['Выключает ПК', 'Блокирует экран', 'Открывает поиск'], ans: 1 },
+      { q: 'Чтобы одновременно работало больше программ, нужно увеличить:', opts: ['ОЗУ', 'Размер экрана', 'Мощность БП'], ans: 0 },
+      { q: 'Как открыть историю буфера обмена (Windows 10/11)?', opts: ['Win+V', 'Ctrl+V', 'Win+C'], ans: 0 },
+      { q: 'Какое устройство одновременно ввода и вывода?', opts: ['Сенсорный экран', 'Колонки', 'Принтер'], ans: 0 },
+      { q: 'Замена термопасты помогает:', opts: ['Увеличить скорость Wi-Fi', 'Снизить температуру процессора', 'Добавить памяти'], ans: 1 }
+    ];
+    document.getElementById('finalQuiz').innerHTML = finalQuestions.map((q, i) => `
+      <div style="margin-bottom:1.4rem;"><strong>${i+1}. ${q.q}</strong>
+        ${q.opts.map((opt, j) => `<label class="quiz-option"><input type="radio" name="fq${i}" value="${j}"> ${opt}</label>`).join('')}
+      </div>
+    `).join('');
+
+    document.getElementById('checkFinal').addEventListener('click', () => {
+      let score = 0;
+      finalQuestions.forEach((q, i) => {
+        const sel = document.querySelector(`input[name="fq${i}"]:checked`);
+        if (sel && parseInt(sel.value) === q.ans) score++;
+      });
+      const fb = document.getElementById('finalFeedback');
+      if (score === finalQuestions.length) {
+        fb.textContent = `🏅 Идеально! ${score}/${finalQuestions.length}. +30 XP`;
+        fb.className = 'feedback success';
+        addXP(30);
+      } else if (score >= 5) {
+        fb.textContent = `👍 Хорошо! ${score}/${finalQuestions.length}. +15 XP`;
+        fb.className = 'feedback success';
+        addXP(15);
+      } else {
+        fb.textContent = `📚 ${score}/${finalQuestions.length}. Повторите материал.`;
+        fb.className = 'feedback error';
+      }
+    });
+
+  })();
 </script>
-
 </body>
 </html>
