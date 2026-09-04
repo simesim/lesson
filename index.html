@@ -3,35 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Бобёр строит домик</title>
+  <title>Ёжик выращивает сад</title>
   <style>
     * {
       box-sizing: border-box;
     }
 
     :root {
-      --sky1: #8fd8ff;
-      --sky2: #e6f8ff;
-      --grass1: #9adf6f;
-      --grass2: #63c14c;
+      --sky-1: #8fd7ff;
+      --sky-2: #e9f9ff;
+      --grass-1: #9be272;
+      --grass-2: #63c84e;
       --panel: rgba(255, 255, 255, 0.94);
-      --text: #243746;
-      --accent: #ff9f43;
-      --green: #48bf6a;
+      --text: #253746;
+      --accent: #ff9f42;
+      --green: #4fc46a;
       --blue: #6f86ff;
       --red: #ef6666;
-      --shadow: 0 14px 30px rgba(27, 57, 85, 0.15);
-      --wood: #bd7b47;
-      --wood-dark: #8f5a33;
-      --roof: #dd5a52;
-      --roof-dark: #b7403b;
-      --window: #bfe9ff;
-      --glass: #eaf8ff;
-      --stone: #b8b8bf;
-      --fence: #d6a06a;
-      --flower1: #ff6699;
-      --flower2: #ffd84d;
-      --flower3: #8d7dff;
+      --shadow: 0 16px 34px rgba(26, 58, 84, 0.15);
+      --border: #d8e8f5;
     }
 
     body {
@@ -40,9 +30,9 @@
       font-family: Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 15% 15%, rgba(255,255,255,0.55) 0 70px, transparent 71px),
-        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.4) 0 90px, transparent 91px),
-        linear-gradient(to bottom, var(--sky1) 0%, var(--sky2) 58%, #c7f3a1 58%, #93da6c 100%);
+        radial-gradient(circle at 18% 16%, rgba(255,255,255,0.55) 0 70px, transparent 71px),
+        radial-gradient(circle at 82% 10%, rgba(255,255,255,0.42) 0 90px, transparent 91px),
+        linear-gradient(to bottom, var(--sky-1) 0%, var(--sky-2) 57%, #c8f1a8 57%, #93da6b 100%);
       overflow-x: hidden;
     }
 
@@ -68,7 +58,7 @@
       margin: 0;
       font-size: 20px;
       font-weight: 700;
-      color: #25526e;
+      color: #27526e;
     }
 
     .game {
@@ -89,8 +79,8 @@
 
     .meta {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
       margin-bottom: 16px;
     }
 
@@ -100,7 +90,7 @@
       font-size: 17px;
       font-weight: 700;
       background: linear-gradient(180deg, #fff, #edf7ff);
-      border: 2px solid #dbe9ff;
+      border: 2px solid var(--border);
     }
 
     .progress {
@@ -110,33 +100,34 @@
       border-radius: 999px;
       overflow: hidden;
       margin-bottom: 18px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.07);
     }
 
     .progress__bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #ffbf59, #ff8d4e, #ff6aa1);
+      background: linear-gradient(90deg, #ffbf59, #ff9152, #ff67a1);
       transition: width 0.35s ease;
     }
 
     .question-box {
-      min-height: 210px;
+      min-height: 200px;
       border-radius: 24px;
       padding: 22px;
       background: linear-gradient(180deg, #fffaf0, #fff2dc);
-      border: 2px dashed #ffcc77;
+      border: 2px dashed #ffcc78;
       margin-bottom: 16px;
     }
 
     .question-number {
       font-size: 18px;
       font-weight: 700;
-      color: #ae6800;
+      color: #ad6800;
       margin-bottom: 12px;
     }
 
     .question-text {
-      font-size: 29px;
+      font-size: 31px;
       line-height: 1.42;
       font-weight: 700;
     }
@@ -144,7 +135,7 @@
     .help-text {
       margin-top: 14px;
       font-size: 16px;
-      color: #5d6d79;
+      color: #5b6d79;
     }
 
     .input-row {
@@ -158,16 +149,17 @@
       flex: 1 1 260px;
       min-width: 220px;
       padding: 16px 18px;
-      border: 2px solid #d1e0eb;
+      border: 2px solid #d3e2ed;
       border-radius: 18px;
       font-size: 24px;
       outline: none;
       background: #fff;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
     }
 
     input[type="text"]:focus {
-      border-color: #75bbff;
-      box-shadow: 0 0 0 4px rgba(117, 187, 255, 0.18);
+      border-color: #78bcff;
+      box-shadow: 0 0 0 4px rgba(120, 188, 255, 0.18);
     }
 
     button {
@@ -192,12 +184,12 @@
     }
 
     .btn-hint {
-      background: linear-gradient(180deg, #ffd15c, #ffae38);
-      color: #533400;
+      background: linear-gradient(180deg, #ffd25d, #ffad39);
+      color: #4f3400;
     }
 
     .btn-restart {
-      background: linear-gradient(180deg, #7c95ff, #5a78e8);
+      background: linear-gradient(180deg, #7d96ff, #5a78e8);
       color: white;
       margin-top: 12px;
     }
@@ -211,6 +203,7 @@
       display: flex;
       align-items: center;
       background: #f3f7fa;
+      margin-bottom: 12px;
     }
 
     .message.success {
@@ -228,6 +221,40 @@
       color: #2a6699;
     }
 
+    .hint-box {
+      min-height: 92px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: linear-gradient(180deg, #fdfcff, #f3f8ff);
+      border: 2px solid #ddeaff;
+      font-size: 20px;
+      line-height: 1.45;
+      font-weight: 700;
+      color: #274d70;
+    }
+
+    .finish {
+      display: none;
+      margin-top: 14px;
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #edfff0, #dbffea);
+      border: 2px solid #b7efc3;
+      text-align: center;
+    }
+
+    .finish h2 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      color: #17723d;
+    }
+
+    .finish p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
     .scene {
       position: sticky;
       top: 16px;
@@ -240,8 +267,8 @@
       border-radius: 26px;
       padding: 20px 18px 18px;
       background:
-        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.85), transparent 190px),
-        linear-gradient(to bottom, #8ed5ff 0%, #dcf7ff 57%, #afe58a 57%, #75cb59 100%);
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.86), transparent 190px),
+        linear-gradient(to bottom, #8ed6ff 0%, #ddf8ff 57%, #afe58a 57%, #75cb59 100%);
       overflow: hidden;
       box-shadow: inset 0 -12px 22px rgba(0,0,0,0.08);
     }
@@ -250,11 +277,11 @@
       position: absolute;
       right: 24px;
       top: 18px;
-      width: 78px;
-      height: 78px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff8c7 0 18%, #ffd65f 45%, #ffb43a 100%);
-      box-shadow: 0 0 34px rgba(255, 204, 83, 0.8);
+      background: radial-gradient(circle at 35% 35%, #fff8c8 0 18%, #ffd55f 45%, #ffb43a 100%);
+      box-shadow: 0 0 34px rgba(255, 205, 82, 0.8);
       animation: pulse 2.8s ease-in-out infinite;
     }
 
@@ -269,7 +296,7 @@
       text-align: center;
       font-size: 20px;
       font-weight: 700;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.10);
     }
 
     .speech::after {
@@ -283,312 +310,94 @@
       transform: translateX(-50%) rotate(45deg);
     }
 
-    .build-area {
+    .garden-stage {
       position: relative;
       width: 100%;
-      height: 330px;
-      margin-top: 12px;
-      z-index: 2;
-    }
-
-    .house {
-      position: absolute;
-      left: 50%;
-      bottom: 38px;
-      transform: translateX(-50%);
-      width: 290px;
-      height: 230px;
-    }
-
-    .part {
-      position: absolute;
-      opacity: 0;
-      transform: scale(0.7) translateY(10px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-
-    .part.show {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-
-    .foundation-left,
-    .foundation-right {
-      bottom: 0;
-      width: 140px;
-      height: 20px;
-      background: linear-gradient(180deg, #c5c5cc, #9e9ea8);
-      border: 3px solid #6d6d76;
-      border-radius: 6px;
-    }
-
-    .foundation-left {
-      left: 0;
-    }
-
-    .foundation-right {
-      right: 0;
-    }
-
-    .floor {
-      left: 38px;
-      bottom: 18px;
-      width: 214px;
-      height: 14px;
-      background: linear-gradient(180deg, #cf8d57, #ab6c3f);
-      border: 3px solid #764622;
-      border-radius: 4px;
-    }
-
-    .wall-left,
-    .wall-right,
-    .wall-back,
-    .wall-front {
-      background: linear-gradient(180deg, #d79a62, #b87645);
-      border: 3px solid #875229;
-    }
-
-    .wall-left {
-      left: 36px;
-      bottom: 30px;
-      width: 20px;
-      height: 112px;
-      border-radius: 4px;
-    }
-
-    .wall-right {
-      right: 36px;
-      bottom: 30px;
-      width: 20px;
-      height: 112px;
-      border-radius: 4px;
-    }
-
-    .wall-back {
-      left: 54px;
-      bottom: 122px;
-      width: 182px;
-      height: 20px;
-      border-radius: 4px;
-    }
-
-    .wall-front {
-      left: 54px;
-      bottom: 30px;
-      width: 182px;
-      height: 96px;
-      border-radius: 8px;
-    }
-
-    .roof-left,
-    .roof-right {
-      width: 120px;
-      height: 18px;
-      background: linear-gradient(180deg, var(--roof), var(--roof-dark));
-      border: 3px solid #8a3430;
-      top: 64px;
-      transform-origin: center;
-      border-radius: 10px;
-    }
-
-    .roof-left {
-      left: 30px;
-      transform: rotate(-28deg) scale(0.7) translateY(10px);
-    }
-
-    .roof-left.show {
-      transform: rotate(-28deg) scale(1) translateY(0);
-    }
-
-    .roof-right {
-      right: 30px;
-      transform: rotate(28deg) scale(0.7) translateY(10px);
-    }
-
-    .roof-right.show {
-      transform: rotate(28deg) scale(1) translateY(0);
-    }
-
-    .door {
-      left: 118px;
-      bottom: 30px;
-      width: 48px;
-      height: 70px;
-      background: linear-gradient(180deg, #96582f, #7a421f);
-      border: 3px solid #5a2d12;
-      border-radius: 12px 12px 4px 4px;
-    }
-
-    .door::after {
-      content: "";
-      position: absolute;
-      right: 7px;
-      top: 34px;
-      width: 8px;
-      height: 8px;
-      background: #ffd15a;
-      border-radius: 50%;
-    }
-
-    .window-left,
-    .window-right {
-      bottom: 70px;
-      width: 46px;
-      height: 46px;
-      background: linear-gradient(180deg, var(--window), var(--glass));
-      border: 3px solid #4b7ea1;
-      border-radius: 10px;
-    }
-
-    .window-left {
-      left: 68px;
-    }
-
-    .window-right {
-      right: 68px;
-    }
-
-    .window-left::before,
-    .window-right::before,
-    .window-left::after,
-    .window-right::after {
-      content: "";
-      position: absolute;
-      background: #4b7ea1;
-    }
-
-    .window-left::before,
-    .window-right::before {
-      left: 50%;
-      top: 0;
-      width: 3px;
-      height: 100%;
-      transform: translateX(-50%);
-    }
-
-    .window-left::after,
-    .window-right::after {
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      transform: translateY(-50%);
-    }
-
-    .chimney {
-      right: 58px;
-      top: 26px;
-      width: 28px;
-      height: 58px;
-      background: linear-gradient(180deg, #d18c56, #b36b3a);
-      border: 3px solid #7d4822;
-      border-radius: 6px 6px 4px 4px;
-    }
-
-    .fence {
-      left: -10px;
-      bottom: 0;
-      width: 310px;
-      height: 46px;
-    }
-
-    .fence::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      height: 350px;
+      margin-top: 10px;
+      border-radius: 24px;
       background:
-        repeating-linear-gradient(
-          to right,
-          transparent 0 8px,
-          #d8a36d 8px 22px,
-          transparent 22px 30px
-        );
-      border-bottom: 4px solid #9a6334;
+        linear-gradient(to bottom, rgba(255,255,255,0.16), rgba(255,255,255,0)),
+        linear-gradient(to top, #6ab24f 0%, #7dc95c 22%, #8fda69 50%, rgba(143,218,105,0) 51%);
+      overflow: hidden;
     }
 
-    .flowers {
-      left: 30px;
-      bottom: -4px;
-      width: 230px;
-      height: 42px;
-    }
-
-    .flower {
-      position: absolute;
-      bottom: 0;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      box-shadow:
-        10px 0 0 currentColor,
-        -10px 0 0 currentColor,
-        0 -10px 0 currentColor,
-        0 10px 0 currentColor;
-    }
-
-    .flower::after {
-      content: "";
+    .garden-path {
       position: absolute;
       left: 50%;
-      top: 50%;
-      width: 8px;
-      height: 8px;
-      background: #ffd857;
+      bottom: 26px;
+      width: 180px;
+      height: 120px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, #e5c895 0%, #d9b87e 60%, #c79d63 100%);
+      border-radius: 50% 50% 10px 10px / 60% 60% 8px 8px;
+      opacity: 0.9;
+    }
+
+    .garden-bush-left,
+    .garden-bush-right {
+      position: absolute;
+      bottom: 42px;
+      width: 110px;
+      height: 70px;
+      background: radial-gradient(circle at 50% 50%, #87d965, #55b545);
       border-radius: 50%;
-      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 8px 8px rgba(0,0,0,0.08));
+      opacity: 0.9;
     }
 
-    .flower.f1 { left: 20px; color: var(--flower1); }
-    .flower.f2 { left: 62px; color: var(--flower2); }
-    .flower.f3 { left: 104px; color: var(--flower3); }
-    .flower.f4 { left: 146px; color: #ff7f50; }
-    .flower.f5 { left: 188px; color: #7ccf62; }
+    .garden-bush-left {
+      left: -10px;
+    }
 
-    .bird {
+    .garden-bush-right {
+      right: -10px;
+    }
+
+    .hedgehog-zone {
       position: absolute;
-      top: 80px;
-      left: 50px;
-      font-size: 24px;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-
-    .bird.show {
-      opacity: 1;
-      transform: translateY(0);
-      animation: birdFly 2.8s ease-in-out infinite;
-    }
-
-    .beaver-zone {
-      position: absolute;
-      left: 14px;
-      bottom: 34px;
-      z-index: 4;
+      left: 18px;
+      bottom: 24px;
+      z-index: 5;
       display: flex;
       align-items: end;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .beaver {
-      font-size: 84px;
+    .hedgehog {
+      font-size: 88px;
       transform-origin: center bottom;
       animation: bob 2.2s ease-in-out infinite;
       user-select: none;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,0.12));
     }
 
-    .beaver.happy {
+    .hedgehog.happy {
       animation: cheer 0.7s ease;
     }
 
-    .beaver-text {
-      background: rgba(255,255,255,0.92);
+    .hedgehog-text {
+      background: rgba(255,255,255,0.94);
       border-radius: 14px;
       padding: 8px 12px;
       font-size: 16px;
       font-weight: 700;
-      max-width: 130px;
+      max-width: 150px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .garden-item {
+      position: absolute;
+      opacity: 0;
+      transform: scale(0.4) translateY(12px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      filter: drop-shadow(0 6px 6px rgba(0,0,0,0.10));
+      user-select: none;
+    }
+
+    .garden-item.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
     }
 
     .material-fly,
@@ -602,7 +411,7 @@
     .material-fly {
       font-size: 34px;
       left: 16%;
-      bottom: 110px;
+      bottom: 120px;
       animation: materialFly 0.95s ease forwards;
     }
 
@@ -611,7 +420,7 @@
       height: 18px;
       border-radius: 3px;
       left: 50%;
-      top: 38%;
+      top: 36%;
       animation: confettiBurst 1.2s ease-out forwards;
     }
 
@@ -642,7 +451,7 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.07);
     }
 
-    .materials {
+    .basket {
       position: relative;
       z-index: 4;
       min-height: 150px;
@@ -652,14 +461,14 @@
       border: 2px dashed #ffbe5e;
     }
 
-    .materials h3 {
+    .basket h3 {
       margin: 0 0 12px;
       text-align: center;
       font-size: 24px;
       color: #9b5c00;
     }
 
-    .material-list {
+    .basket-list {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -668,31 +477,9 @@
       font-size: 30px;
     }
 
-    .mat {
+    .basket-item {
       display: inline-block;
       animation: popIn 0.35s ease;
-    }
-
-    .finish {
-      display: none;
-      margin-top: 14px;
-      padding: 20px;
-      border-radius: 22px;
-      background: linear-gradient(180deg, #edfff0, #dbffea);
-      border: 2px solid #b8efc4;
-      text-align: center;
-    }
-
-    .finish h2 {
-      margin: 0 0 10px;
-      font-size: 34px;
-      color: #17723d;
-    }
-
-    .finish p {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.5;
     }
 
     .ground {
@@ -736,7 +523,7 @@
         opacity: 1;
       }
       100% {
-        transform: translate(210px, -130px) scale(1.1) rotate(20deg);
+        transform: translate(220px, -150px) scale(1.1) rotate(18deg);
         opacity: 0;
       }
     }
@@ -777,11 +564,6 @@
       }
     }
 
-    @keyframes birdFly {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(14px, -8px); }
-    }
-
     @media (max-width: 960px) {
       .game {
         grid-template-columns: 1fr;
@@ -792,7 +574,7 @@
       }
 
       .question-text {
-        font-size: 25px;
+        font-size: 26px;
       }
     }
 
@@ -806,15 +588,11 @@
       }
 
       .question-text {
-        font-size: 22px;
+        font-size: 23px;
       }
 
       .world {
-        min-height: 610px;
-      }
-
-      .house {
-        transform: translateX(-50%) scale(0.88);
+        min-height: 620px;
       }
 
       input[type="text"] {
@@ -826,8 +604,8 @@
 <body>
   <div class="wrap">
     <div class="title">
-      <h1>🦫 Бобёр строит домик</h1>
-      <p>Решай задачи на площадь и периметр — помоги бобру построить уютный дом.</p>
+      <h1>🦔 Ёжик выращивает сад</h1>
+      <p>Решай примеры на умножение и деление — и сад будет становиться всё красивее.</p>
     </div>
 
     <div class="game">
@@ -835,7 +613,7 @@
         <div class="meta">
           <div class="pill" id="taskCounter">Задача 1 из 15</div>
           <div class="pill" id="scoreCounter">Верно: 0</div>
-          <div class="pill" id="buildCounter">Построено: 0/15</div>
+          <div class="pill" id="gardenCounter">Сад вырос: 0/15</div>
         </div>
 
         <div class="progress">
@@ -845,7 +623,7 @@
         <div class="question-box">
           <div class="question-number" id="questionNumber">Задача 1</div>
           <div class="question-text" id="questionText"></div>
-          <div class="help-text">Пиши только число. Можно нажать Enter.</div>
+          <div class="help-text">Будут примеры на умножение и деление. В делении всегда без остатка.</div>
         </div>
 
         <div class="input-row">
@@ -854,10 +632,12 @@
           <button class="btn-hint" id="hintBtn">Подсказка</button>
         </div>
 
-        <div class="message info" id="message">Реши первую задачу.</div>
+        <div class="message info" id="message">Реши первый пример.</div>
+
+        <div class="hint-box" id="hintBox">Подсказка появится здесь. Нажми кнопку «Подсказка».</div>
 
         <div class="finish" id="finishBox">
-          <h2>Ура! Домик готов 🎉</h2>
+          <h2>Ура! Сад готов 🌸</h2>
           <p id="finishText"></p>
           <button class="btn-restart" id="restartBtn">Играть заново</button>
         </div>
@@ -866,37 +646,16 @@
       <div class="panel scene">
         <div class="world" id="world">
           <div class="sun"></div>
-          <div class="speech" id="speech">Мне нужны материалы для стройки!</div>
+          <div class="speech" id="speech">Помоги мне вырастить красивый сад!</div>
 
-          <div class="build-area">
-            <div class="house">
-              <div class="part foundation-left" id="part1"></div>
-              <div class="part foundation-right" id="part2"></div>
-              <div class="part floor" id="part3"></div>
-              <div class="part wall-left" id="part4"></div>
-              <div class="part wall-right" id="part5"></div>
-              <div class="part wall-back" id="part6"></div>
-              <div class="part wall-front" id="part7"></div>
-              <div class="part roof-left" id="part8"></div>
-              <div class="part roof-right" id="part9"></div>
-              <div class="part door" id="part10"></div>
-              <div class="part window-left" id="part11"></div>
-              <div class="part window-right" id="part12"></div>
-              <div class="part chimney" id="part13"></div>
-              <div class="part fence" id="part14"></div>
-              <div class="part flowers" id="part15">
-                <div class="flower f1"></div>
-                <div class="flower f2"></div>
-                <div class="flower f3"></div>
-                <div class="flower f4"></div>
-                <div class="flower f5"></div>
-              </div>
-              <div class="bird" id="bird">🐦</div>
-            </div>
+          <div class="garden-stage" id="gardenStage">
+            <div class="garden-path"></div>
+            <div class="garden-bush-left"></div>
+            <div class="garden-bush-right"></div>
 
-            <div class="beaver-zone">
-              <div class="beaver" id="beaver">🦫</div>
-              <div class="beaver-text" id="beaverText">Строим домик</div>
+            <div class="hedgehog-zone">
+              <div class="hedgehog" id="hedgehog">🦔</div>
+              <div class="hedgehog-text" id="hedgehogText">Сажаю цветы</div>
             </div>
           </div>
 
@@ -905,9 +664,9 @@
             <div class="small-card" id="rightInfo">Осталось задач: 15</div>
           </div>
 
-          <div class="materials">
-            <h3>Строительные материалы</h3>
-            <div class="material-list" id="materialList"></div>
+          <div class="basket">
+            <h3>Что уже выросло</h3>
+            <div class="basket-list" id="basketList"></div>
           </div>
 
           <div class="ground"></div>
@@ -917,134 +676,159 @@
   </div>
 
   <script>
-    const tasks = [
-      {
-        question: "У прямоугольника длина 8 см, ширина 3 см. Найди периметр.",
-        answer: 22,
-        hint: "Периметр прямоугольника: (длина + ширина) × 2."
-      },
-      {
-        question: "У квадрата сторона 6 см. Найди периметр.",
-        answer: 24,
-        hint: "Периметр квадрата: сторона × 4."
-      },
-      {
-        question: "Длина прямоугольника 9 м, ширина 4 м. Найди периметр.",
-        answer: 26,
-        hint: "Сначала сложи 9 и 4, потом умножь на 2."
-      },
-      {
-        question: "Периметр квадрата 20 см. Чему равна его сторона?",
-        answer: 5,
-        hint: "У квадрата 4 одинаковые стороны. 20 ÷ 4."
-      },
-      {
-        question: "У прямоугольника одна сторона 7 см, другая 5 см. Найди периметр.",
-        answer: 24,
-        hint: "(7 + 5) × 2."
-      },
-      {
-        question: "Сторона квадрата 9 дм. Найди периметр.",
-        answer: 36,
-        hint: "9 × 4."
-      },
-      {
-        question: "Периметр прямоугольника 18 см, одна сторона 5 см. Найди другую сторону.",
-        answer: 4,
-        hint: "Полупериметр: 18 ÷ 2 = 9. Вторая сторона: 9 - 5."
-      },
-      {
-        question: "У прямоугольника длина 7 см, ширина 3 см. Найди площадь.",
-        answer: 21,
-        hint: "Площадь прямоугольника: длина × ширина."
-      },
-      {
-        question: "У квадрата сторона 5 см. Найди площадь.",
-        answer: 25,
-        hint: "Площадь квадрата: сторона × сторону."
-      },
-      {
-        question: "Длина прямоугольника 10 м, ширина 2 м. Найди площадь.",
-        answer: 20,
-        hint: "10 × 2."
-      },
-      {
-        question: "Сторона квадрата 8 дм. Найди площадь.",
-        answer: 64,
-        hint: "8 × 8."
-      },
-      {
-        question: "У прямоугольника длина 6 см, ширина 4 см. Найди площадь.",
-        answer: 24,
-        hint: "6 × 4."
-      },
-      {
-        question: "У прямоугольника длина 12 см, ширина 2 см. Найди сначала периметр.",
-        answer: 28,
-        hint: "(12 + 2) × 2."
-      },
-      {
-        question: "У квадрата сторона 7 см. Найди сначала площадь.",
-        answer: 49,
-        hint: "7 × 7."
-      },
-      {
-        question: "У прямоугольника длина 9 м, ширина 6 м. Что больше: площадь или периметр? В ответ запиши только большее число.",
-        answer: 54,
-        hint: "Площадь: 9 × 6. Периметр: (9 + 6) × 2. Выбери большее."
-      }
+    const TOTAL_TASKS = 15;
+
+    const gardenItemData = [
+      { icon: "🌱", left: "22%", top: "74%", size: "34px" },
+      { icon: "🌷", left: "38%", top: "73%", size: "36px" },
+      { icon: "🌼", left: "58%", top: "74%", size: "36px" },
+      { icon: "🍓", left: "72%", top: "72%", size: "34px" },
+      { icon: "🍄", left: "18%", top: "58%", size: "36px" },
+      { icon: "🌻", left: "48%", top: "58%", size: "42px" },
+      { icon: "🪻", left: "78%", top: "56%", size: "38px" },
+      { icon: "🌿", left: "30%", top: "49%", size: "38px" },
+      { icon: "🌺", left: "64%", top: "48%", size: "40px" },
+      { icon: "🐞", left: "54%", top: "40%", size: "28px" },
+      { icon: "🦋", left: "26%", top: "34%", size: "30px" },
+      { icon: "🍎", left: "80%", top: "36%", size: "32px" },
+      { icon: "🌳", left: "12%", top: "28%", size: "52px" },
+      { icon: "🌸", left: "52%", top: "24%", size: "42px" },
+      { icon: "🌈", left: "66%", top: "14%", size: "58px" }
     ];
 
-    const materialIcons = ["🪵", "🪵", "🟫", "🪵", "🪵", "🪵", "🪵", "🧱", "🧱", "🚪", "🪟", "🪟", "🧱", "🪵", "🌸"];
+    const basketIcons = ["🌱", "🌷", "🌼", "🍓", "🍄", "🌻", "🪻", "🌿", "🌺", "🐞", "🦋", "🍎", "🌳", "🌸", "🌈"];
 
     let currentIndex = 0;
     let correctAnswers = 0;
-    let builtParts = 0;
+    let grownItems = 0;
+    let typePlan = [];
+    let currentTask = null;
 
     const taskCounter = document.getElementById("taskCounter");
     const scoreCounter = document.getElementById("scoreCounter");
-    const buildCounter = document.getElementById("buildCounter");
+    const gardenCounter = document.getElementById("gardenCounter");
     const questionNumber = document.getElementById("questionNumber");
     const questionText = document.getElementById("questionText");
     const answerInput = document.getElementById("answerInput");
     const checkBtn = document.getElementById("checkBtn");
     const hintBtn = document.getElementById("hintBtn");
     const message = document.getElementById("message");
+    const hintBox = document.getElementById("hintBox");
     const progressBar = document.getElementById("progressBar");
     const speech = document.getElementById("speech");
-    const beaver = document.getElementById("beaver");
-    const beaverText = document.getElementById("beaverText");
+    const hedgehog = document.getElementById("hedgehog");
+    const hedgehogText = document.getElementById("hedgehogText");
     const leftInfo = document.getElementById("leftInfo");
     const rightInfo = document.getElementById("rightInfo");
-    const materialList = document.getElementById("materialList");
+    const basketList = document.getElementById("basketList");
     const finishBox = document.getElementById("finishBox");
     const finishText = document.getElementById("finishText");
     const restartBtn = document.getElementById("restartBtn");
     const world = document.getElementById("world");
-    const bird = document.getElementById("bird");
+    const gardenStage = document.getElementById("gardenStage");
 
-    const houseParts = Array.from({ length: 15 }, (_, i) => document.getElementById(`part${i + 1}`));
+    const gardenElements = [];
 
-    function renderTask() {
-      if (currentIndex >= tasks.length) {
-        showFinish();
-        return;
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function buildTypePlan() {
+      const multiplyCount = Math.ceil(TOTAL_TASKS / 2);
+      const divideCount = TOTAL_TASKS - multiplyCount;
+      const plan = [
+        ...Array(multiplyCount).fill("multiply"),
+        ...Array(divideCount).fill("divide")
+      ];
+      return shuffle(plan);
+    }
+
+    function buildGarden() {
+      gardenItemData.forEach((item, index) => {
+        const el = document.createElement("div");
+        el.className = "garden-item";
+        el.textContent = item.icon;
+        el.style.left = item.left;
+        el.style.top = item.top;
+        el.style.fontSize = item.size;
+        el.dataset.index = index;
+        gardenStage.appendChild(el);
+        gardenElements.push(el);
+      });
+    }
+
+    function generateMultiplicationTask() {
+      const first = randomInt(12, 99);
+      const twoDigit = first % 10 === 0 ? first - 1 : first;
+      const multiplier = randomInt(2, 9);
+      const tens = Math.floor(twoDigit / 10) * 10;
+      const ones = twoDigit % 10;
+      const answer = twoDigit * multiplier;
+
+      const hint = `${twoDigit} × ${multiplier} = ${tens} × ${multiplier} + ${ones} × ${multiplier} = ${tens * multiplier} + ${ones * multiplier} = ${answer}`;
+
+      return {
+        type: "multiply",
+        question: `${twoDigit} × ${multiplier} = ?`,
+        answer,
+        hint
+      };
+    }
+
+    function generateDivisionTask() {
+      const divisor = randomInt(2, 9);
+      const preferred = [];
+      const fallback = [];
+
+      for (let tens = 10; tens <= 90; tens += 10) {
+        if (tens % divisor !== 0) continue;
+
+        for (let ones = 0; ones <= 9; ones++) {
+          if (ones % divisor !== 0) continue;
+
+          const dividend = tens + ones;
+          if (dividend < 10 || dividend > 99) continue;
+
+          const item = {
+            dividend,
+            divisor,
+            tens,
+            ones,
+            answer: dividend / divisor
+          };
+
+          if (ones > 0) {
+            preferred.push(item);
+          } else {
+            fallback.push(item);
+          }
+        }
       }
 
-      const task = tasks[currentIndex];
+      const pool = preferred.length ? preferred : fallback;
+      const pick = pool[randomInt(0, pool.length - 1)];
 
-      taskCounter.textContent = `Задача ${currentIndex + 1} из ${tasks.length}`;
-      scoreCounter.textContent = `Верно: ${correctAnswers}`;
-      buildCounter.textContent = `Построено: ${builtParts}/15`;
-      questionNumber.textContent = `Задача ${currentIndex + 1}`;
-      questionText.textContent = task.question;
-      leftInfo.textContent = `Правильных ответов: ${correctAnswers}`;
-      rightInfo.textContent = `Осталось задач: ${tasks.length - currentIndex}`;
-      progressBar.style.width = `${(currentIndex / tasks.length) * 100}%`;
+      const hint = `${pick.dividend} ÷ ${pick.divisor} = ${pick.tens} ÷ ${pick.divisor} + ${pick.ones} ÷ ${pick.divisor} = ${pick.tens / pick.divisor} + ${pick.ones / pick.divisor} = ${pick.answer}`;
 
-      answerInput.value = "";
-      answerInput.focus();
-      updateScene();
+      return {
+        type: "divide",
+        question: `${pick.dividend} ÷ ${pick.divisor} = ?`,
+        answer: pick.answer,
+        hint
+      };
+    }
+
+    function generateTask(taskType) {
+      return taskType === "multiply" ? generateMultiplicationTask() : generateDivisionTask();
     }
 
     function setMessage(text, type = "info") {
@@ -1052,54 +836,75 @@
       message.className = `message ${type}`;
     }
 
-    function updateScene() {
-      houseParts.forEach((part, index) => {
-        part.classList.toggle("show", index < builtParts);
+    function updateGarden() {
+      gardenElements.forEach((el, index) => {
+        el.classList.toggle("show", index < grownItems);
       });
 
-      if (builtParts >= 15) {
-        bird.classList.add("show");
-      } else {
-        bird.classList.remove("show");
-      }
+      basketList.innerHTML = "";
 
-      materialList.innerHTML = "";
-
-      if (builtParts === 0) {
-        materialList.innerHTML = "<span style='font-size:18px;color:#6b7a82;'>Пока пусто</span>";
+      if (grownItems === 0) {
+        basketList.innerHTML = "<span style='font-size:18px;color:#6b7a82;'>Пока пусто</span>";
       } else {
-        for (let i = 0; i < builtParts; i++) {
+        for (let i = 0; i < grownItems; i++) {
           const span = document.createElement("span");
-          span.className = "mat";
-          span.textContent = materialIcons[i];
-          materialList.appendChild(span);
+          span.className = "basket-item";
+          span.textContent = basketIcons[i];
+          basketList.appendChild(span);
         }
       }
+    }
+
+    function updateCounters() {
+      taskCounter.textContent = `Задача ${currentIndex + 1} из ${TOTAL_TASKS}`;
+      scoreCounter.textContent = `Верно: ${correctAnswers}`;
+      gardenCounter.textContent = `Сад вырос: ${grownItems}/${TOTAL_TASKS}`;
+      leftInfo.textContent = `Правильных ответов: ${correctAnswers}`;
+      rightInfo.textContent = `Осталось задач: ${TOTAL_TASKS - currentIndex}`;
+      progressBar.style.width = `${(currentIndex / TOTAL_TASKS) * 100}%`;
+    }
+
+    function renderTask() {
+      if (currentIndex >= TOTAL_TASKS) {
+        showFinish();
+        return;
+      }
+
+      currentTask = generateTask(typePlan[currentIndex]);
+
+      updateCounters();
+      questionNumber.textContent = `Задача ${currentIndex + 1}`;
+      questionText.textContent = currentTask.question;
+      hintBox.textContent = "Подсказка появится здесь. Нажми кнопку «Подсказка».";
+      answerInput.value = "";
+      answerInput.focus();
+      updateGarden();
     }
 
     function normalizeNumber(value) {
       return Number(String(value).trim().replace(",", "."));
     }
 
-    function createFlyingMaterial(icon) {
-      const mat = document.createElement("div");
-      mat.className = "material-fly";
-      mat.textContent = icon;
-      world.appendChild(mat);
+    function createFlyingItem(icon) {
+      const item = document.createElement("div");
+      item.className = "material-fly";
+      item.textContent = icon;
+      world.appendChild(item);
 
       setTimeout(() => {
-        mat.remove();
+        item.remove();
       }, 950);
     }
 
-    function createConfetti(amount = 20) {
+    function createConfetti(amount = 18) {
       const colors = ["#ffd54f", "#ff8a65", "#ff78b2", "#7dd3fc", "#86efac", "#c4b5fd"];
+
       for (let i = 0; i < amount; i++) {
         const piece = document.createElement("div");
         piece.className = "confetti";
         piece.style.background = colors[i % colors.length];
         piece.style.setProperty("--tx", `${Math.random() * 760 - 380}px`);
-        piece.style.setProperty("--ty", `${Math.random() * 500 - 260}px`);
+        piece.style.setProperty("--ty", `${Math.random() * 500 - 250}px`);
         piece.style.setProperty("--rot", `${Math.random() * 720 - 360}deg`);
         world.appendChild(piece);
 
@@ -1111,13 +916,14 @@
 
     function createStars() {
       const symbols = ["⭐", "✨", "🌟"];
+
       for (let i = 0; i < 7; i++) {
         const star = document.createElement("div");
         star.className = "star";
-        star.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        star.style.left = 25 + Math.random() * 50 + "%";
-        star.style.top = 28 + Math.random() * 25 + "%";
-        star.style.animationDelay = i * 0.05 + "s";
+        star.textContent = symbols[randomInt(0, symbols.length - 1)];
+        star.style.left = 24 + Math.random() * 52 + "%";
+        star.style.top = 26 + Math.random() * 25 + "%";
+        star.style.animationDelay = `${i * 0.05}s`;
         world.appendChild(star);
 
         setTimeout(() => {
@@ -1126,26 +932,26 @@
       }
     }
 
-    function cheerBeaver(text) {
-      beaver.classList.remove("happy");
-      void beaver.offsetWidth;
-      beaver.classList.add("happy");
-      beaverText.textContent = text;
+    function cheerHedgehog(text) {
+      hedgehog.classList.remove("happy");
+      void hedgehog.offsetWidth;
+      hedgehog.classList.add("happy");
+      hedgehogText.textContent = text;
 
       setTimeout(() => {
-        beaver.classList.remove("happy");
+        hedgehog.classList.remove("happy");
       }, 700);
     }
 
     function checkAnswer() {
-      if (currentIndex >= tasks.length) return;
+      if (currentIndex >= TOTAL_TASKS) return;
 
       const rawValue = answerInput.value.trim();
 
       if (!rawValue) {
         setMessage("Сначала введи ответ.", "error");
         speech.textContent = "Напиши число в поле ответа.";
-        beaverText.textContent = "Жду ответ";
+        hedgehogText.textContent = "Жду ответ";
         return;
       }
 
@@ -1154,71 +960,71 @@
       if (Number.isNaN(userAnswer)) {
         setMessage("Нужно ввести число.", "error");
         speech.textContent = "Нужен числовой ответ.";
-        beaverText.textContent = "Только число";
+        hedgehogText.textContent = "Только число";
         return;
       }
 
-      const task = tasks[currentIndex];
-
-      if (userAnswer === task.answer) {
+      if (userAnswer === currentTask.answer) {
         correctAnswers++;
-        builtParts++;
+        grownItems++;
 
-        createFlyingMaterial(materialIcons[builtParts - 1]);
+        createFlyingItem(basketIcons[grownItems - 1]);
         createStars();
-        if (builtParts % 3 === 0) {
+        if (grownItems % 3 === 0) {
           createConfetti(10);
         }
 
-        cheerBeaver("Отлично!");
-        updateScene();
+        cheerHedgehog("Отлично!");
+        updateGarden();
 
-        setMessage("Верно! Домик строится дальше.", "success");
-        speech.textContent = "Верно! Добавляем новую часть.";
+        setMessage("Верно! В саду выросло что-то новое.", "success");
+        speech.textContent = "Верно! Сад становится красивее.";
         currentIndex++;
 
         setTimeout(() => {
-          if (currentIndex < tasks.length) {
+          if (currentIndex < TOTAL_TASKS) {
             renderTask();
             setMessage("Хорошо. Переходим дальше.", "info");
-            speech.textContent = "Следующая задача!";
-            beaverText.textContent = "Строим дальше";
+            speech.textContent = "Решим следующий пример!";
+            hedgehogText.textContent = "Сажаю дальше";
           } else {
             showFinish();
           }
         }, 900);
       } else {
         setMessage("Пока неверно. Попробуй ещё раз.", "error");
-        speech.textContent = "Проверь вычисления ещё раз.";
-        beaverText.textContent = "Попробуй снова";
+        speech.textContent = "Проверь вычисления.";
+        hedgehogText.textContent = "Попробуй снова";
         answerInput.focus();
         answerInput.select();
       }
     }
 
     function showHint() {
-      if (currentIndex >= tasks.length) return;
-      setMessage(`Подсказка: ${tasks[currentIndex].hint}`, "info");
-      speech.textContent = "Вот подсказка.";
-      beaverText.textContent = "Подумай";
+      if (!currentTask) return;
+
+      hintBox.textContent = currentTask.hint;
+      setMessage("Подсказка показана.", "info");
+      speech.textContent = "Смотри, как можно разложить число.";
+      hedgehogText.textContent = "Подсказал";
       answerInput.focus();
     }
 
     function showFinish() {
       progressBar.style.width = "100%";
       finishBox.style.display = "block";
-      questionText.textContent = "Все задачи решены!";
       questionNumber.textContent = "Финиш";
+      questionText.textContent = "Все примеры решены!";
       setMessage("Игра завершена. Молодец!", "success");
-      speech.textContent = "Ура! Домик готов!";
-      beaverText.textContent = "Дом построен";
+      speech.textContent = "Ура! Наш сад расцвёл!";
+      hedgehogText.textContent = "Сад готов";
       rightInfo.textContent = "Осталось задач: 0";
-      finishText.textContent = `Ты решил(а) все ${tasks.length} задач. Бобёр достроил домик полностью.`;
+      finishText.textContent = `Ты решил(а) все ${TOTAL_TASKS} примеров. Ёжик вырастил красивый сад.`;
       answerInput.disabled = true;
       checkBtn.disabled = true;
       hintBtn.disabled = true;
-      updateScene();
-      bird.classList.add("show");
+      hintBox.textContent = "Все задания выполнены.";
+      updateGarden();
       createConfetti(50);
       createStars();
       createStars();
@@ -1227,16 +1033,17 @@
     function restartGame() {
       currentIndex = 0;
       correctAnswers = 0;
-      builtParts = 0;
+      grownItems = 0;
+      typePlan = buildTypePlan();
 
       finishBox.style.display = "none";
       answerInput.disabled = false;
       checkBtn.disabled = false;
       hintBtn.disabled = false;
-      speech.textContent = "Мне нужны материалы для стройки!";
-      beaverText.textContent = "Строим домик";
-      setMessage("Реши первую задачу.", "info");
-      updateScene();
+      speech.textContent = "Помоги мне вырастить красивый сад!";
+      hedgehogText.textContent = "Сажаю цветы";
+      setMessage("Реши первый пример.", "info");
+      updateGarden();
       renderTask();
     }
 
@@ -1250,8 +1057,8 @@
       }
     });
 
-    updateScene();
-    renderTask();
+    buildGarden();
+    restartGame();
   </script>
 </body>
 </html>
