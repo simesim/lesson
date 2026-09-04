@@ -1,544 +1,1257 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>🧠 Квиз‑игра: 30 вопросов компьютерной грамотности</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бобёр строит домик</title>
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --sky1: #8fd8ff;
+      --sky2: #e6f8ff;
+      --grass1: #9adf6f;
+      --grass2: #63c14c;
+      --panel: rgba(255, 255, 255, 0.94);
+      --text: #243746;
+      --accent: #ff9f43;
+      --green: #48bf6a;
+      --blue: #6f86ff;
+      --red: #ef6666;
+      --shadow: 0 14px 30px rgba(27, 57, 85, 0.15);
+      --wood: #bd7b47;
+      --wood-dark: #8f5a33;
+      --roof: #dd5a52;
+      --roof-dark: #b7403b;
+      --window: #bfe9ff;
+      --glass: #eaf8ff;
+      --stone: #b8b8bf;
+      --fence: #d6a06a;
+      --flower1: #ff6699;
+      --flower2: #ffd84d;
+      --flower3: #8d7dff;
+    }
+
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #e5f0fc 0%, #f3f9ff 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 1.2rem;
       margin: 0;
-      color: #12273f;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,0.55) 0 70px, transparent 71px),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,0.4) 0 90px, transparent 91px),
+        linear-gradient(to bottom, var(--sky1) 0%, var(--sky2) 58%, #c7f3a1 58%, #93da6c 100%);
+      overflow-x: hidden;
     }
 
-    .quiz-wrapper {
-      max-width: 650px;
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 16px 40px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .title h1 {
+      margin: 0 0 10px;
+      font-size: 40px;
+      line-height: 1.1;
+      color: #173a54;
+    }
+
+    .title p {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #25526e;
+    }
+
+    .game {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 2px solid rgba(255,255,255,0.65);
+      backdrop-filter: blur(6px);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 17px;
+      font-weight: 700;
+      background: linear-gradient(180deg, #fff, #edf7ff);
+      border: 2px solid #dbe9ff;
+    }
+
+    .progress {
       width: 100%;
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 2.5rem;
-      box-shadow: 0 30px 50px -15px rgba(0,15,30,0.2), inset 0 1px 1px rgba(255,255,255,0.8);
-      padding: 2rem 1.8rem;
-      border: 1px solid rgba(255,255,255,0.7);
-    }
-
-    h1 {
-      font-size: clamp(1.8rem, 6vw, 2.2rem);
-      font-weight: 700;
-      background: linear-gradient(140deg, #0b2b41, #1f5679);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .xp-badge {
-      background: #ffb82e;
-      color: #2e2000;
-      padding: 0.4rem 1.2rem;
-      border-radius: 3rem;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-left: auto;
-      box-shadow: 0 6px 14px rgba(255,170,0,0.5);
-      -webkit-text-fill-color: #2e2000;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .progress-area {
-      background: #ebf4fe;
-      border-radius: 2rem;
-      padding: 0.7rem 1.2rem;
-      margin: 1.3rem 0 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .progress-text {
-      font-weight: 650;
-      color: #1c4461;
-    }
-
-    .progress-bar {
-      flex: 1;
-      height: 10px;
-      background: #cddff2;
-      border-radius: 10px;
+      height: 20px;
+      background: #edf3f7;
+      border-radius: 999px;
       overflow: hidden;
-      min-width: 100px;
+      margin-bottom: 18px;
     }
 
-    .progress-fill {
-      width: 0%;
+    .progress__bar {
       height: 100%;
-      background: #1f5b8c;
-      border-radius: 10px;
-      transition: width 0.2s;
+      width: 0%;
+      background: linear-gradient(90deg, #ffbf59, #ff8d4e, #ff6aa1);
+      transition: width 0.35s ease;
     }
 
-    .question-card {
-      background: white;
-      border-radius: 2rem;
-      padding: 1.8rem;
-      margin: 1.2rem 0;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
-      border: 1px solid #e2edf9;
+    .question-box {
+      min-height: 210px;
+      border-radius: 24px;
+      padding: 22px;
+      background: linear-gradient(180deg, #fffaf0, #fff2dc);
+      border: 2px dashed #ffcc77;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ae6800;
+      margin-bottom: 12px;
     }
 
     .question-text {
-      font-size: 1.2rem;
-      font-weight: 650;
-      margin-bottom: 1.3rem;
-      line-height: 1.4;
-    }
-
-    .options-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-bottom: 1rem;
-    }
-
-    .option-btn {
-      background: #f2f7fd;
-      border: 2px solid transparent;
-      border-radius: 1.2rem;
-      padding: 0.9rem 1.2rem;
-      text-align: left;
-      font-weight: 550;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: 0.15s;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: #15293e;
-    }
-
-    .option-btn:hover {
-      background: #e1edfc;
-    }
-
-    .option-btn.correct-choice {
-      background: #d4edda;
-      border-color: #2a7a3a;
+      font-size: 29px;
+      line-height: 1.42;
       font-weight: 700;
     }
 
-    .option-btn.wrong-choice {
-      background: #ffe0e0;
-      border-color: #b12a2a;
+    .help-text {
+      margin-top: 14px;
+      font-size: 16px;
+      color: #5d6d79;
     }
 
-    .option-btn.disabled {
-      pointer-events: none;
-      opacity: 0.85;
+    .input-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
-    .explanation {
-      background: #f9fafe;
-      border-radius: 1rem;
-      padding: 0.8rem 1rem;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #2e4b63;
-      border-left: 4px solid #2d7fc1;
+    input[type="text"] {
+      flex: 1 1 260px;
+      min-width: 220px;
+      padding: 16px 18px;
+      border: 2px solid #d1e0eb;
+      border-radius: 18px;
+      font-size: 24px;
+      outline: none;
+      background: #fff;
     }
 
-    .btn {
-      background: #1b4b73;
+    input[type="text"]:focus {
+      border-color: #75bbff;
+      box-shadow: 0 0 0 4px rgba(117, 187, 255, 0.18);
+    }
+
+    button {
       border: none;
-      color: white;
+      border-radius: 18px;
+      padding: 16px 20px;
+      font-size: 18px;
       font-weight: 700;
-      padding: 0.9rem 2rem;
-      border-radius: 2.5rem;
-      font-size: 1rem;
       cursor: pointer;
-      transition: 0.2s;
-      min-height: 50px;
-      min-width: 140px;
-      box-shadow: 0 6px 16px rgba(26,73,114,0.35);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     }
 
-    .btn:active { transform: scale(0.96); }
-    .btn:disabled { opacity: 0.5; }
+    button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+    }
 
-    .result-area {
+    .btn-check {
+      background: linear-gradient(180deg, #58cf78, #34b45a);
+      color: white;
+    }
+
+    .btn-hint {
+      background: linear-gradient(180deg, #ffd15c, #ffae38);
+      color: #533400;
+    }
+
+    .btn-restart {
+      background: linear-gradient(180deg, #7c95ff, #5a78e8);
+      color: white;
+      margin-top: 12px;
+    }
+
+    .message {
+      min-height: 62px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      background: #f3f7fa;
+    }
+
+    .message.success {
+      background: #e9faee;
+      color: #187338;
+    }
+
+    .message.error {
+      background: #fff0f0;
+      color: #bf3d3d;
+    }
+
+    .message.info {
+      background: #eef6ff;
+      color: #2a6699;
+    }
+
+    .scene {
+      position: sticky;
+      top: 16px;
+      overflow: hidden;
+    }
+
+    .world {
+      position: relative;
+      min-height: 620px;
+      border-radius: 26px;
+      padding: 20px 18px 18px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.85), transparent 190px),
+        linear-gradient(to bottom, #8ed5ff 0%, #dcf7ff 57%, #afe58a 57%, #75cb59 100%);
+      overflow: hidden;
+      box-shadow: inset 0 -12px 22px rgba(0,0,0,0.08);
+    }
+
+    .sun {
+      position: absolute;
+      right: 24px;
+      top: 18px;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8c7 0 18%, #ffd65f 45%, #ffb43a 100%);
+      box-shadow: 0 0 34px rgba(255, 204, 83, 0.8);
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    .speech {
+      position: relative;
+      z-index: 4;
+      margin: 0 auto 16px;
+      max-width: 86%;
+      background: white;
+      border-radius: 18px;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .speech::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -12px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .build-area {
+      position: relative;
+      width: 100%;
+      height: 330px;
+      margin-top: 12px;
+      z-index: 2;
+    }
+
+    .house {
+      position: absolute;
+      left: 50%;
+      bottom: 38px;
+      transform: translateX(-50%);
+      width: 290px;
+      height: 230px;
+    }
+
+    .part {
+      position: absolute;
+      opacity: 0;
+      transform: scale(0.7) translateY(10px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .part.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .foundation-left,
+    .foundation-right {
+      bottom: 0;
+      width: 140px;
+      height: 20px;
+      background: linear-gradient(180deg, #c5c5cc, #9e9ea8);
+      border: 3px solid #6d6d76;
+      border-radius: 6px;
+    }
+
+    .foundation-left {
+      left: 0;
+    }
+
+    .foundation-right {
+      right: 0;
+    }
+
+    .floor {
+      left: 38px;
+      bottom: 18px;
+      width: 214px;
+      height: 14px;
+      background: linear-gradient(180deg, #cf8d57, #ab6c3f);
+      border: 3px solid #764622;
+      border-radius: 4px;
+    }
+
+    .wall-left,
+    .wall-right,
+    .wall-back,
+    .wall-front {
+      background: linear-gradient(180deg, #d79a62, #b87645);
+      border: 3px solid #875229;
+    }
+
+    .wall-left {
+      left: 36px;
+      bottom: 30px;
+      width: 20px;
+      height: 112px;
+      border-radius: 4px;
+    }
+
+    .wall-right {
+      right: 36px;
+      bottom: 30px;
+      width: 20px;
+      height: 112px;
+      border-radius: 4px;
+    }
+
+    .wall-back {
+      left: 54px;
+      bottom: 122px;
+      width: 182px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .wall-front {
+      left: 54px;
+      bottom: 30px;
+      width: 182px;
+      height: 96px;
+      border-radius: 8px;
+    }
+
+    .roof-left,
+    .roof-right {
+      width: 120px;
+      height: 18px;
+      background: linear-gradient(180deg, var(--roof), var(--roof-dark));
+      border: 3px solid #8a3430;
+      top: 64px;
+      transform-origin: center;
+      border-radius: 10px;
+    }
+
+    .roof-left {
+      left: 30px;
+      transform: rotate(-28deg) scale(0.7) translateY(10px);
+    }
+
+    .roof-left.show {
+      transform: rotate(-28deg) scale(1) translateY(0);
+    }
+
+    .roof-right {
+      right: 30px;
+      transform: rotate(28deg) scale(0.7) translateY(10px);
+    }
+
+    .roof-right.show {
+      transform: rotate(28deg) scale(1) translateY(0);
+    }
+
+    .door {
+      left: 118px;
+      bottom: 30px;
+      width: 48px;
+      height: 70px;
+      background: linear-gradient(180deg, #96582f, #7a421f);
+      border: 3px solid #5a2d12;
+      border-radius: 12px 12px 4px 4px;
+    }
+
+    .door::after {
+      content: "";
+      position: absolute;
+      right: 7px;
+      top: 34px;
+      width: 8px;
+      height: 8px;
+      background: #ffd15a;
+      border-radius: 50%;
+    }
+
+    .window-left,
+    .window-right {
+      bottom: 70px;
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(180deg, var(--window), var(--glass));
+      border: 3px solid #4b7ea1;
+      border-radius: 10px;
+    }
+
+    .window-left {
+      left: 68px;
+    }
+
+    .window-right {
+      right: 68px;
+    }
+
+    .window-left::before,
+    .window-right::before,
+    .window-left::after,
+    .window-right::after {
+      content: "";
+      position: absolute;
+      background: #4b7ea1;
+    }
+
+    .window-left::before,
+    .window-right::before {
+      left: 50%;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+
+    .window-left::after,
+    .window-right::after {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      transform: translateY(-50%);
+    }
+
+    .chimney {
+      right: 58px;
+      top: 26px;
+      width: 28px;
+      height: 58px;
+      background: linear-gradient(180deg, #d18c56, #b36b3a);
+      border: 3px solid #7d4822;
+      border-radius: 6px 6px 4px 4px;
+    }
+
+    .fence {
+      left: -10px;
+      bottom: 0;
+      width: 310px;
+      height: 46px;
+    }
+
+    .fence::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          to right,
+          transparent 0 8px,
+          #d8a36d 8px 22px,
+          transparent 22px 30px
+        );
+      border-bottom: 4px solid #9a6334;
+    }
+
+    .flowers {
+      left: 30px;
+      bottom: -4px;
+      width: 230px;
+      height: 42px;
+    }
+
+    .flower {
+      position: absolute;
+      bottom: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      box-shadow:
+        10px 0 0 currentColor,
+        -10px 0 0 currentColor,
+        0 -10px 0 currentColor,
+        0 10px 0 currentColor;
+    }
+
+    .flower::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      background: #ffd857;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .flower.f1 { left: 20px; color: var(--flower1); }
+    .flower.f2 { left: 62px; color: var(--flower2); }
+    .flower.f3 { left: 104px; color: var(--flower3); }
+    .flower.f4 { left: 146px; color: #ff7f50; }
+    .flower.f5 { left: 188px; color: #7ccf62; }
+
+    .bird {
+      position: absolute;
+      top: 80px;
+      left: 50px;
+      font-size: 24px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .bird.show {
+      opacity: 1;
+      transform: translateY(0);
+      animation: birdFly 2.8s ease-in-out infinite;
+    }
+
+    .beaver-zone {
+      position: absolute;
+      left: 14px;
+      bottom: 34px;
+      z-index: 4;
+      display: flex;
+      align-items: end;
+      gap: 6px;
+    }
+
+    .beaver {
+      font-size: 84px;
+      transform-origin: center bottom;
+      animation: bob 2.2s ease-in-out infinite;
+      user-select: none;
+    }
+
+    .beaver.happy {
+      animation: cheer 0.7s ease;
+    }
+
+    .beaver-text {
+      background: rgba(255,255,255,0.92);
+      border-radius: 14px;
+      padding: 8px 12px;
+      font-size: 16px;
+      font-weight: 700;
+      max-width: 130px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .material-fly,
+    .confetti,
+    .star {
+      position: absolute;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .material-fly {
+      font-size: 34px;
+      left: 16%;
+      bottom: 110px;
+      animation: materialFly 0.95s ease forwards;
+    }
+
+    .confetti {
+      width: 12px;
+      height: 18px;
+      border-radius: 3px;
+      left: 50%;
+      top: 38%;
+      animation: confettiBurst 1.2s ease-out forwards;
+    }
+
+    .star {
+      font-size: 24px;
+      animation: starFloat 1s ease forwards;
+      opacity: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .small-card {
+      background: linear-gradient(180deg, #fff7e8, #fff1d8);
+      border: 2px solid #ffd89d;
+      border-radius: 18px;
+      padding: 12px 14px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.07);
+    }
+
+    .materials {
+      position: relative;
+      z-index: 4;
+      min-height: 150px;
+      border-radius: 22px;
+      padding: 16px;
+      background: linear-gradient(180deg, #fffaf0, #ffefcf);
+      border: 2px dashed #ffbe5e;
+    }
+
+    .materials h3 {
+      margin: 0 0 12px;
+      text-align: center;
+      font-size: 24px;
+      color: #9b5c00;
+    }
+
+    .material-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      min-height: 84px;
+      font-size: 30px;
+    }
+
+    .mat {
+      display: inline-block;
+      animation: popIn 0.35s ease;
+    }
+
+    .finish {
+      display: none;
+      margin-top: 14px;
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #edfff0, #dbffea);
+      border: 2px solid #b8efc4;
       text-align: center;
     }
 
-    .score-circle {
-      font-size: 3rem;
-      font-weight: 800;
-      background: #d7e9ff;
-      display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 50%;
-      margin: 1rem 0;
+    .finish h2 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      color: #17723d;
     }
 
-    @media (max-width: 500px) {
-      .quiz-wrapper { padding: 1.3rem 1rem; }
-      .option-btn { padding: 0.8rem; }
+    .finish p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .ground {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 74px;
+      background:
+        radial-gradient(circle at 8% 62%, #93dc67 0 24px, transparent 25px),
+        radial-gradient(circle at 28% 62%, #7ed05a 0 22px, transparent 23px),
+        radial-gradient(circle at 48% 62%, #91dc66 0 26px, transparent 27px),
+        radial-gradient(circle at 70% 62%, #7ed259 0 24px, transparent 25px),
+        radial-gradient(circle at 90% 62%, #90dc66 0 22px, transparent 23px),
+        linear-gradient(to top, #4faa40, #70cb57);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(2px) rotate(-2deg); }
+    }
+
+    @keyframes cheer {
+      0%   { transform: translateY(0) scale(1); }
+      30%  { transform: translateY(-12px) scale(1.08); }
+      60%  { transform: translateY(-4px) scale(1.04); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes materialFly {
+      0% {
+        transform: translate(0, 0) scale(0.4) rotate(-20deg);
+        opacity: 0;
+      }
+      18% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(210px, -130px) scale(1.1) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes confettiBurst {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) rotate(var(--rot)) scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes starFloat {
+      0% {
+        transform: translateY(16px) scale(0.3) rotate(0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-70px) scale(1.2) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.4) translateY(10px);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes birdFly {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(14px, -8px); }
+    }
+
+    @media (max-width: 960px) {
+      .game {
+        grid-template-columns: 1fr;
+      }
+
+      .scene {
+        position: static;
+      }
+
+      .question-text {
+        font-size: 25px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .title h1 {
+        font-size: 31px;
+      }
+
+      .title p {
+        font-size: 18px;
+      }
+
+      .question-text {
+        font-size: 22px;
+      }
+
+      .world {
+        min-height: 610px;
+      }
+
+      .house {
+        transform: translateX(-50%) scale(0.88);
+      }
+
+      input[type="text"] {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
-<div class="quiz-wrapper">
-  <h1>
-    🎮 Квиз‑игра
-    <span class="xp-badge" id="xpDisplay">⚡ 0 XP</span>
-  </h1>
-  <div class="progress-area">
-    <span class="progress-text" id="questionCounter">1/30</span>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+  <div class="wrap">
+    <div class="title">
+      <h1>🦫 Бобёр строит домик</h1>
+      <p>Решай задачи на площадь и периметр — помоги бобру построить уютный дом.</p>
+    </div>
+
+    <div class="game">
+      <div class="panel">
+        <div class="meta">
+          <div class="pill" id="taskCounter">Задача 1 из 15</div>
+          <div class="pill" id="scoreCounter">Верно: 0</div>
+          <div class="pill" id="buildCounter">Построено: 0/15</div>
+        </div>
+
+        <div class="progress">
+          <div class="progress__bar" id="progressBar"></div>
+        </div>
+
+        <div class="question-box">
+          <div class="question-number" id="questionNumber">Задача 1</div>
+          <div class="question-text" id="questionText"></div>
+          <div class="help-text">Пиши только число. Можно нажать Enter.</div>
+        </div>
+
+        <div class="input-row">
+          <input type="text" id="answerInput" placeholder="Введи ответ" autocomplete="off" />
+          <button class="btn-check" id="checkBtn">Проверить</button>
+          <button class="btn-hint" id="hintBtn">Подсказка</button>
+        </div>
+
+        <div class="message info" id="message">Реши первую задачу.</div>
+
+        <div class="finish" id="finishBox">
+          <h2>Ура! Домик готов 🎉</h2>
+          <p id="finishText"></p>
+          <button class="btn-restart" id="restartBtn">Играть заново</button>
+        </div>
+      </div>
+
+      <div class="panel scene">
+        <div class="world" id="world">
+          <div class="sun"></div>
+          <div class="speech" id="speech">Мне нужны материалы для стройки!</div>
+
+          <div class="build-area">
+            <div class="house">
+              <div class="part foundation-left" id="part1"></div>
+              <div class="part foundation-right" id="part2"></div>
+              <div class="part floor" id="part3"></div>
+              <div class="part wall-left" id="part4"></div>
+              <div class="part wall-right" id="part5"></div>
+              <div class="part wall-back" id="part6"></div>
+              <div class="part wall-front" id="part7"></div>
+              <div class="part roof-left" id="part8"></div>
+              <div class="part roof-right" id="part9"></div>
+              <div class="part door" id="part10"></div>
+              <div class="part window-left" id="part11"></div>
+              <div class="part window-right" id="part12"></div>
+              <div class="part chimney" id="part13"></div>
+              <div class="part fence" id="part14"></div>
+              <div class="part flowers" id="part15">
+                <div class="flower f1"></div>
+                <div class="flower f2"></div>
+                <div class="flower f3"></div>
+                <div class="flower f4"></div>
+                <div class="flower f5"></div>
+              </div>
+              <div class="bird" id="bird">🐦</div>
+            </div>
+
+            <div class="beaver-zone">
+              <div class="beaver" id="beaver">🦫</div>
+              <div class="beaver-text" id="beaverText">Строим домик</div>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="small-card" id="leftInfo">Правильных ответов: 0</div>
+            <div class="small-card" id="rightInfo">Осталось задач: 15</div>
+          </div>
+
+          <div class="materials">
+            <h3>Строительные материалы</h3>
+            <div class="material-list" id="materialList"></div>
+          </div>
+
+          <div class="ground"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="quizContainer" class="question-card"></div>
-  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
-    <button class="btn" id="nextBtn" style="display: none;">Далее ➡️</button>
-  </div>
-  <div id="finalResult" style="display: none;" class="result-area"></div>
-</div>
-
-<script>
-  (function() {
-    // Массив из 30 вопросов с пояснениями
-    const questions = [
+  <script>
+    const tasks = [
       {
-        question: "1. Что такое процессор (CPU)?",
-        options: ["Устройство для долговременного хранения", "«Мозг» компьютера, выполняющий вычисления", "Устройство вывода изображения", "Блок питания"],
-        correct: 1,
-        explanation: "Процессор — центральный вычислительный компонент, обрабатывает инструкции программ."
+        question: "У прямоугольника длина 8 см, ширина 3 см. Найди периметр.",
+        answer: 22,
+        hint: "Периметр прямоугольника: (длина + ширина) × 2."
       },
       {
-        question: "2. Для чего нужна оперативная память (RAM)?",
-        options: ["Хранить файлы после выключения", "Временно хранить данные запущенных программ", "Улучшать графику", "Охлаждать процессор"],
-        correct: 1,
-        explanation: "ОЗУ — быстрая энергозависимая память для текущих задач. При выключении данные стираются."
+        question: "У квадрата сторона 6 см. Найди периметр.",
+        answer: 24,
+        hint: "Периметр квадрата: сторона × 4."
       },
       {
-        question: "3. SSD — это…",
-        options: ["Тип монитора", "Оперативная память", "Твердотельный накопитель для хранения данных", "Система охлаждения"],
-        correct: 2,
-        explanation: "SSD (Solid‑State Drive) — быстрый накопитель без движущихся частей."
+        question: "Длина прямоугольника 9 м, ширина 4 м. Найди периметр.",
+        answer: 26,
+        hint: "Сначала сложи 9 и 4, потом умножь на 2."
       },
       {
-        question: "4. Какое устройство относится к устройствам ВВОДА?",
-        options: ["Монитор", "Принтер", "Мышь", "Колонки"],
-        correct: 2,
-        explanation: "Мышь передаёт команды от пользователя в компьютер."
+        question: "Периметр квадрата 20 см. Чему равна его сторона?",
+        answer: 5,
+        hint: "У квадрата 4 одинаковые стороны. 20 ÷ 4."
       },
       {
-        question: "5. Какое устройство относится к устройствам ВЫВОДА?",
-        options: ["Клавиатура", "Микрофон", "Монитор", "Сканер"],
-        correct: 2,
-        explanation: "Монитор отображает информацию, полученную от компьютера."
+        question: "У прямоугольника одна сторона 7 см, другая 5 см. Найди периметр.",
+        answer: 24,
+        hint: "(7 + 5) × 2."
       },
       {
-        question: "6. Какая комбинация клавиш копирует выделенный текст?",
-        options: ["Ctrl+X", "Ctrl+V", "Ctrl+C", "Ctrl+Z"],
-        correct: 2,
-        explanation: "Ctrl+C — копировать, Ctrl+V — вставить, Ctrl+X — вырезать."
+        question: "Сторона квадрата 9 дм. Найди периметр.",
+        answer: 36,
+        hint: "9 × 4."
       },
       {
-        question: "7. Чтобы вставить скопированный объект, нужно нажать:",
-        options: ["Ctrl+P", "Ctrl+V", "Shift+Ins", "Ctrl+Ins"],
-        correct: 1,
-        explanation: "Стандартное сочетание для вставки — Ctrl+V."
+        question: "Периметр прямоугольника 18 см, одна сторона 5 см. Найди другую сторону.",
+        answer: 4,
+        hint: "Полупериметр: 18 ÷ 2 = 9. Вторая сторона: 9 - 5."
       },
       {
-        question: "8. Какая комбинация отменяет последнее действие?",
-        options: ["Ctrl+Y", "Ctrl+Z", "Ctrl+Shift+Z", "Alt+Backspace"],
-        correct: 1,
-        explanation: "Ctrl+Z — универсальная отмена во многих программах."
+        question: "У прямоугольника длина 7 см, ширина 3 см. Найди площадь.",
+        answer: 21,
+        hint: "Площадь прямоугольника: длина × ширина."
       },
       {
-        question: "9. Что делает сочетание Win+D?",
-        options: ["Блокирует компьютер", "Открывает диспетчер задач", "Сворачивает все окна / показывает рабочий стол", "Переключает язык"],
-        correct: 2,
-        explanation: "Win+D мгновенно сворачивает все окна и показывает рабочий стол."
+        question: "У квадрата сторона 5 см. Найди площадь.",
+        answer: 25,
+        hint: "Площадь квадрата: сторона × сторону."
       },
       {
-        question: "10. Как быстро открыть Диспетчер задач?",
-        options: ["Ctrl+Alt+Del (выбрать пункт)", "Ctrl+Shift+Esc", "Win+T", "Alt+F4"],
-        correct: 1,
-        explanation: "Ctrl+Shift+Esc запускает Диспетчер задач напрямую, без дополнительного меню."
+        question: "Длина прямоугольника 10 м, ширина 2 м. Найди площадь.",
+        answer: 20,
+        hint: "10 × 2."
       },
       {
-        question: "11. Зачем нужен блок питания в компьютере?",
-        options: ["Преобразует электричество и питает компоненты", "Охлаждает процессор", "Хранит резервные копии", "Усиливает Wi‑Fi"],
-        correct: 0,
-        explanation: "Блок питания (PSU) подаёт стабильное напряжение на все комплектующие."
+        question: "Сторона квадрата 8 дм. Найди площадь.",
+        answer: 64,
+        hint: "8 × 8."
       },
       {
-        question: "12. Материнская плата выполняет функцию:",
-        options: ["Обработки графики", "Соединения всех компонентов и передачи данных", "Звукозаписи", "Зарядки аккумулятора"],
-        correct: 1,
-        explanation: "Материнская плата — основа, к которой подключаются процессор, ОЗУ, видеокарта и др."
+        question: "У прямоугольника длина 6 см, ширина 4 см. Найди площадь.",
+        answer: 24,
+        hint: "6 × 4."
       },
       {
-        question: "13. Какое расширение обычно имеет текстовый документ?",
-        options: [".exe", ".jpg", ".txt", ".mp3"],
-        correct: 2,
-        explanation: ".txt — простой текстовый файл, .exe — исполняемый, .jpg — изображение."
+        question: "У прямоугольника длина 12 см, ширина 2 см. Найди сначала периметр.",
+        answer: 28,
+        hint: "(12 + 2) × 2."
       },
       {
-        question: "14. Как создать новую папку в Проводнике Windows?",
-        options: ["Дважды кликнуть по пустому месту", "Правая кнопка мыши → Создать → Папку", "Нажать Delete", "Нажать F5"],
-        correct: 1,
-        explanation: "Контекстное меню (правая кнопка) → Создать → Папку. Также работает Ctrl+Shift+N."
+        question: "У квадрата сторона 7 см. Найди сначала площадь.",
+        answer: 49,
+        hint: "7 × 7."
       },
       {
-        question: "15. Что такое фишинг?",
-        options: ["Антивирусная программа", "Мошенничество с целью кражи личных данных", "Игровая приставка", "Название процессора"],
-        correct: 1,
-        explanation: "Фишинг — злоумышленники выдают себя за надёжные организации, чтобы получить пароли и данные."
-      },
-      {
-        question: "16. Какая программа помогает защитить компьютер от вирусов?",
-        options: ["Браузер", "Файловый менеджер", "Антивирус", "Калькулятор"],
-        correct: 2,
-        explanation: "Антивирус (например, Microsoft Defender) обнаруживает и удаляет вредоносные программы."
-      },
-      {
-        question: "17. Облачное хранилище (например, OneDrive) — это:",
-        options: ["Жёсткий диск внутри ПК", "Флешка", "Удалённые серверы для хранения файлов в интернете", "Оперативная память"],
-        correct: 2,
-        explanation: "Данные хранятся на серверах в дата‑центрах, доступны через интернет."
-      },
-      {
-        question: "18. Что из перечисленного НЕ является веб‑браузером?",
-        options: ["Google Chrome", "Mozilla Firefox", "Microsoft Word", "Opera"],
-        correct: 2,
-        explanation: "Microsoft Word — текстовый редактор, а не браузер."
-      },
-      {
-        question: "19. Для чего служит кулер (вентилятор) в системном блоке?",
-        options: ["Увеличение скорости интернета", "Охлаждение компонентов", "Подсветка корпуса", "Усиление звука"],
-        correct: 1,
-        explanation: "Кулер отводит тепло от процессора, видеокарты и других деталей."
-      },
-      {
-        question: "20. Как посмотреть основные характеристики компьютера (ОЗУ, процессор) в Windows?",
-        options: ["Нажать Win+Pause (или правой кнопкой по «Этот компьютер» → Свойства)", "Нажать Alt+F4", "Запустить Paint", "Нажать F1"],
-        correct: 0,
-        explanation: "Окно «Система» показывает процессор, объём ОЗУ и версию Windows."
-      },
-      {
-        question: "21. Что произойдёт при нажатии Alt+F4 на рабочем столе?",
-        options: ["Откроется справка", "Закроется активное окно (или меню завершения работы)", "Запустится игра", "Сделается скриншот"],
-        correct: 1,
-        explanation: "Alt+F4 закрывает текущее окно. На рабочем столе вызывает диалог выключения."
-      },
-      {
-        question: "22. Как сделать снимок всего экрана (скриншот) стандартными средствами Windows?",
-        options: ["Нажать кнопку Print Screen (PrtSc)", "Нажать Ctrl+P", "Правой кнопкой по рабочему столу", "Нажать Win+L"],
-        correct: 0,
-        explanation: "Print Screen копирует снимок экрана в буфер обмена. Win+Shift+S — выделение области."
-      },
-      {
-        question: "23. Какой тип накопителя обычно работает быстрее?",
-        options: ["HDD (жёсткий диск)", "SSD (твердотельный)", "DVD‑диск", "Дискета"],
-        correct: 1,
-        explanation: "SSD не имеет движущихся частей и значительно быстрее HDD."
-      },
-      {
-        question: "24. Какое устройство может одновременно быть и вводом, и выводом?",
-        options: ["Принтер", "Колонки", "Сенсорный экран", "Микрофон"],
-        correct: 2,
-        explanation: "Сенсорный экран принимает касания (ввод) и отображает картинку (вывод)."
-      },
-      {
-        question: "25. Какая память очищается при выключении питания компьютера?",
-        options: ["Оперативная память (RAM)", "SSD", "Жёсткий диск", "USB‑флешка"],
-        correct: 0,
-        explanation: "ОЗУ энергозависима — все данные в ней теряются при отключении питания."
-      },
-      {
-        question: "26. Зачем нужна учётная запись Microsoft в Windows?",
-        options: ["Только для игр", "Синхронизация настроек и доступ к облачным сервисам", "Для работы калькулятора", "Без неё компьютер не включится"],
-        correct: 1,
-        explanation: "Учётная запись позволяет хранить файлы в OneDrive, синхронизировать пароли и настройки."
-      },
-      {
-        question: "27. Как безопасно выключить зависший компьютер, если он не реагирует?",
-        options: ["Дёрнуть шнур питания", "Удерживать кнопку питания несколько секунд до отключения", "Ждать, пока само пройдёт", "Нажать все клавиши сразу"],
-        correct: 1,
-        explanation: "Длительное удержание кнопки питания принудительно обесточит систему."
-      },
-      {
-        question: "28. Какая комбинация открывает поиск в Windows (поиск файлов, приложений)?",
-        options: ["Win+S (или Win+Q)", "Win+L", "Ctrl+F", "Win+E"],
-        correct: 0,
-        explanation: "Win+S открывает строку поиска, где можно найти документы и программы."
-      },
-      {
-        question: "29. Что такое драйвер?",
-        options: ["Программа, управляющая работой устройства", "Вирус", "Файл с паролями", "Беспроводная сеть"],
-        correct: 0,
-        explanation: "Драйвер обеспечивает взаимодействие ОС с конкретным оборудованием (принтером, видеокартой)."
-      },
-      {
-        question: "30. BIOS/UEFI — это…",
-        options: ["Новая операционная система", "Программа начальной загрузки и настройки оборудования", "Текстовый редактор", "Антивирус"],
-        correct: 1,
-        explanation: "BIOS/UEFI запускается при включении, проверяет компоненты и загружает ОС."
+        question: "У прямоугольника длина 9 м, ширина 6 м. Что больше: площадь или периметр? В ответ запиши только большее число.",
+        answer: 54,
+        hint: "Площадь: 9 × 6. Периметр: (9 + 6) × 2. Выбери большее."
       }
     ];
 
+    const materialIcons = ["🪵", "🪵", "🟫", "🪵", "🪵", "🪵", "🪵", "🧱", "🧱", "🚪", "🪟", "🪟", "🧱", "🪵", "🌸"];
+
     let currentIndex = 0;
-    let score = 0;
-    let xp = 0;
-    let answered = false;
-    const totalQuestions = questions.length;
+    let correctAnswers = 0;
+    let builtParts = 0;
 
-    const xpDisplay = document.getElementById('xpDisplay');
-    const questionCounter = document.getElementById('questionCounter');
-    const progressFill = document.getElementById('progressFill');
-    const quizContainer = document.getElementById('quizContainer');
-    const nextBtn = document.getElementById('nextBtn');
-    const finalResultDiv = document.getElementById('finalResult');
+    const taskCounter = document.getElementById("taskCounter");
+    const scoreCounter = document.getElementById("scoreCounter");
+    const buildCounter = document.getElementById("buildCounter");
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const answerInput = document.getElementById("answerInput");
+    const checkBtn = document.getElementById("checkBtn");
+    const hintBtn = document.getElementById("hintBtn");
+    const message = document.getElementById("message");
+    const progressBar = document.getElementById("progressBar");
+    const speech = document.getElementById("speech");
+    const beaver = document.getElementById("beaver");
+    const beaverText = document.getElementById("beaverText");
+    const leftInfo = document.getElementById("leftInfo");
+    const rightInfo = document.getElementById("rightInfo");
+    const materialList = document.getElementById("materialList");
+    const finishBox = document.getElementById("finishBox");
+    const finishText = document.getElementById("finishText");
+    const restartBtn = document.getElementById("restartBtn");
+    const world = document.getElementById("world");
+    const bird = document.getElementById("bird");
 
-    function updateProgress() {
-      questionCounter.textContent = `${currentIndex+1}/${totalQuestions}`;
-      const percent = ((currentIndex) / totalQuestions) * 100; // до перехода к следующему
-      progressFill.style.width = `${percent}%`;
-    }
+    const houseParts = Array.from({ length: 15 }, (_, i) => document.getElementById(`part${i + 1}`));
 
-    function addXP(points) {
-      xp += points;
-      xpDisplay.textContent = `⚡ ${xp} XP`;
-    }
-
-    function renderQuestion() {
-      if (currentIndex >= totalQuestions) {
-        showFinalResult();
+    function renderTask() {
+      if (currentIndex >= tasks.length) {
+        showFinish();
         return;
       }
-      const q = questions[currentIndex];
-      answered = false;
-      nextBtn.style.display = 'none';
-      
-      let html = `<div class="question-text">${q.question}</div><div class="options-grid">`;
-      q.options.forEach((opt, idx) => {
-        html += `<button class="option-btn" data-option-index="${idx}">${opt}</button>`;
-      });
-      html += `</div><div id="explanationArea" class="explanation" style="display: none;"></div>`;
-      quizContainer.innerHTML = html;
 
-      document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.addEventListener('click', optionClickHandler);
-      });
+      const task = tasks[currentIndex];
 
-      updateProgress();
+      taskCounter.textContent = `Задача ${currentIndex + 1} из ${tasks.length}`;
+      scoreCounter.textContent = `Верно: ${correctAnswers}`;
+      buildCounter.textContent = `Построено: ${builtParts}/15`;
+      questionNumber.textContent = `Задача ${currentIndex + 1}`;
+      questionText.textContent = task.question;
+      leftInfo.textContent = `Правильных ответов: ${correctAnswers}`;
+      rightInfo.textContent = `Осталось задач: ${tasks.length - currentIndex}`;
+      progressBar.style.width = `${(currentIndex / tasks.length) * 100}%`;
+
+      answerInput.value = "";
+      answerInput.focus();
+      updateScene();
     }
 
-    function optionClickHandler(e) {
-      if (answered) return;
-      const selectedBtn = e.currentTarget;
-      const selectedIdx = parseInt(selectedBtn.getAttribute('data-option-index'));
-      const q = questions[currentIndex];
-      const correctIdx = q.correct;
-      const explanationArea = document.getElementById('explanationArea');
-
-      // Блокируем все кнопки
-      document.querySelectorAll('.option-btn').forEach(b => b.classList.add('disabled'));
-
-      // Подсвечиваем правильный и неправильный
-      document.querySelectorAll('.option-btn').forEach((btn, idx) => {
-        if (idx === correctIdx) {
-          btn.classList.add('correct-choice');
-        } else if (idx === selectedIdx && selectedIdx !== correctIdx) {
-          btn.classList.add('wrong-choice');
-        }
-      });
-
-      // Показываем объяснение
-      explanationArea.style.display = 'block';
-      explanationArea.textContent = '💡 ' + q.explanation;
-
-      if (selectedIdx === correctIdx) {
-        score++;
-        addXP(5);
-      }
-
-      answered = true;
-      nextBtn.style.display = 'inline-flex';
+    function setMessage(text, type = "info") {
+      message.textContent = text;
+      message.className = `message ${type}`;
     }
 
-    function nextQuestion() {
-      currentIndex++;
-      if (currentIndex < totalQuestions) {
-        renderQuestion();
+    function updateScene() {
+      houseParts.forEach((part, index) => {
+        part.classList.toggle("show", index < builtParts);
+      });
+
+      if (builtParts >= 15) {
+        bird.classList.add("show");
       } else {
-        showFinalResult();
+        bird.classList.remove("show");
+      }
+
+      materialList.innerHTML = "";
+
+      if (builtParts === 0) {
+        materialList.innerHTML = "<span style='font-size:18px;color:#6b7a82;'>Пока пусто</span>";
+      } else {
+        for (let i = 0; i < builtParts; i++) {
+          const span = document.createElement("span");
+          span.className = "mat";
+          span.textContent = materialIcons[i];
+          materialList.appendChild(span);
+        }
       }
     }
 
-    function showFinalResult() {
-      quizContainer.innerHTML = '';
-      nextBtn.style.display = 'none';
-      progressFill.style.width = '100%';
-      questionCounter.textContent = `${totalQuestions}/${totalQuestions}`;
-      
-      let message = '';
-      if (score === totalQuestions) message = '🏆 Идеально! Вы настоящий эксперт!';
-      else if (score >= 22) message = '🎉 Отличный результат! Вы хорошо разбираетесь в ПК.';
-      else if (score >= 14) message = '👍 Хорошо! Есть что вспомнить, но база крепкая.';
-      else message = '📚 Продолжайте изучать компьютерную грамотность, всё получится!';
-      
-      finalResultDiv.style.display = 'block';
-      finalResultDiv.innerHTML = `
-        <div class="score-circle">${score}/${totalQuestions}</div>
-        <h2>${message}</h2>
-        <p style="margin-top:1rem;">Вы заработали <strong>${xp} XP</strong></p>
-        <button class="btn" id="restartBtn" style="margin-top:1.5rem;">🔄 Пройти заново</button>
-      `;
-      document.getElementById('restartBtn').addEventListener('click', restartQuiz);
+    function normalizeNumber(value) {
+      return Number(String(value).trim().replace(",", "."));
     }
 
-    function restartQuiz() {
+    function createFlyingMaterial(icon) {
+      const mat = document.createElement("div");
+      mat.className = "material-fly";
+      mat.textContent = icon;
+      world.appendChild(mat);
+
+      setTimeout(() => {
+        mat.remove();
+      }, 950);
+    }
+
+    function createConfetti(amount = 20) {
+      const colors = ["#ffd54f", "#ff8a65", "#ff78b2", "#7dd3fc", "#86efac", "#c4b5fd"];
+      for (let i = 0; i < amount; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.background = colors[i % colors.length];
+        piece.style.setProperty("--tx", `${Math.random() * 760 - 380}px`);
+        piece.style.setProperty("--ty", `${Math.random() * 500 - 260}px`);
+        piece.style.setProperty("--rot", `${Math.random() * 720 - 360}deg`);
+        world.appendChild(piece);
+
+        setTimeout(() => {
+          piece.remove();
+        }, 1300);
+      }
+    }
+
+    function createStars() {
+      const symbols = ["⭐", "✨", "🌟"];
+      for (let i = 0; i < 7; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        star.style.left = 25 + Math.random() * 50 + "%";
+        star.style.top = 28 + Math.random() * 25 + "%";
+        star.style.animationDelay = i * 0.05 + "s";
+        world.appendChild(star);
+
+        setTimeout(() => {
+          star.remove();
+        }, 1000);
+      }
+    }
+
+    function cheerBeaver(text) {
+      beaver.classList.remove("happy");
+      void beaver.offsetWidth;
+      beaver.classList.add("happy");
+      beaverText.textContent = text;
+
+      setTimeout(() => {
+        beaver.classList.remove("happy");
+      }, 700);
+    }
+
+    function checkAnswer() {
+      if (currentIndex >= tasks.length) return;
+
+      const rawValue = answerInput.value.trim();
+
+      if (!rawValue) {
+        setMessage("Сначала введи ответ.", "error");
+        speech.textContent = "Напиши число в поле ответа.";
+        beaverText.textContent = "Жду ответ";
+        return;
+      }
+
+      const userAnswer = normalizeNumber(rawValue);
+
+      if (Number.isNaN(userAnswer)) {
+        setMessage("Нужно ввести число.", "error");
+        speech.textContent = "Нужен числовой ответ.";
+        beaverText.textContent = "Только число";
+        return;
+      }
+
+      const task = tasks[currentIndex];
+
+      if (userAnswer === task.answer) {
+        correctAnswers++;
+        builtParts++;
+
+        createFlyingMaterial(materialIcons[builtParts - 1]);
+        createStars();
+        if (builtParts % 3 === 0) {
+          createConfetti(10);
+        }
+
+        cheerBeaver("Отлично!");
+        updateScene();
+
+        setMessage("Верно! Домик строится дальше.", "success");
+        speech.textContent = "Верно! Добавляем новую часть.";
+        currentIndex++;
+
+        setTimeout(() => {
+          if (currentIndex < tasks.length) {
+            renderTask();
+            setMessage("Хорошо. Переходим дальше.", "info");
+            speech.textContent = "Следующая задача!";
+            beaverText.textContent = "Строим дальше";
+          } else {
+            showFinish();
+          }
+        }, 900);
+      } else {
+        setMessage("Пока неверно. Попробуй ещё раз.", "error");
+        speech.textContent = "Проверь вычисления ещё раз.";
+        beaverText.textContent = "Попробуй снова";
+        answerInput.focus();
+        answerInput.select();
+      }
+    }
+
+    function showHint() {
+      if (currentIndex >= tasks.length) return;
+      setMessage(`Подсказка: ${tasks[currentIndex].hint}`, "info");
+      speech.textContent = "Вот подсказка.";
+      beaverText.textContent = "Подумай";
+      answerInput.focus();
+    }
+
+    function showFinish() {
+      progressBar.style.width = "100%";
+      finishBox.style.display = "block";
+      questionText.textContent = "Все задачи решены!";
+      questionNumber.textContent = "Финиш";
+      setMessage("Игра завершена. Молодец!", "success");
+      speech.textContent = "Ура! Домик готов!";
+      beaverText.textContent = "Дом построен";
+      rightInfo.textContent = "Осталось задач: 0";
+      finishText.textContent = `Ты решил(а) все ${tasks.length} задач. Бобёр достроил домик полностью.`;
+      answerInput.disabled = true;
+      checkBtn.disabled = true;
+      hintBtn.disabled = true;
+      updateScene();
+      bird.classList.add("show");
+      createConfetti(50);
+      createStars();
+      createStars();
+    }
+
+    function restartGame() {
       currentIndex = 0;
-      score = 0;
-      xp = 0;
-      answered = false;
-      xpDisplay.textContent = '⚡ 0 XP';
-      finalResultDiv.style.display = 'none';
-      renderQuestion();
+      correctAnswers = 0;
+      builtParts = 0;
+
+      finishBox.style.display = "none";
+      answerInput.disabled = false;
+      checkBtn.disabled = false;
+      hintBtn.disabled = false;
+      speech.textContent = "Мне нужны материалы для стройки!";
+      beaverText.textContent = "Строим домик";
+      setMessage("Реши первую задачу.", "info");
+      updateScene();
+      renderTask();
     }
 
-    nextBtn.addEventListener('click', nextQuestion);
+    checkBtn.addEventListener("click", checkAnswer);
+    hintBtn.addEventListener("click", showHint);
+    restartBtn.addEventListener("click", restartGame);
 
-    // Старт
-    renderQuestion();
-  })();
-</script>
+    answerInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        checkAnswer();
+      }
+    });
+
+    updateScene();
+    renderTask();
+  </script>
 </body>
 </html>
